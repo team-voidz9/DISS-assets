@@ -9,6 +9,10 @@ This assets pack was made to work with [DISS-Toolbox](https://github.com/team-vo
 ## The Things
 - TBU
 
+## DISCLAIMER
+Might delete/overide your app/homebrews/setting. Backup your SD before use
+
+
 ## CREDIT
 
 [CTCaer](https://github.com/CTCaer)
