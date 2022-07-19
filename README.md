@@ -8,8 +8,8 @@ This assets pack was made to work with [DISS-Toolbox](https://github.com/team-vo
 
 ## The Things
 - Payloads : CommonProblemResolver / Incognito_RCM / Lockpick_RCM / TegraExplorer / prodinfo_gen
-- Assets : Custom Hekate boot background/ Custom hekate background / Custom Hekate/nyx Launch Icon / Custom Hekate bootsplash / Custom tinfoil theme + freeShop / SX Gear boot / exosphere / mitm DNS / 
-- Homebrews : appstore / Awoo / breeze / DISS-Toolbox / Edizon / Goldleaf / nxdumptool / nxshell / tinfoil / checkpoint / daybreak / dbi / ftpd / jksv / linkalho / reboot_to_payload / 90_dns_tester / tesla overlays + modules / MissionComtrol / emuiibo 
+- Assets : Custom Hekate boot background/ Custom hekate background / Custom Hekate/nyx Launch Icon / Custom Hekate bootsplash / Custom tinfoil theme + freeShop / SX Gear boot / exosphere / mitm DNS /  DISS-Toolbox (removed for now)
+- Homebrews : appstore / Awoo / breeze / Edizon / Goldleaf / nxdumptool / nxshell / tinfoil / checkpoint / daybreak / dbi / ftpd / jksv / linkalho / reboot_to_payload / 90_dns_tester / tesla overlays + modules / MissionComtrol / emuiibo 
 
 
 ## DISCLAIMER
