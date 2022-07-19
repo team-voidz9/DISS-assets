@@ -7,10 +7,14 @@ This assets pack was made to work with [DISS-Toolbox](https://github.com/team-vo
 [Atmosphere + Hekate](https://sdsetup.com/) + [Sigpatches](https://github.com/ITotalJustice) + [DISS-assets](https://github.com/team-voidz/DISS-assets)
 
 ## The Things
-- TBU
+- Payloads : CommonProblemResolver / Incognito_RCM / Lockpick_RCM / TegraExplorer / prodinfo_gen
+- Assets : Custom Hekate boot background/ Custom hekate background / Custom Hekate/nyx Launch Icon / Custom Hekate bootsplash / Custom tinfoil theme + freeShop / SX Gear boot / exosphere / mitm DNS / 
+- Homebrews : appstore / Awoo / breeze / DISS-Toolbox / Edizon / Goldleaf / nxdumptool / nxshell / tinfoil / checkpoint / daybreak / dbi / ftpd / jksv / linkalho / reboot_to_payload / 90_dns_tester / tesla overlays + modules / MissionComtrol / emuiibo 
+
 
 ## DISCLAIMER
-Might delete/overide your app/homebrews/setting. Backup your SD before use
+- Might delete/overide your app/homebrews/setting. Backup your SD before use
+- Setup your emuMMC first . Checkout https://switch.homebrew.guide/emummc/emummc.html . We suggest go for SD File for easier SD card size upgrade
 
 
 ## CREDIT
@@ -45,4 +49,3 @@ Might delete/overide your app/homebrews/setting. Backup your SD before use
 [mtheall](https://github.com/mtheall)
 [joel16](https://github.com/joel16)
 [sthethix](https://github.com/sthetix)
-[carcashoi](https://github.com/carcaschoi)
