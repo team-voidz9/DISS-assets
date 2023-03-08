@@ -7,22 +7,36 @@ set sd=%1
 if not defined %sd% (GOTO pickSD)
 
 :initialcheck
-if exist "%~dp0\DISS_OLDSD.zip" (DEL /S /Q "%~dp0\DISS_OLDSD.zip")
-if exist "%~dp0\DISS_ABC.zip" (DEL /S /Q "%~dp0\DISS_ABC.zip")
-if exist "%~dp0\jits.zip" (DEL /S /Q "%~dp0\jist.zip")
-if exist "%~dp0\hekate.zip" (DEL /S /Q "%~dp0\hekate.zip")
-if exist "%~dp0\sigpatches.zip" (DEL /S /Q "%~dp0\sigpatches.zip")
-if exist "%~dp0\assets.zip" (DEL /S /Q "%~dp0\assets.zip")
-if exist "%~dp0\DISS_A\temp0" (DEL /S /Q "%~dp0\DISS_A\temp0")
+if exist DISS_OLDSD.zip (DEL /Q /F DISS_OLDSD.zip) 
+if exist DISS_ABC.zip (DEL /Q /F DISS_ABC.zip) 
+if exist DISS_A\temp0 (DEL /Q /F DISS_A\temp0)
 md %~dp0\DISS_A
 md %~dp0\DISS_A\temp0
+md %~dp0\DISS_A\trash
 md %~dp0\DISS_B
 md %~dp0\DISS
 
 :main
-COLOR 0f
+COLOR 02
 cls
-echo.
+:::1      DDDDDDDDDDDDD      IIIIIIIIII   SSSSSSSSSSSSSSS    SSSSSSSSSSSSSSS 
+:::1      D::::::::::::DDD   I::::::::I SS:::::::::::::::S SS:::::::::::::::S
+:::1      D:::::::::::::::DD I::::::::IS:::::SSSSSS::::::SS:::::SSSSSS::::::S
+:::1      DDD:::::DDDDD:::::DII::::::IIS:::::S     SSSSSSSS:::::S     SSSSSSS
+:::1         D:::::D    D:::::D I::::I  S:::::S            S:::::S            
+:::1         D:::::D     D:::::DI::::I  S:::::S            S:::::S            
+:::1         D:::::D     D:::::DI::::I   S::::SSSS          S::::SSSS         
+:::1         D:::::D     D:::::DI::::I    SS::::::SSSSS      SS::::::SSSSS    
+:::1         D:::::D     D:::::DI::::I      SSS::::::::SS      SSS::::::::SS  
+:::1         D:::::D     D:::::DI::::I         SSSSSS::::S        SSSSSS::::S 
+:::1         D:::::D     D:::::DI::::I              S:::::S            S:::::S
+:::1         D:::::D    D:::::D I::::I              S:::::S            S:::::S
+:::1      DDD:::::DDDDD:::::DII::::::IISSSSSSS     S:::::SSSSSSSS     S:::::S
+:::1      D:::::::::::::::DD I::::::::IS::::::SSSSSS:::::SS::::::SSSSSS:::::S
+:::1      D::::::::::::DDD   I::::::::IS:::::::::::::::SS S:::::::::::::::SS 
+:::1       DDDDDDDDDDDDD      IIIIIIIIII SSSSSSSSSSSSSSS    SSSSSSSSSSSSSSS   
+for /f "delims=:::1 tokens=*" %%A in ('findstr /b :::1 "%~f0"') do @echo(%%A
+
 echo      ====================== DISS Downloader V0.1.0 ========================
 echo                          (cfw / bootloader / assets)
 echo      1. This script will download needed files (cfw, bootloader and assets)
@@ -63,23 +77,32 @@ ECHO ----------------------------------------------------------
 ECHO ======                 DISS Downloader               =====
 ECHO ======           Assets / Bootloader / CFW           =====
 ECHO ----------------------------------------------------------
-ECHO.        
-IF EXIST "%~dp0\DISS_A\jits.zip" (
+ECHO.
+set filepath="%~dp0\DISS_A\atmosphere-*.zip"
+for /F "delims=" %%i in (%filepath%) do set basename="%%~ni"       
+IF EXIST "%~dp0\DISS_A\atmosphere-*.zip" (
 echo                   CFW and SIGPATCHES READY! [4MB done!]
+echo                   %basename%
 ) ELSE (
 echo                [NO] CFW and SIGPATCHES files detected   
 echo                Press 1 to download          
 )
 echo.
-IF EXIST "%~dp0\DISS_A\hekate.zip" (
+set filepath="%~dp0\DISS_A\hekate_ctcaer*.zip"
+for /F "delims=" %%i in (%filepath%) do set basename="%%~ni"
+IF EXIST "%~dp0\DISS_A\hekate_ctcaer*" (
 echo                   Bootloader File READY! [1MB done!]
+echo                   %basename%
 ) ELSE (
 echo                [NO] Bootloader Files detected
 echo                Press 2 to download  
 )
 echo.
-IF EXIST "%~dp0\DISS_A\assets.zip" (
+set filepath="%~dp0\DISS_A\assets_*.zip"
+for /F "delims=" %%i in (%filepath%) do set basename="%%~ni"
+IF EXIST "%~dp0\DISS_A\assets_*.zip" (
 echo                   DISS Assets File READY! [80MB done!]
+echo                   %basename%
 ) ELSE (
 echo                [NO] Assets Files detected
 echo                Press 3 to download  
@@ -92,7 +115,7 @@ echo            5.  Install Now
 ) ELSE (
 echo            4.  Extract cfw / bootloader / assets
 )
-echo.
+
 ECHO.
 ECHO =Please Download all the required files before extracting=
 ECHO ==========================================================
@@ -114,73 +137,37 @@ for %%A in ("7" "&" "7" "7") do if "%st%"==%%A (GOTO ENDnotgood)
 for %%A in ("" "" "" "") do if "%st%"==%%A (GOTO ENDnotgood)
 
 
+:downloadXX
+COLOR 0f
+cls
+echo.
+ECHO ----------------------------------------------------------
+ECHO ======                 DISS Downloader               =====
+ECHO ======           Assets / Bootloader / CFW           =====
+ECHO ----------------------------------------------------------
+ECHO         Assets, Bootloader, and CFW are extracted
+echo                       and READY!
+echo.
+echo.                   5.  Install Now
+echo.
+ECHO ==========================================================
+ECHO.
+ECHO                                        7.  exit
+ECHO.
+
+set st=
+set /p st="Enter Your number of choice: "
+for %%A in ("5" "5" "5" "5" "5") do if "%st%"==%%A (GOTO startpoint)
+for %%A in ("7" "&" "7" "7") do if "%st%"==%%A (GOTO exit)
+for %%A in ("" "" "" "") do if "%st%"==%%A (GOTO exit)
+
 :downloadALL
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/team-voidz/DISS-assets/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
-if exist "%~dp0\assets.zip" (
-    move "%~dp0\assets.zip" "%~dp0\DISS_A\assets.zip"
-    )
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/tomvita/Breeze-Beta/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
-if exist "%~dp0\version.txt" (DEL /F "%~dp0\version.txt")
-powershell -command "Expand-Archive breeze.zip DISS_A/temp1/" -Force
-if exist "%~dp0\breeze.zip" (DEL /F "%~dp0\breeze.zip")
-
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/WerWolv/EdiZon/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
-if exist "%~dp0\Edizon.nro" (move "%~dp0\Edizon.nro" "%~dp0\DISS_A\temp1\switch\EdiZon\Edizon.nro")
-md %~dp0\DISS_A\temp1\switch\.overlays
-if exist "%~dp0\ovlEdizon.ovl" (move "%~dp0\ovlEdizon.ovl" "%~dp0\DISS_A\temp1\switch\.overlays\ovlEdizon.ovl")
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/DarkMatterCore/nxdumptool/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
-md %~dp0\DISS_A\temp1\switch\nxdumptool
-if exist "%~dp0\nxdumptool.nro" (move "%~dp0\nxdumptool.nro" "%~dp0\DISS_A\temp1\switch\nxdumptool\nxdumptool.nro")
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/rashevskyv/dbi/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
-if exist "%~dp0\dbi.nro" (move "%~dp0\dbi.nro" "%~dp0\DISS_A\temp1\switch\dbi.nro")
-if exist "%~dp0\dbi.config" (move "%~dp0\dbi.config" "%~dp0\DISS_A\temp1\switch\dbi.config")
-if exist "%~dp0\dbibackend.exe" (DEL /F "%~dp0\dbibackend.exe")
-if exist "%~dp0\DBI_ru.nro" (DEL /F "%~dp0\DBI_ru.nro")
-if exist "%~dp0\dbibackend.tar.xz" (DEL /F "%~dp0\dbibackend.tar.xz")
-
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/J-D-K/JKSV/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
-if exist "%~dp0\jksv.nro" (move "%~dp0\jksv.nro" "%~dp0\DISS_A\temp1\switch\jksv.nro")
-
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/meganukebmp/Switch_90DNS_tester/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
-if exist "%~dp0\Switch_90DNS_tester.nro" (move "%~dp0\Switch_90DNS_tester.nro" "%~dp0\DISS_A\temp1\switch\Switch_90DNS_tester.nro")
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/rdmrocha/linkalho/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
-powershell -command "Expand-Archive linkalho-*.zip DISS_A/temp1/switch" -Force
-if exist "%~dp0\linkalho-*.zip" (DEL /F "%~dp0\linkalho-*.zip")
-echo.
-echo            Downloading Assets is done!
-echo.
-TIMEOUT /T 3
-
 for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest ^| find "browser_download_url"') do (
     curl -kOL %%B
 )
 
 if exist "%~dp0\atmosphere-*.zip" (
-    rename %~dp0\atmosphere-*.zip jits.zip
-    move "%~dp0\jits.zip" "%~dp0\DISS_A\jits.zip"
+    move "%~dp0\atmosphere-*.zip" "%~dp0\DISS_A\"
     )
 
 if exist "%~dp0\fusee.bin" (
@@ -203,27 +190,122 @@ for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/CTCa
 )
 
 if exist "%~dp0\hekate_*.zip" (
-    rename %~dp0\hekate_*.zip hekate.zip
-    move "%~dp0\hekate.zip" "%~dp0\DISS_A\hekate.zip"
+    move "%~dp0\hekate_*.zip" "%~dp0\DISS_A\"
+    )
+if exist "%~dp0\joiner_scripts_*.zip" (
+    move "%~dp0\joiner_scripts_*.zip" "%~dp0\DISS_A\trash\"
+    )
+if exist "%~dp0\nyx_usb_*.reg" (
+    move "%~dp0\nyx_usb_*.reg" "%~dp0\DISS_A\trash\"
     )
 
-if exist joiner_scripts_*.zip DEL /F joiner_scripts_*.zip
-if exist nyx_usb_*.reg DEL /F nyx_usb_*.reg
 echo.
 echo            Downloading Bootloader is done!
+echo.
+TIMEOUT /T 3
+
+for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/team-voidz/DISS-assets/releases/latest ^| find "browser_download_url"') do (
+    curl -kOL %%B
+)
+if exist "%~dp0\assets_*.zip" (
+    move "%~dp0\assets_*.zip" "%~dp0\DISS_A\"
+    )
+
+for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/tomvita/Breeze-Beta/releases/latest ^| find "browser_download_url"') do (
+    curl -kOL %%B
+)
+
+powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
+
+if exist "%~dp0\version.txt" (
+    move "%~dp0\version.txt" "%~dp0\DISS_A\trash\"
+    )
+if exist "%~dp0\breeze.zip" (
+    move "%~dp0\breeze.zip" "%~dp0\DISS_A\trash\"
+    )
+
+for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/WerWolv/EdiZon/releases/latest ^| find "browser_download_url"') do (
+    curl -kOL %%B
+)
+if exist "%~dp0\Edizon.nro" (
+    md "%~dp0\DISS_A\temp1\switch\EdiZon\"
+    move "%~dp0\Edizon.nro" "%~dp0\DISS_A\temp1\switch\EdiZon\"
+    )
+if exist "%~dp0\ovlEdizon.ovl" (
+    md "%~dp0\DISS_A\temp1\switch\.overlays\"
+    move "%~dp0\ovlEdizon.ovl" "%~dp0\DISS_A\temp1\switch\EdiZon\"
+    )
+
+for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/DarkMatterCore/nxdumptool/releases/latest ^| find "browser_download_url"') do (
+    curl -kOL %%B
+)
+if exist "%~dp0\nxdumptool.nro" (
+    md "%~dp0\DISS_A\temp1\switch\nxdumptool\"
+    move "%~dp0\nxdumptool.nro" "%~dp0\DISS_A\temp1\switch\nxdumptool\"
+    )
+
+for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/rashevskyv/dbi/releases/latest ^| find "browser_download_url"') do (
+    curl -kOL %%B
+)
+if exist "%~dp0\dbi.nro" (
+    move "%~dp0\dbi.nro" "%~dp0\DISS_A\temp1\switch\"
+    )
+if exist "%~dp0\dbi.config" (
+    move "%~dp0\dbi.config" "%~dp0\DISS_A\temp1\switch\"
+    )
+if exist "%~dp0\dbibackend.exe" (
+    move "%~dp0\dbibackend.exe" "%~dp0\DISS_A\trash\"
+    )
+if exist "%~dp0\DBI_ru.nro" (
+    move "%~dp0\DBI_ru.nro" "%~dp0\DISS_A\trash\"
+    )
+if exist "%~dp0\dbibackend.tar.xz" (
+    move "%~dp0\dbibackend.tar.xz" "%~dp0\DISS_A\trash\"
+    )
+
+for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/J-D-K/JKSV/releases/latest ^| find "browser_download_url"') do (
+    curl -kOL %%B
+)
+if exist "%~dp0\jksv.nro" (
+    move "%~dp0\jksv.nro" "%~dp0\DISS_A\temp1\switch\"
+    )
+
+for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/meganukebmp/Switch_90DNS_tester/releases/latest ^| find "browser_download_url"') do (
+    curl -kOL %%B
+)
+if exist "%~dp0\Switch_90DNS_tester.nro" (
+    move "%~dp0\Switch_90DNS_tester.nro" "%~dp0\DISS_A\temp1\switch\"
+    )
+
+for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/rdmrocha/linkalho/releases/latest ^| find "browser_download_url"') do (
+    curl -kOL %%B
+)
+powershell -command "Expand-Archive %~dp0/linkalho-*.zip %~dp0/DISS_A/temp1/switch" -verbose -force
+if exist "%~dp0\linkalho-*.zip" (
+    move "%~dp0\linkalho-*.zip" "%~dp0\DISS_A\trash\"
+    )
+
+for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/ITotalJustice/Gamecard-Installer-NX/releases/latest ^| find "browser_download_url"') do (
+    curl -kOL %%B
+)
+powershell -command "Expand-Archive %~dp0/gamecard_installer.zip %~dp0/DISS_A/temp1" -verbose -force
+if exist "%~dp0\gamecard_installer.zip " (
+    move "%~dp0\gamecard_installer.zip " "%~dp0\DISS_A\trash\"
+    )
+
+echo.
+echo            Downloading Assets is done!
 echo.
 TIMEOUT /T 3
 goto download0
 
 :download1
-
 for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest ^| find "browser_download_url"') do (
     curl -kOL %%B
 )
 
 if exist "%~dp0\atmosphere-*.zip" (
-    rename %~dp0\atmosphere-*.zip jits.zip
-    move "%~dp0\jits.zip" "%~dp0\DISS_A\jits.zip"
+    move "%~dp0\atmosphere-*.zip" "%~dp0\DISS_A\"
     )
 
 if exist "%~dp0\fusee.bin" (
@@ -248,12 +330,15 @@ for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/CTCa
 )
 
 if exist "%~dp0\hekate_*.zip" (
-    rename %~dp0\hekate_*.zip hekate.zip
-    move "%~dp0\hekate.zip" "%~dp0\DISS_A\hekate.zip"
+    move "%~dp0\hekate_*.zip" "%~dp0\DISS_A\"
+    )
+if exist "%~dp0\joiner_scripts_*.zip" (
+    move "%~dp0\joiner_scripts_*.zip" "%~dp0\DISS_A\trash\"
+    )
+if exist "%~dp0\nyx_usb_*.reg" (
+    move "%~dp0\nyx_usb_*.reg" "%~dp0\DISS_A\trash\"
     )
 
-if exist joiner_scripts_*.zip DEL /F joiner_scripts_*.zip
-if exist nyx_usb_*.reg DEL /F nyx_usb_*.reg
 echo.
 echo            Downloading Bootloader is done!
 echo.
@@ -264,57 +349,93 @@ goto download0
 for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/team-voidz/DISS-assets/releases/latest ^| find "browser_download_url"') do (
     curl -kOL %%B
 )
-if exist "%~dp0\assets.zip" (
-    move "%~dp0\assets.zip" "%~dp0\DISS_A\assets.zip"
+if exist "%~dp0\assets_*.zip" (
+    move "%~dp0\assets_*.zip" "%~dp0\DISS_A\"
     )
 
 for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/tomvita/Breeze-Beta/releases/latest ^| find "browser_download_url"') do (
     curl -kOL %%B
 )
-if exist "%~dp0\version.txt" (DEL /F "%~dp0\version.txt")
-powershell -command "Expand-Archive breeze.zip DISS_A/temp1/" -Force
-if exist "%~dp0\breeze.zip" (DEL /F "%~dp0\breeze.zip")
 
+powershell -command "Expand-Archive %~dp0/breeze.zip %~dp0/DISS_A/temp1/" -verbose -force
+
+
+if exist "%~dp0\version.txt" (
+    move "%~dp0\version.txt" "%~dp0\DISS_A\trash\"
+    )
+if exist "%~dp0\breeze.zip" (
+    move "%~dp0\breeze.zip" "%~dp0\DISS_A\trash\"
+    )
 
 for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/WerWolv/EdiZon/releases/latest ^| find "browser_download_url"') do (
     curl -kOL %%B
 )
-if exist "%~dp0\Edizon.nro" (move "%~dp0\Edizon.nro" "%~dp0\DISS_A\temp1\switch\EdiZon\Edizon.nro")
-md %~dp0\DISS_A\temp1\switch\.overlays
-if exist "%~dp0\ovlEdizon.ovl" (move "%~dp0\ovlEdizon.ovl" "%~dp0\DISS_A\temp1\switch\.overlays\ovlEdizon.ovl")
+if exist "%~dp0\Edizon.nro" (
+    md "%~dp0\DISS_A\temp1\switch\EdiZon\"
+    move "%~dp0\Edizon.nro" "%~dp0\DISS_A\temp1\switch\EdiZon\"
+    )
+if exist "%~dp0\ovlEdizon.ovl" (
+    md "%~dp0\DISS_A\temp1\switch\.overlays\"
+    move "%~dp0\ovlEdizon.ovl" "%~dp0\DISS_A\temp1\switch\EdiZon\"
+    )
 
 for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/DarkMatterCore/nxdumptool/releases/latest ^| find "browser_download_url"') do (
     curl -kOL %%B
 )
-md %~dp0\DISS_A\temp1\switch\nxdumptool
-if exist "%~dp0\nxdumptool.nro" (move "%~dp0\nxdumptool.nro" "%~dp0\DISS_A\temp1\switch\nxdumptool\nxdumptool.nro")
+if exist "%~dp0\nxdumptool.nro" (
+    md "%~dp0\DISS_A\temp1\switch\nxdumptool\"
+    move "%~dp0\nxdumptool.nro" "%~dp0\DISS_A\temp1\switch\nxdumptool\"
+    )
 
 for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/rashevskyv/dbi/releases/latest ^| find "browser_download_url"') do (
     curl -kOL %%B
 )
-if exist "%~dp0\dbi.nro" (move "%~dp0\dbi.nro" "%~dp0\DISS_A\temp1\switch\dbi.nro")
-if exist "%~dp0\dbi.config" (move "%~dp0\dbi.config" "%~dp0\DISS_A\temp1\switch\dbi.config")
-if exist "%~dp0\dbibackend.exe" (DEL /F "%~dp0\dbibackend.exe")
-if exist "%~dp0\DBI_ru.nro" (DEL /F "%~dp0\DBI_ru.nro")
-if exist "%~dp0\dbibackend.tar.xz" (DEL /F "%~dp0\dbibackend.tar.xz")
-
+if exist "%~dp0\dbi.nro" (
+    move "%~dp0\dbi.nro" "%~dp0\DISS_A\temp1\switch\"
+    )
+if exist "%~dp0\dbi.config" (
+    move "%~dp0\dbi.config" "%~dp0\DISS_A\temp1\switch\"
+    )
+if exist "%~dp0\dbibackend.exe" (
+    move "%~dp0\dbibackend.exe" "%~dp0\DISS_A\trash\"
+    )
+if exist "%~dp0\DBI_ru.nro" (
+    move "%~dp0\DBI_ru.nro" "%~dp0\DISS_A\trash\"
+    )
+if exist "%~dp0\dbibackend.tar.xz" (
+    move "%~dp0\dbibackend.tar.xz" "%~dp0\DISS_A\trash\"
+    )
 
 for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/J-D-K/JKSV/releases/latest ^| find "browser_download_url"') do (
     curl -kOL %%B
 )
-if exist "%~dp0\jksv.nro" (move "%~dp0\jksv.nro" "%~dp0\DISS_A\temp1\switch\jksv.nro")
-
+if exist "%~dp0\jksv.nro" (
+    move "%~dp0\jksv.nro" "%~dp0\DISS_A\temp1\switch\"
+    )
 
 for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/meganukebmp/Switch_90DNS_tester/releases/latest ^| find "browser_download_url"') do (
     curl -kOL %%B
 )
-if exist "%~dp0\Switch_90DNS_tester.nro" (move "%~dp0\Switch_90DNS_tester.nro" "%~dp0\DISS_A\temp1\switch\Switch_90DNS_tester.nro")
+if exist "%~dp0\Switch_90DNS_tester.nro" (
+    move "%~dp0\Switch_90DNS_tester.nro" "%~dp0\DISS_A\temp1\switch\"
+    )
 
 for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/rdmrocha/linkalho/releases/latest ^| find "browser_download_url"') do (
     curl -kOL %%B
 )
-powershell -command "Expand-Archive linkalho-*.zip DISS_A/temp1/switch" -Force
-if exist "%~dp0\linkalho-*.zip" (DEL /F "%~dp0\linkalho-*.zip")
+powershell -command "Expand-Archive %~dp0/linkalho-*.zip %~dp0/DISS_A/temp1/switch" -verbose -force
+if exist "%~dp0\linkalho-*.zip" (
+    move "%~dp0\linkalho-*.zip" "%~dp0\DISS_A\trash\"
+    )
+
+for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/ITotalJustice/Gamecard-Installer-NX/releases/latest ^| find "browser_download_url"') do (
+    curl -kOL %%B
+)
+powershell -command "Expand-Archive %~dp0/gamecard_installer.zip %~dp0/DISS_A/temp1" -verbose -force
+if exist "%~dp0\gamecard_installer.zip " (
+    move "%~dp0\gamecard_installer.zip " "%~dp0\DISS_A\trash\"
+    )
+
 echo.
 echo            Downloading Assets is done!
 echo.
@@ -323,32 +444,38 @@ goto download0
 
 :unpack
 if exist "%~dp0\DISS" (RD /s /q "%~dp0\DISS")
-powershell -command "Expand-Archive DISS_A/assets.zip DISS_A/assets" -Force
+
+if exist "%~dp0\DISS_A\atmosphere-*.zip" (
+    rename %~dp0\DISS_A\atmosphere-*.zip jits.zip
+    )
+if exist "%~dp0\DISS_A\hekate_*.zip" (
+    rename %~dp0\DISS_A\hekate_*.zip hekate.zip
+    )
+if exist "%~dp0\DISS_A\assets_*.zip" (
+    rename %~dp0\DISS_A\assets_*.zip assets.zip
+    )
+powershell -command "Expand-Archive %~dp0/DISS_A/assets.zip %~dp0/DISS_A/assets" -verbose -Force
 
 if exist "%~dp0\DISS_A\assets\gear\boot.dat" (
-    rename %~dp0\DISS_A\assets\gear\boot.dat boot.dat
     copy "%~dp0\DISS_A\assets\gear\boot.dat" "%~dp0\DISS_A\temp0\boot.dat.diss"
     )
 if exist "%~dp0\DISS_A\assets\gear\boot.ini" (
-    rename %~dp0\DISS_A\assets\gear\boot.ini boot.ini
     copy "%~dp0\DISS_A\assets\gear\boot.ini" "%~dp0\DISS_A\temp0\boot.ini.diss"
     )
 if exist "%~dp0\DISS_A\assets\gear\exosphere.ini" (
-    rename %~dp0\DISS_A\assets\gear\exosphere.ini exosphere.ini
     copy "%~dp0\DISS_A\assets\gear\exosphere.ini" "%~dp0\DISS_A\temp0\exosphere.ini.diss"
     )
 
-powershell -command "Expand-Archive DISS_A/hekate.zip DISS_A/hekate" -Force
+powershell -command "Expand-Archive %~dp0/DISS_A/hekate.zip %~dp0/DISS_A/hekate" -verbose -Force
 if exist "%~dp0\DISS_A\hekate\hekate_*.bin" (
     rename %~dp0\DISS_A\hekate\hekate_*.bin payload.bin
     copy "%~dp0\DISS_A\hekate\payload.bin" "%~dp0\DISS_A\hekate\bootloader\payloads\hekate.bin"
     )
 if exist "%~dp0\DISS_A\hekate\payload.bin" (
-    rename %~dp0\DISS_A\hekate\payload.bin payload.bin
     copy "%~dp0\DISS_A\hekate\payload.bin" "%~dp0\DISS_A\temp0\payload.bin.diss"
     )
 
-powershell -command "Expand-Archive DISS_A/jits.zip DISS_A/cfw" -Force
+powershell -command "Expand-Archive %~dp0/DISS_A/jits.zip %~dp0/DISS_A/cfw" -verbose -Force
 if exist "%~dp0\DISS_A\temp0\fusee.bin.diss2" (
     rename %~dp0\DISS_A\temp0\fusee.bin.diss2 fusee.bin
     move "%~dp0\DISS_A\temp0\fusee.bin" "%~dp0\DISS_A\cfw\fusee.bin"
@@ -360,30 +487,38 @@ if exist "%~dp0\DISS_A\cfw\fusee.bin" (
     copy "%~dp0\DISS_A\cfw\fusee.bin" "%~dp0\DISS_A\hekate\bootloader\payloads\fusee.bin"
     )
 if exist "%~dp0\DISS_A\cfw\hbmenu.nro" (
-    rename %~dp0\DISS_A\cfw\hbmenu.nro hbmenu.nro
     copy "%~dp0\DISS_A\cfw\hbmenu.nro" "%~dp0\DISS_A\temp0\hbmenu.nro.diss"
     )
-powershell -command "Expand-Archive DISS_A/sigpatches.zip DISS_A/cfw" -Force
+powershell -command "Expand-Archive %~dp0/DISS_A/sigpatches.zip %~dp0/DISS_A/cfw" -verbose -Force
 echo.
 ECHO  Extracting Assets, Bootloader, CFW is done!
 echo.
 TIMEOUT /T 3
-goto download0
+goto downloadXX
 
 :startpoint
 COLOR 0f
 cls
 echo ------------------------------------------------------------------------
-echo.
-echo              Step 1 : Backup and Remove old pack files from SD                         
-echo.
+echo           STEP 1
+:::2           _______                                                   
+:::2          /       \                                                  
+:::2          $$$$$$$  | ______  _____  ____   ______  __     __ ______  
+:::2          $$ |__$$ |/      \/     \/    \ /      \/  \   /  /      \ 
+:::2          $$    $$</$$$$$$  $$$$$$ $$$$  /$$$$$$  $$  \ /$$/$$$$$$  |
+:::2          $$$$$$$  $$    $$ $$ | $$ | $$ $$ |  $$ |$$  /$$/$$    $$ |
+:::2          $$ |  $$ $$$$$$$$/$$ | $$ | $$ $$ \__$$ | $$ $$/ $$$$$$$$/ 
+:::2          $$ |  $$ $$       $$ | $$ | $$ $$    $$/   $$$/  $$       |
+:::2          $$/   $$/ $$$$$$$/$$/  $$/  $$/ $$$$$$/     $/    $$$$$$$/ 
+                                                           
+for /f "delims=:::2 tokens=*" %%A in ('findstr /b :::2 "%~f0"') do @echo(%%A
 echo ------------------------------------------------------------------------
 echo.
 TIMEOUT /T 3
 
 robocopy %sd%:\ %~dp0\DISS_B\ /E /COPYALL /PURGE /XD %sd%:\emuMMC %sd%:\backup %sd%:\games %sd%:\DISS %sd%:\DISS_A %sd%:\DISS_B %sd%:\Firmware /XF %sd%:\DISS_Clean_Install.bat %sd%:\DISS_OLDSD.zip %sd%:\DISS_ABC.zip
 
-powershell -command "Compress-Archive -Path %~dp0/DISS_B -Destination %~dp0/DISS_OLDSD.zip -Force"
+powershell -command "Compress-Archive -Path %~dp0/DISS_B -Destination %~dp0/DISS_OLDSD.zip" -verbose -Force
 echo.
 echo.
 echo.
@@ -408,15 +543,25 @@ if exist "%sd%:\hbmenu.nro" (del /s /q "%sd%:\hbmenu.nro")
 echo.
 echo                     Old File(s) Removed from SD
 echo.
-TIMEOUT /T 3
+TIMEOUT /T 2
 
 :install
 cls
 echo ------------------------------------------------------------------------
-echo.
-echo                   Step 2 : Installing DISS                   
-echo.
+echo            STEP 2
+::::3           /      |                   /  |            /  /  |
+::::3           $$$$$$/ _______   _______ _$$ |_    ______ $$ $$ |
+::::3             $$ | /       \ /       / $$   |  /      \$$ $$ |
+::::3             $$ | $$$$$$$  /$$$$$$$/$$$$$$/   $$$$$$  $$ $$ |
+::::3             $$ | $$ |  $$ $$      \  $$ | __ /    $$ $$ $$ |
+::::3            _$$ |_$$ |  $$ |$$$$$$  | $$ |/  /$$$$$$$ $$ $$ |
+::::3           / $$   $$ |  $$ /     $$/  $$  $$/$$    $$ $$ $$ |
+::::3           $$$$$$/$$/   $$/$$$$$$$/    $$$$/  $$$$$$$/$$/$$
+                                                           
+for /f "delims=::::3 tokens=*" %%A in ('findstr /b ::::3 "%~f0"') do @echo(%%A
 echo ------------------------------------------------------------------------
+echo.
+TIMEOUT /T 3
 xcopy "%~dp0\DISS_A\assets\boot_logo\*" "%~dp0\DISS_A\cfw\atmosphere\exefs_patches\boot_logo\" /E /y
 xcopy "%~dp0\DISS_A\cfw\*" "%~dp0\DISS\" /E /y
 
@@ -430,23 +575,31 @@ xcopy "%~dp0\DISS_A\assets\gear\*" "%~dp0\DISS\" /E /y
 xcopy "%~dp0\DISS_A\assets\inis\*" "%~dp0\DISS\bootloader\" /E /y
 xcopy "%~dp0\DISS_A\assets\boot_logo\*" "%~dp0\DISS_A\cfw\atmosphere\exefs_patches\boot_logo\" /E /y
 xcopy "%~dp0\DISS_A\temp1\*" "%~dp0\DISS\" /E /y
-pause
+echo.
+TIMEOUT /T 2
+echo.
 xcopy "%~dp0\DISS\*" "%sd%:\" /E
 
-
 echo.
-echo                     New file(s) copied to SD
+echo                     New file(s) Installed to SD
 echo.
-TIMEOUT /T 3
+TIMEOUT /T 2
 
 cls
 echo ------------------------------------------------------------------------
-echo.
-echo                  Step 3 : Fixing Folder Atributes                            
-echo.
+echo            STEP 3
+:::::4          /        |      /      |      /  |  /  |
+:::::4          $$$$$$$$/       $$$$$$/       $$ |  $$ |
+:::::4          $$ |__            $$ |        $$  \/$$/ 
+:::::4          $$    |           $$ |         $$  $$<  
+:::::4          $$$$$/            $$ |          $$$$  \ 
+:::::4          $$ |             _$$ |_        $$ /$$  |
+:::::4          $$ |            / $$   |      $$ |  $$ |
+:::::4          $$/             $$$$$$/       $$/   $$/                                     
+for /f "delims=:::::4 tokens=*" %%A in ('findstr /b :::::4 "%~f0"') do @echo(%%A
 echo ------------------------------------------------------------------------
 echo.
-
+TIMEOUT /T 3
 if not exist "%sd%:\boot.dat" (copy "%~dp0\DISS_A\temp0\boot.dat.diss" "%sd%:\boot.dat")
 if not exist "%sd%:\boot.ini" (copy "%~dp0\DISS_A\temp0\boot.ini.diss" "%sd%:\boot.ini")
 if not exist "%sd%:\boot.ini" (copy "%~dp0\DISS_A\temp0\boot.ini.diss" "%sd%:\boot.ini")
@@ -493,26 +646,48 @@ if exist "%sd%:\payload.bin" (attrib -A -r %sd%:\payload.bin)
 if exist "%sd%:\pegascape" (
 	attrib -A /S /D %sd%:\pegascape\*
 	attrib -A %sd%:\pegascape)
-
+if exist "%sd%:\*" (
+	attrib -A -r /S /D %sd%:\*
+	attrib -A -r %sd%:\*)
+if exist "%sd%:\*.*" (attrib -A -r %sd%:\*.*)
 
 echo.
-echo                     Folder(s) Fixed
+echo                     SD Folder(s) attribute Fixed
 echo.
-TIMEOUT /T 3
+TIMEOUT /T 2
+pause
 
 cls
 echo ------------------------------------------------------------------------
-echo.
-echo                  Step 4 : Delete and Backup                            
-echo.
+echo            STEP 4
+::::::5          ______  __                            
+::::::5         /      \/  |                           
+::::::5        /$$$$$$  $$ | ______   ______  _______  
+::::::5        $$ |  $$/$$ |/      \ /      \/       \ 
+::::::5        $$ |     $$ /$$$$$$  |$$$$$$  $$$$$$$  |
+::::::5        $$ |   __$$ $$    $$ |/    $$ $$ |  $$ |
+::::::5        $$ \__/  $$ $$$$$$$$//$$$$$$$ $$ |  $$ |
+::::::5        $$    $$/$$ $$       $$    $$ $$ |  $$ |
+::::::5         $$$$$$/ $$/ $$$$$$$/ $$$$$$$/$$/   $$/                                     
+for /f "delims=::::::5  tokens=*" %%A in ('findstr /b ::::::5  "%~f0"') do @echo(%%A
 echo ------------------------------------------------------------------------
 echo.
-
+TIMEOUT /T 3
 if exist "%~dp0\DISS_A\assets" (RD /s /q "%~dp0\DISS_A\assets")
 if exist "%~dp0\DISS_A\hekate" (RD /s /q "%~dp0\DISS_A\hekate")
 if exist "%~dp0\DISS_A\cfw" (RD /s /q "%~dp0\DISS_A\cfw")
+if exist "%~dp0\DISS_A/trash" (RD /s /q "%~dp0\DISS_A/trash")
+if exist "%~dp0\DISS_A/temp0" (RD /s /q "%~dp0\DISS_A/temp1")
+if exist "%~dp0\DISS_A/temp1" (RD /s /q "%~dp0\DISS_A/temp1")
 
-powershell -command "Compress-Archive -Path %~dp0/DISS_A -Destination %~dp0/DISS_ABC.zip -Force"
+powershell -command "Compress-Archive -Path %~dp0/DISS_A -Destination %~dp0/DISS_ABC.zip" -verbose -Force
+if exist "%~dp0\DISS_ABC.zip" (
+    md C:\dissbackup\
+    copy "%~dp0\DISS_ABC.zip" "C:\dissbackup\"
+    )
+if exist "%~dp0\DISS_OLDSD.zip" (
+    copy "%~dp0\DISS_OLDSD.zip" "C:\dissbackup\"
+    )
 echo.
 echo.
 echo.
@@ -521,10 +696,8 @@ echo                     Please Wait
 if exist "%~dp0\DISS_B" (RD /s /q "%~dp0\DISS_B")
 if exist "%~dp0\DISS" (RD /s /q "%~dp0\DISS")
 
-
-
 echo.
-echo                    Deleted
+echo       Trash Deleted. Needed Item Backed Up. SD Cleaned 
 echo.
 TIMEOUT /T 3
 goto ENDgood
@@ -549,10 +722,10 @@ ECHO.
 set st=
 set /p st="Enter Your number of choice: "
 
-for %%A in ("Y" "y" "1" "н" "Н") do if "%st%"==%%A (GOTO delete3)
+for %%A in ("Y" "y" "1" "н" "Н") do if "%st%"==%%A (GOTO exit)
 for %%A in ("N" "n" "2" "т" "Т") do if "%st%"==%%A (GOTO pickSD)
-for %%A in ("3" "#" "3" "3") do if "%st%"==%%A (GOTO delete3)
-for %%A in ("" "" "" "") do if "%st%"==%%A (GOTO delete3)
+for %%A in ("3" "#" "3" "3") do if "%st%"==%%A (GOTO exit)
+for %%A in ("" "" "" "") do if "%st%"==%%A (GOTO exit)
 
 :delete1
 cls
@@ -581,6 +754,24 @@ exit
 cls
 if exist "%~dp0\DISS" (RD /s /q "%~dp0\DISS")
 if exist "%~dp0\DISS_A" (RD /S /Q "%~dp0\DISS_A\")
+COLOR 02
+:::9      DDDDDDDDDDDDD      IIIIIIIIII   SSSSSSSSSSSSSSS    SSSSSSSSSSSSSSS 
+:::9      D::::::::::::DDD   I::::::::I SS:::::::::::::::S SS:::::::::::::::S
+:::9      D:::::::::::::::DD I::::::::IS:::::SSSSSS::::::SS:::::SSSSSS::::::S
+:::9      DDD:::::DDDDD:::::DII::::::IIS:::::S     SSSSSSSS:::::S     SSSSSSS
+:::9         D:::::D    D:::::D I::::I  S:::::S            S:::::S            
+:::9         D:::::D     D:::::DI::::I  S:::::S            S:::::S            
+:::9         D:::::D     D:::::DI::::I   S::::SSSS          S::::SSSS         
+:::9         D:::::D     D:::::DI::::I    SS::::::SSSSS      SS::::::SSSSS    
+:::9         D:::::D     D:::::DI::::I      SSS::::::::SS      SSS::::::::SS  
+:::9         D:::::D     D:::::DI::::I         SSSSSS::::S        SSSSSS::::S 
+:::9         D:::::D     D:::::DI::::I              S:::::S            S:::::S
+:::9         D:::::D    D:::::D I::::I              S:::::S            S:::::S
+:::9      DDD:::::DDDDD:::::DII::::::IISSSSSSS     S:::::SSSSSSSS     S:::::S
+:::9      D:::::::::::::::DD I::::::::IS::::::SSSSSS:::::SS::::::SSSSSS:::::S
+:::9      D::::::::::::DDD   I::::::::IS:::::::::::::::SS S:::::::::::::::SS 
+:::9       DDDDDDDDDDDDD      IIIIIIIIII SSSSSSSSSSSSSSS    SSSSSSSSSSSSSSS   
+for /f "delims=:::9 tokens=*" %%A in ('findstr /b :::9 "%~f0"') do @echo(%%A
 echo.
 echo	                                 DONE! and DONE!
 echo	 Please backup DISS_OLDSD.zip (old sd files) and DISS_ABC.zip (zip files backup)
