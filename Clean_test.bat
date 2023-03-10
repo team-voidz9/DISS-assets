@@ -451,6 +451,9 @@ TIMEOUT /T 3
 goto download0
 
 :unpack
+dir /b "%~dp0\DISS_A\*.zip" > DISS_Version.txt
+echo "ATMOS, BOOTLOADER, and CFW version recorded"
+
 if exist "%~dp0\DISS" (RD /s /q "%~dp0\DISS")
 
 if exist "%~dp0\DISS_A\atmosphere-*.zip" (
@@ -498,6 +501,11 @@ if exist "%~dp0\DISS_A\cfw\hbmenu.nro" (
     copy "%~dp0\DISS_A\cfw\hbmenu.nro" "%~dp0\DISS_A\temp0\hbmenu.nro.diss"
     )
 powershell -command "Expand-Archive %~dp0/DISS_A/sigpatches.zip %~dp0/DISS_A/cfw" -verbose -Force
+
+if exist "%~dp0\DISS_Version.txt" (
+    rename %~dp0\DISS_Version.txt DISS_Version.diss
+    move "%~dp0\DISS_Version.diss" "%~dp0\DISS_A\temp0\DISS_Version.diss"
+    )
 echo.
 ECHO  Extracting Assets, Bootloader, CFW is done!
 echo.
@@ -580,6 +588,7 @@ xcopy "%~dp0\DISS_A\assets\gear\*" "%~dp0\DISS\" /E /y
 xcopy "%~dp0\DISS_A\assets\inis\*" "%~dp0\DISS\bootloader\" /E /y
 xcopy "%~dp0\DISS_A\assets\boot_logo\*" "%~dp0\DISS_A\cfw\atmosphere\exefs_patches\boot_logo\" /E /y
 xcopy "%~dp0\DISS_A\temp1\*" "%~dp0\DISS\" /E /y
+xcopy "%~dp0\DISS_A\temp0\DISS_Version.diss*" "%~dp0\DISS\DISS_Version.txt" /E /y
 echo.
 TIMEOUT /T 2
 echo.
