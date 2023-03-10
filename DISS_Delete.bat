@@ -1,10 +1,10 @@
 @echo off
 :deleteDelete
-if exist "%~dp0\Clean_Clean.bat" (
-    Del "%~dp0\Clean_Clean.bat"
+if exist "%~dp0:\Clean_Clean.bat" (
+    Del /F "%~dp0:\Clean_Clean.bat"
     )
-if exist "%~dp0\DISS_downloader.bat" (
-    Del "%~dp0\DISS_downloader.bat"
+if exist "%~dp0:\DISS_downloader.bat" (
+    Del /F "%~dp0:\DISS_downloader.bat"
     )
 COLOR 02
 :::9      DDDDDDDDDDDDD      IIIIIIIIII   SSSSSSSSSSSSSSS    SSSSSSSSSSSSSSS 
@@ -33,5 +33,5 @@ echo	                    Put The SD back in your switch and boot
 echo.
 echo Press any button for exit
 pause>nul 2>&1
-del %0
+del /F %0
 
