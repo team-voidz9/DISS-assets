@@ -85,7 +85,7 @@ echo                   CFW and SIGPATCHES READY! [4MB done!]
 echo                   %basename%
 ) ELSE (
 echo                [NO] CFW and SIGPATCHES files detected   
-echo                Press 1 to download          
+echo                Enter 1 to download          
 )
 echo.
 set filepath="%~dp0\DISS_A\hekate_ctcaer*.zip"
@@ -95,7 +95,7 @@ echo                   Bootloader File READY! [1MB done!]
 echo                   %basename%
 ) ELSE (
 echo                [NO] Bootloader Files detected
-echo                Press 2 to download  
+echo                Enter 2 to download  
 )
 echo.
 set filepath="%~dp0\DISS_A\assets_*.zip"
@@ -105,12 +105,12 @@ echo                   DISS Assets File READY! [80MB done!]
 echo                   %basename%
 ) ELSE (
 echo                [NO] Assets Files detected
-echo                Press 3 to download  
+echo                Enter 3 to download  
 )
 echo.
 IF EXIST "%~dp0\DISS_A\assets_*.zip" IF EXIST "%~dp0\DISS_A\hekate_ctcaer*.zip" (
 echo                   cfw / bootloader / assets [detected!]
-echo                   Press 4 to extract
+echo                   Enter 4 to extract
 ) ELSE (
 echo                   ...
 )
@@ -146,11 +146,13 @@ ECHO ----------------------------------------------------------
 ECHO.
 
 IF EXIST "%~dp0\DISS_A\assets\inis\hekate_ipl.ini" IF EXIST "%~dp0\DISS_A\cfw\switch\daybreak.nro" (
-echo                   cfw / bootloader / assets [extracted]
-echo                   Press 5 to extract
+echo          cfw / bootloader / assets [extracted]
+echo                    Enter 5 to extract
 ) ELSE (
-echo                   ...
+echo                          ...
 )
+echo.
+echo.
 ECHO ==========================================================
 ECHO                                        7.  exit
 ECHO.
