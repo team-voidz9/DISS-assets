@@ -588,7 +588,7 @@ xcopy "%~dp0\DISS_A\assets\gear\*" "%~dp0\DISS\" /E /y
 xcopy "%~dp0\DISS_A\assets\inis\*" "%~dp0\DISS\bootloader\" /E /y
 xcopy "%~dp0\DISS_A\assets\boot_logo\*" "%~dp0\DISS_A\cfw\atmosphere\exefs_patches\boot_logo\" /E /y
 xcopy "%~dp0\DISS_A\temp1\*" "%~dp0\DISS\" /E /y
-xcopy "%~dp0\DISS_A\temp0\DISS_Version.diss*" "%~dp0\DISS\DISS_Version.txt" /E /y
+
 echo.
 TIMEOUT /T 2
 echo.
@@ -621,6 +621,7 @@ if not exist "%sd%:\exosphere.ini" (copy "%~dp0\DISS_A\temp0\exosphere.ini.diss"
 if not exist "%sd%:\payload.bin" (copy "%~dp0\DISS_A\temp0\payload.bin.diss" "%sd%:\payload.bin")
 if not exist "%sd%:\fusee.bin" (copy "%~dp0\DISS_A\temp0\fusee.bin.diss" "%sd%:\fusee.bin")
 if not exist "%sd%:\hbmenu.nro" (copy "%~dp0\DISS_A\temp0\hbmenu.nro.diss" "%sd%:\hbmenu.nro")
+if not exist "%sd%:\DISS_Version.txt" (copy "%~dp0\DISS_A\temp0\DISS_Version.diss" "%sd%:\DISS_Version.txt")
 
 if exist "%sd%:\atmosphere" (
 	attrib -A -r /S /D %sd%:\atmosphere\*
