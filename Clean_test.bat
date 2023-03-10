@@ -135,6 +135,37 @@ for %%A in ("6" "^" "6" "6" "6") do if "%st%"==%%A (GOTO delete1)
 for %%A in ("7" "&" "7" "7") do if "%st%"==%%A (GOTO exit)
 for %%A in ("" "" "" "") do if "%st%"==%%A (GOTO exit)
 
+:downloadXX
+COLOR 0f
+cls
+echo.
+ECHO ----------------------------------------------------------
+ECHO ======                 DISS Downloader               =====
+ECHO ======           Assets / Bootloader / CFW           =====
+ECHO ----------------------------------------------------------
+ECHO.
+
+IF EXIST "%~dp0\DISS_A\assets\inis\hekate_ipl.ini" IF EXIST "%~dp0\DISS_A\cfw\switch\daybreak.nro" (
+echo                   cfw / bootloader / assets [extracted]
+echo                   Press 5 to extract
+) ELSE (
+echo                   ...
+)
+ECHO ==========================================================
+ECHO                                        7.  exit
+ECHO.
+
+set st=
+set /p st="Enter Your number of choice: "
+for %%A in ("0" "o" "O" "0" "0") do if "%st%"==%%A (GOTO downloadALL)
+for %%A in ("Y" "y" "1" "н" "Н") do if "%st%"==%%A (GOTO download1)
+for %%A in ("N" "n" "2" "т" "Т") do if "%st%"==%%A (GOTO download2)
+for %%A in ("3" "#" "3" "3" "3") do if "%st%"==%%A (GOTO download3)
+for %%A in ("$" "4" "4" "4" "4") do if "%st%"==%%A (GOTO unpack)
+for %%A in ("5" "5" "5" "5" "5") do if "%st%"==%%A (GOTO startpoint)
+for %%A in ("6" "^" "6" "6" "6") do if "%st%"==%%A (GOTO delete1)
+for %%A in ("7" "&" "7" "7") do if "%st%"==%%A (GOTO exit)
+for %%A in ("" "" "" "") do if "%st%"==%%A (GOTO exit)
 
 :downloadALL
 for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest ^| find "browser_download_url"') do (
