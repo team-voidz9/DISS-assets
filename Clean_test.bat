@@ -553,6 +553,7 @@ if exist "%sd%:\payload.bin" (del /s /q "%sd%:\payload.bin")
 if exist "%sd%:\boot.dat" (del /s /q "%sd%:\boot.dat")
 if exist "%sd%:\boot.ini" (del /s /q "%sd%:\boot.ini")
 if exist "%sd%:\hbmenu.nro" (del /s /q "%sd%:\hbmenu.nro")
+if exist "%sd%:\DISS_Version.txt" (del /s /q "%sd%:\DISS_Version.txt")
 echo.
 echo                     Old File(s) Removed from SD
 echo.
