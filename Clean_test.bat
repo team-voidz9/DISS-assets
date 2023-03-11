@@ -765,7 +765,9 @@ if exist "%~dp0\DISS_ABC.zip" (
 if exist "%~dp0\DISS_OLDSD.zip" (
     copy "%~dp0\DISS_OLDSD.zip" "C:\dissbackup\"
     )
-
+if exist "%sd%:\DISS_version.txt"
+    copy "%sd%:\DISS_version.txt" "C:\dissbackup\"
+    )
 echo.
 echo                     Please Wait
 
