@@ -593,7 +593,7 @@ echo ------------------------------------------------------------------------
 echo.
 TIMEOUT /T 3
 
-robocopy %sd%:\ %~dp0\DISS_B\ /E /COPYALL /PURGE /XD %sd%:\emuMMC %sd%:\backup %sd%:\games %sd%:\DISS %sd%:\DISS_A %sd%:\DISS_B %sd%:\Firmware /XF %sd%:\DISS_Delete.bat %sd%:\DISS_Downloader.bat %sd%:\Clean_clean.bat %sd%:\DISS_OLDSD.zip %sd%:\DISS_ABC.zip
+robocopy %sd%:\ %~dp0\DISS_B\ /E /COPYALL /PURGE /XD %sd%:\emuMMC %sd%:\backup %sd%:\games %sd%:\DISS %sd%:\DISS_A %sd%:\DISS_B %sd%:\DISSScript %sd%:\Firmware /XF %sd%:\DISS_Delete.bat %sd%:\DISS_Downloader.bat %sd%:\Clean_clean.bat %sd%:\DISS_OLDSD.zip %sd%:\DISS_ABC.zip %sd%:\*.bat %sd%:\*.ps1
 
 powershell -command "Compress-Archive -Path %~dp0/DISS_B/ -Destination %~dp0/DISS_OLDSD.zip" -verbose -Force
 echo.
@@ -826,13 +826,13 @@ echo	 zip files and temp folders DELETED!
 echo.
 echo Press any button for exit
 pause>nul 2>&1
-call DISS_delete.bat
+call %~dp0\DISS_delete.bat
 
 :delete3
 cls
 if exist "%~dp0\DISS" (RD /s /q "%~dp0\DISS")
 if exist "%~dp0\DISS_A" (RD /S /Q "%~dp0\DISS_A\")
-call DISS_delete.bat
+call %~dp0\DISS_delete.bat
 
 :ENDgood
 COLOR 0f

@@ -29,8 +29,10 @@ echo.
 powershell write-host -back Green  Put The SD back in your switch and boot
 echo.
 pause
-if exist Clean_Clean.bat (DEL /Q /F Clean_Clean.bat) 
-if exist DISS_downloader.bat (DEL /Q /F DISS_downloader.bat) 
+if exist %~dp0\Clean_Clean.bat (DEL /Q /F %~dp0\Clean_Clean.bat) 
+if exist %~dp0\DISS_downloader.bat (DEL /Q /F %~dp0\DISS_downloader.bat) 
+if exist %~dp0\DISS_downloader.bat (DEL /Q /F %~dp0\DISS_downloader.bat)
+if exist %~dp0\*.ps1 (DEL /Q /F %~dp0\*.ps1) 
 pause
 del %0
 
