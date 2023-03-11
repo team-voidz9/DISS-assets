@@ -885,17 +885,3 @@ set /p st="Enter Your number of choice: "
 
 for %%A in ("Y" "y" "1" "н" "Н") do if "%st%"==%%A (GOTO download0)
 for %%A in ("N" "n" "2" "т" "Т") do if "%st%"==%%A (GOTO exit)
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
