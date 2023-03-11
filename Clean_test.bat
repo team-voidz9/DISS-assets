@@ -651,6 +651,7 @@ xcopy "%~dp0\DISS_A\assets\gear\*" "%~dp0\DISS\" /E /y
 xcopy "%~dp0\DISS_A\assets\inis\*" "%~dp0\DISS\bootloader\" /E /y
 xcopy "%~dp0\DISS_A\assets\boot_logo\*" "%~dp0\DISS_A\cfw\atmosphere\exefs_patches\boot_logo\" /E /y
 xcopy "%~dp0\DISS_A\temp1\*" "%~dp0\DISS\" /E /y
+xcopy "%~dp0\DISS_Downloader.bat" "%~dp0\DISS\DISS_Downloader.bat" /E /y
 
 echo.
 TIMEOUT /T 2
