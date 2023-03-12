@@ -461,7 +461,7 @@ echo ------------------------------------------------------------------------
 echo.
 TIMEOUT /T 3
 
-robocopy %sd%:\ %~dp0\DISS_B\ /E /COPYALL /PURGE /XD %sd%:\emuMMC %sd%:\backup %sd%:\games %sd%:\DISS %sd%:\DISS_A %sd%:\DISS_B %sd%:\DISSScript %sd%:\Firmware /XF %sd%:\DISS_Delete.bat %sd%:\DISS_Downloader.bat %sd%:\Clean_clean.bat %sd%:\DISS_OLDSD.zip %sd%:\DISS_ABC.zip %sd%:\*.bat %sd%:\*.ps1
+robocopy %sd%:\ %~dp0\DISS_B\ /E /COPYALL  /XD %sd%:\emuMMC %sd%:\backup %sd%:\games %sd%:\DISS %sd%:\DISS_A %sd%:\DISS_B %sd%:\Firmware /XF %sd%:\DISS_OLDSD.zip %sd%:\DISS_ABC.zip %sd%:\*.bat %sd%:\*.ps1
 
 powershell -command "Compress-Archive -Path %~dp0/DISS_B/ -Destination %~dp0/DISS_OLDSD.zip" -verbose -Force
 echo.
