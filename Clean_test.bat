@@ -588,7 +588,6 @@ goto download0
 :delete2
 cls
 if exist "%~dp0\DISS" (RD /s /q "%~dp0\DISS")
-if exist "%~dp0\DISS_A" (RD /s /q "%~dp0\DISS_A")
 echo.
 echo	 zip files and temp folders DELETED!
 echo.
@@ -599,7 +598,6 @@ call %~dp0\DISS_delete.bat
 :delete3
 cls
 if exist "%~dp0\DISS" (RD /s /q "%~dp0\DISS")
-if exist "%~dp0\DISS_A" (RD /S /Q "%~dp0\DISS_A\")
 call %~dp0\DISS_delete.bat
 
 :ENDgood
