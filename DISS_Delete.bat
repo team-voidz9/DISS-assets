@@ -18,13 +18,15 @@ cls
 for /f "delims=:::1 tokens=*" %%A in ('findstr /b :::1 "%~f0"') do @echo(%%A
 echo.
 echo	                                 DONE! and DONE!
-echo.                   
+echo.
+if exist "%~dp0\DISS_A\temp0\DISS_Version.diss" (
+    rename %~dp0\DISS_A\temp0\DISS_Version.diss DISS_Version.txt
+    copy "%~dp0\DISS_A\temp0\DISS_Version.txt" "%~dp0\DISS_A\DISS_Version.txt"
+    )
 powershell write-host -back Red These File have been installed into your SD CARD.
-powershell Get-Content C:\dissbackup\DISS_version.txt 
+powershell Get-Content %~dp0\DISS_A\DISS_Version.txt 
 powershell write-host -back Red .................................................
 echo.
-echo	 Please backup DISS_OLDSD.zip (old sd files) and DISS_ABC.zip (zip files backup)
-echo	 Also we have backup it up at C:/dissbackup
 echo.
 if exist "%~dp0\DISS_A\assets" (RD /s /q "%~dp0\DISS_A\assets")
 if exist "%~dp0\DISS_A\hekate" (RD /s /q "%~dp0\DISS_A\hekate")
@@ -33,26 +35,23 @@ if exist "%~dp0\DISS_A\trash" (RD /s /q "%~dp0\DISS_A\trash")
 if exist "%~dp0\DISS_A\temp0" (RD /s /q "%~dp0\DISS_A\temp1")
 if exist "%~dp0\DISS_A\temp1" (RD /s /q "%~dp0\DISS_A\temp1")
 if exist "%~dp0\DISS" (RD /s /q "%~dp0\DISS")
-powershell -command "Compress-Archive -Path DISS_B\* -Destination DISS_OLDSD.zip" -verbose -Force
-powershell -command "Compress-Archive -Path DISS_A\* -Destinationpath DISS_ABC.zip" -verbose -force
-if exist "%~dp0\DISS_ABC.zip" (
-    md C:\dissbackup\
-    copy "%~dp0\DISS_ABC.zip" "C:\dissbackup\DISS_ABC.zip"
-    )
-if exist "%~dp0\DISS_OLDSD.zip" (
-    copy "%~dp0\DISS_OLDSD.zip" "C:\dissbackup\DISS_OLDSD.zip"
-    )
-if exist "%sd%:\DISS_version.txt"
-    copy "%sd%:\DISS_version.txt" "C:\dissbackup\DISS_version.txt"
-    )
+powershell -command "Compress-Archive -Path DISS_B\ -Destination DISS_OLDSD.zip"  -verbose -Force
+TIMEOUT /T 2
+powershell -command "Compress-Archive -Path DISS_A\ -Destination DISS_ABCBackups.zip"  -verbose -Force
+rd C:\dissbackup\
+md C:\dissbackup\
+robocopy %~dp0\DISS_ABCBackups.zip C:\dissbackup\ /E /COPYALL
+robocopy %~dp0\DISS_OLDSD.zip C:\dissbackup\ /E /COPYALL
+robocopy %~dp0\DISS_A\DISS_Version.txt C:\dissbackup\ /E /COPYALL
 if exist "%~dp0\DISS_B" (RD /s /q "%~dp0\DISS_B")
-powershell write-host -back Green  Put The SD back in your switch and boot
-echo.
-
-pause
-if exist %~dp0\Clean_Clean.bat (DEL /Q /F %~dp0\Clean_Clean.bat) 
-if exist %~dp0\DISS_downloader.bat (DEL /Q /F %~dp0\DISS_downloader.bat) 
-if exist %~dp0\DISS_downloader.bat (DEL /Q /F %~dp0\DISS_downloader.bat)
-if exist %~dp0\*.ps1 (DEL /Q /F %~dp0\*.ps1) 
+TIMEOUT /T 2
+DEL Clean_Clean.bat
+DEL DISS_downloader.bat
+DEL DISS_downloader.bat
+DEL Atmos.ps1
+DEL BINRO.ps1
+DEL DAss.ps1
+DEL Hekat.ps1
+RD /s /q DISS_A
 pause
 del %0

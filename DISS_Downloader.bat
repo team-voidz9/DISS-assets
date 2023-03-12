@@ -26,10 +26,6 @@ echo.
 TIMEOUT /T 3
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/Clean_test.bat" --output %~dp0\Clean_Clean.bat
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS_Delete.bat" --output %~dp0\DISS_Delete.bat
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/Atmos.ps1" --output %~dp0\Atmos.ps1
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/BINRO.ps1" --output %~dp0\BINRO.ps1
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DAss.ps1" --output %~dp0\DAss.ps1
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/Hekat.ps1" --output %~dp0\Hekat.ps1
 TIMEOUT /T 3
 
 call %~dp0\Clean_Clean.bat

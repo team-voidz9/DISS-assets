@@ -220,12 +220,12 @@ TIMEOUT /T 3
 goto download0
 
 :download1
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/Atmos.ps1" --output %~dp0\Atmos.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\atmos.ps1'"
 
 if exist "%~dp0\atmosphere-*.zip" (
     move "%~dp0\atmosphere-*.zip" "%~dp0\DISS_A\"
     )
-
 if exist "%~dp0\fusee.bin" (
     rename %~dp0\fusee.bin fusee.bin.diss2
     move "%~dp0\fusee.bin.diss2" "%~dp0\DISS_A\temp0\fusee.bin.diss2"
@@ -236,6 +236,10 @@ curl "https://sigmapatches.coomer.party/sigpatches.zip" --output sigpatches.zip
 if exist "%~dp0\sigpatches.zip" (
     move "%~dp0\sigpatches.zip" "%~dp0\DISS_A\sigpatches.zip"
     )
+if exist "%~dp0\atmos.ps1" (
+    rename %~dp0\atmos.ps1 atmos.diss.done
+    move "%~dp0\atmos.diss.done" "%~dp0\DISS_A\trash\atmos.diss.done"
+    )	
 echo.
 echo            Downloading CFW and Sigpatches is done!
 echo.
@@ -243,10 +247,15 @@ TIMEOUT /T 3
 goto download0
 
 :download2
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/Hekat.ps1" --output %~dp0\Hekat.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\Hekat.ps1'"
 
 if exist "%~dp0\hekate_*.zip" (
     move "%~dp0\hekate_*.zip" "%~dp0\DISS_A\"
+    )
+if exist "%~dp0\Hekat.ps1" (
+    rename %~dp0\Hekat.ps1 Hekat.diss.done
+    move "%~dp0\Hekat.diss.done" "%~dp0\DISS_A\trash\Hekat.diss.done"
     )
 echo.
 echo            Downloading Bootloader is done!
@@ -255,10 +264,15 @@ TIMEOUT /T 3
 goto download0
 
 :download3
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DAss.ps1" --output %~dp0\DAss.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\DAss.ps1'"
 )
 if exist "%~dp0\assets_*.zip" (
     move "%~dp0\assets_*.zip" "%~dp0\DISS_A\"
+    )
+if exist "%~dp0\DAss.ps1" (
+    rename %~dp0\DAss.ps1 DAss.diss.done
+    move "%~dp0\DAss.diss.done" "%~dp0\DISS_A\trash\DAss.diss.done"
     )
 echo.
 echo            Downloading Assets is done
@@ -267,6 +281,7 @@ TIMEOUT /T 3
 goto downloadextra
 
 :downloadextra
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/BINRO.ps1" --output %~dp0\BINRO.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\BINRO.ps1'"
 powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
 if exist "%~dp0\breeze.zip" (
@@ -318,7 +333,10 @@ if exist "%~dp0\CommonProblemResolver.bin" (
 if exist "%~dp0\Incognito_RCM.bin" (
     move "%~dp0\Incognito_RCM.bin" "%~dp0\DISS_A\assets\payloads"
     )
-	
+if exist "%~dp0\BINRO.ps1" (
+    rename %~dp0\BINRO.ps1 BINRO.diss.done
+    move "%~dp0\BINRO.diss.done" "%~dp0\DISS_A\trash\BINRO.diss.done"
+    )	
 echo.
 echo            Downloading BINs and NROs are done!
 echo.
@@ -392,7 +410,7 @@ goto downloadXX
 COLOR 0f
 cls
 echo ------------------------------------------------------------------------
-echo           STEP 1
+echo           STEP 1 : Copy / Remove SD Contents
 :::2           _______
 :::2          /       \
 :::2          $$$$$$$  | ______  _____  ____   ______  __     __ ______
@@ -409,7 +427,6 @@ echo.
 TIMEOUT /T 3
 
 robocopy %sd%:\ %~dp0\DISS_B\ /E /COPYALL  /XD %sd%:\emuMMC %sd%:\backup %sd%:\games %sd%:\DISS %sd%:\DISS_A %sd%:\DISS_B %sd%:\Firmware /XF %sd%:\DISS_OLDSD.zip %sd%:\DISS_ABC.zip
-powershell -command "Compress-Archive -Path DISS_B\* -Destination DISS_OLDSD.zip" -verbose -Force
 echo.
 ECHO       Please Wait.
 TIMEOUT /T 3
@@ -431,14 +448,15 @@ if exist "%sd%:\boot.ini" (del /s /q "%sd%:\boot.ini")
 if exist "%sd%:\hbmenu.nro" (del /s /q "%sd%:\hbmenu.nro")
 if exist "%sd%:\DISS_Version.txt" (del /s /q "%sd%:\DISS_Version.txt")
 echo.
-echo                     Old File(s) Removed from SD
+echo                     DONE
 echo.
 TIMEOUT /T 2
 
 :install
 cls
 echo ------------------------------------------------------------------------
-echo            STEP 2
+echo            STEP 2 : Installing New Downloaded Files
+::::3            ______                     __              _____
 ::::3           /      |                   /  |            /  /  |
 ::::3           $$$$$$/ _______   _______ _$$ |_    ______ $$ $$ |
 ::::3             $$ | /       \ /       / $$   |  /      \$$ $$ |
@@ -468,16 +486,17 @@ robocopy %~dp0\DISS_A\temp1 %~dp0\DISS\ /E /COPYALL
 echo.
 TIMEOUT /T 2
 echo.
-robocopy %~dp0\DISS\ %sd%:\ /E /COPYALL
+robocopy %~dp0\DISS\ %sd%:\ /E /MIR /COPYALL
 
 echo.
-echo                     New file(s) Installed to SD
+echo                     DONE
 echo.
 TIMEOUT /T 2
 
 cls
 echo ------------------------------------------------------------------------
-echo            STEP 3
+echo            STEP 3 : Fixing Missing Files / Attributes
+:::::4           ________        ______        __    __
 :::::4          /        |      /      |      /  |  /  |
 :::::4          $$$$$$$$/       $$$$$$/       $$ |  $$ |
 :::::4          $$ |__            $$ |        $$  \/$$/
@@ -543,7 +562,7 @@ if exist "%sd%:\*" (
 if exist "%sd%:\*.*" (attrib -A -r %sd%:\*.*)
 
 echo.
-echo                     SD Folder(s) attribute Fixed
+echo                     DONE
 echo.
 TIMEOUT /T 2
 goto ENDgood
