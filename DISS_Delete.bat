@@ -38,11 +38,20 @@ if exist "%~dp0\DISS" (RD /s /q "%~dp0\DISS")
 powershell -command "Compress-Archive -Path DISS_B\ -Destination DISS_OLDSD.zip"  -verbose -Force
 TIMEOUT /T 2
 powershell -command "Compress-Archive -Path DISS_A\ -Destination DISS_ABCBackups.zip"  -verbose -Force
-rd C:\dissbackup\
+RD /s /q C:\dissbackup\
 md C:\dissbackup\
-robocopy %~dp0\DISS_ABCBackups.zip C:\dissbackup\DISS_ABCBackups.zip /E /COPYALL
-robocopy %~dp0\DISS_OLDSD.zip C:\dissbackup\DISS_OLDSD.zip /E /COPYALL
-robocopy %~dp0\DISS_A\DISS_Version.txt C:\dissbackup\ /E /COPYALL
+if exist "%~dp0\DISS_ABCBackups.zip" (
+    copy "%~dp0\DISS_ABCBackups.zip" "C:\dissbackup\DISS_ABCBackups.zip"
+    )
+if exist "%~dp0\DISS_OLDSD.zip" (
+    copy "%~dp0\DISS_OLDSD.zip" "C:\dissbackup\DISS_OLDSD.zip"
+    )	
+if exist "%~dp0\DISS_ABCBackups.zip" (
+    copy "%~dp0\DISS_ABCBackups.zip" "C:\dissbackup\DISS_ABCBackups.zip"
+    )
+if exist "%~dp0\DISS_A\temp0\DISS_Version.txt" (
+    copy "%~dp0\DISS_A\temp0\DISS_Version.txt" "C:\dissbackup\DISS_Version.txt"
+    )	
 if exist "%~dp0\DISS_B" (RD /s /q "%~dp0\DISS_B")
 TIMEOUT /T 2
 DEL Clean_Clean.bat
