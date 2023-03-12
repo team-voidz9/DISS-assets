@@ -116,7 +116,7 @@ IF EXIST "%~dp0\DISS_A\assets_*.zip" IF EXIST "%~dp0\DISS_A\hekate_ctcaer*.zip" 
 echo      Assets, Bootloader and CFW checked and ready
 powershell write-host -back Red         Enter 4 to extract
 ) ELSE (
-echo                   ...
+echo.
 )
 echo.
 IF EXIST "%~dp0\DISS_A\temp1\switch\nxdumptool\nxdumptool.nro" IF EXIST "%~dp0\DISS_A\assets\payloads\Lockpick_RCM.bin"(
