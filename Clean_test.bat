@@ -105,7 +105,7 @@ echo.
 set filepath3="%~dp0\DISS_A\assets_*.zip"
 for /F "delims=" %%i in (%filepath3%) do set basename3="%%~ni"
 IF EXIST "%~dp0\DISS_A\assets_*.zip" (
-echo      DISS Assets File READY! [25MB done!]
+echo      DISS Assets File READY! [100MB done!]
 echo       %basename3%
 ) ELSE (
 echo      [NO] Assets Files detected
@@ -264,13 +264,11 @@ echo.
 echo            Downloading Assets is done
 echo.
 TIMEOUT /T 3
-goto download0
+goto downloadextra
 
-:downloadextra not use
+:downloadextra
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\BINRO.ps1'"
 powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
-
-
 if exist "%~dp0\breeze.zip" (
     move "%~dp0\breeze.zip" "%~dp0\DISS_A\trash\"
     )
@@ -281,7 +279,7 @@ if exist "%~dp0\Edizon.nro" (
     )
 if exist "%~dp0\ovlEdizon.ovl" (
     md "%~dp0\DISS_A\temp1\switch\.overlays\"
-    move "%~dp0\ovlEdizon.ovl" "%~dp0\DISS_A\temp1\switch\EdiZon\.overlays\"
+    move "%~dp0\ovlEdizon.ovl" "%~dp0\DISS_A\temp1\switch\.overlays\"
     )
 if exist "%~dp0\nxdumptool.nro" (
     md "%~dp0\DISS_A\temp1\switch\nxdumptool\"
@@ -328,65 +326,6 @@ TIMEOUT /T 3
 goto download0
 
 :unpack
-PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\BINRO.ps1'"
-powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
-
-
-if exist "%~dp0\breeze.zip" (
-    move "%~dp0\breeze.zip" "%~dp0\DISS_A\trash\"
-    )
-
-if exist "%~dp0\Edizon.nro" (
-    md "%~dp0\DISS_A\temp1\switch\EdiZon\"
-    move "%~dp0\Edizon.nro" "%~dp0\DISS_A\temp1\switch\EdiZon\"
-    )
-if exist "%~dp0\ovlEdizon.ovl" (
-    md "%~dp0\DISS_A\temp1\switch\.overlays\"
-    move "%~dp0\ovlEdizon.ovl" "%~dp0\DISS_A\temp1\switch\EdiZon\.overlays\"
-    )
-if exist "%~dp0\nxdumptool.nro" (
-    md "%~dp0\DISS_A\temp1\switch\nxdumptool\"
-    move "%~dp0\nxdumptool.nro" "%~dp0\DISS_A\temp1\switch\nxdumptool\"
-    )
-if exist "%~dp0\dbi.nro" (
-    move "%~dp0\dbi.nro" "%~dp0\DISS_A\temp1\switch\"
-    )
-if exist "%~dp0\dbi.config" (
-    move "%~dp0\dbi.config" "%~dp0\DISS_A\temp1\switch\"
-    )
-if exist "%~dp0\jksv.nro" (
-    move "%~dp0\jksv.nro" "%~dp0\DISS_A\temp1\switch\"
-    )
-if exist "%~dp0\Switch_90DNS_tester.nro" (
-    move "%~dp0\Switch_90DNS_tester.nro" "%~dp0\DISS_A\temp1\switch\"
-    )
-powershell -command "Expand-Archive %~dp0/linkalho-*.zip %~dp0/DISS_A/temp1/switch" -verbose -force
-if exist "%~dp0\linkalho-*.zip" (
-    move "%~dp0\linkalho-*.zip" "%~dp0\DISS_A\trash\"
-    )
-powershell -command "Expand-Archive %~dp0/gamecard_installer.zip %~dp0/DISS_A/temp1" -verbose -force
-if exist "%~dp0\gamecard_installer.zip " (
-    move "%~dp0\gamecard_installer.zip " "%~dp0\DISS_A\trash\"
-    )
-if exist "%~dp0\TegraExplorer.bin" (
-    md "%~dp0\DISS_A\assets\payloads\"
-    move "%~dp0\TegraExplorer.bin" "%~dp0\DISS_A\assets\payloads"
-    )
-if exist "%~dp0\Lockpick_RCM.bin" (
-    move "%~dp0\Lockpick_RCM.bin" "%~dp0\DISS_A\assets\payloads"
-    )
-if exist "%~dp0\CommonProblemResolver.bin" (
-    move "%~dp0\CommonProblemResolver.bin" "%~dp0\DISS_A\assets\payloads"
-    )
-if exist "%~dp0\Incognito_RCM.bin" (
-    move "%~dp0\Incognito_RCM.bin" "%~dp0\DISS_A\assets\payloads"
-    )
-	
-echo.
-echo            Downloading BINs and NROs are done!
-echo.
-TIMEOUT /T 3
-
 dir /b "%~dp0\DISS_A\*.zip" > DISS_Version.txt
 echo "ATMOS, BOOTLOADER, and CFW version recorded"
 echo.
