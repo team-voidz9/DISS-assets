@@ -119,7 +119,7 @@ powershell write-host -back Red         Enter 4 to extract
 echo.
 )
 echo.
-IF EXIST "%~dp0\DISS_A\temp1\switch\nxdumptool\nxdumptool.nro" IF EXIST "%~dp0\DISS_A\assets\payloads\Lockpick_RCM.bin"(
+IF EXIST "%~dp0\DISS_A\assets\payloads\Lockpick_RCM.bin"(
 echo      [EXTRA] Payloads and Homebrews Ready! [50MB done!] 
 powershell write-host -back Red         Nice
 ) ELSE (
