@@ -265,9 +265,9 @@ echo            Downloading Assets is done
 echo.
 TIMEOUT /T 3
 goto download0
-PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\BINRO.ps1'"
 
-:downloadextra
+:downloadextra not use
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\BINRO.ps1'"
 powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
 
 
@@ -328,6 +328,65 @@ TIMEOUT /T 3
 goto download0
 
 :unpack
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\BINRO.ps1'"
+powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
+
+
+if exist "%~dp0\breeze.zip" (
+    move "%~dp0\breeze.zip" "%~dp0\DISS_A\trash\"
+    )
+
+if exist "%~dp0\Edizon.nro" (
+    md "%~dp0\DISS_A\temp1\switch\EdiZon\"
+    move "%~dp0\Edizon.nro" "%~dp0\DISS_A\temp1\switch\EdiZon\"
+    )
+if exist "%~dp0\ovlEdizon.ovl" (
+    md "%~dp0\DISS_A\temp1\switch\.overlays\"
+    move "%~dp0\ovlEdizon.ovl" "%~dp0\DISS_A\temp1\switch\EdiZon\.overlays\"
+    )
+if exist "%~dp0\nxdumptool.nro" (
+    md "%~dp0\DISS_A\temp1\switch\nxdumptool\"
+    move "%~dp0\nxdumptool.nro" "%~dp0\DISS_A\temp1\switch\nxdumptool\"
+    )
+if exist "%~dp0\dbi.nro" (
+    move "%~dp0\dbi.nro" "%~dp0\DISS_A\temp1\switch\"
+    )
+if exist "%~dp0\dbi.config" (
+    move "%~dp0\dbi.config" "%~dp0\DISS_A\temp1\switch\"
+    )
+if exist "%~dp0\jksv.nro" (
+    move "%~dp0\jksv.nro" "%~dp0\DISS_A\temp1\switch\"
+    )
+if exist "%~dp0\Switch_90DNS_tester.nro" (
+    move "%~dp0\Switch_90DNS_tester.nro" "%~dp0\DISS_A\temp1\switch\"
+    )
+powershell -command "Expand-Archive %~dp0/linkalho-*.zip %~dp0/DISS_A/temp1/switch" -verbose -force
+if exist "%~dp0\linkalho-*.zip" (
+    move "%~dp0\linkalho-*.zip" "%~dp0\DISS_A\trash\"
+    )
+powershell -command "Expand-Archive %~dp0/gamecard_installer.zip %~dp0/DISS_A/temp1" -verbose -force
+if exist "%~dp0\gamecard_installer.zip " (
+    move "%~dp0\gamecard_installer.zip " "%~dp0\DISS_A\trash\"
+    )
+if exist "%~dp0\TegraExplorer.bin" (
+    md "%~dp0\DISS_A\assets\payloads\"
+    move "%~dp0\TegraExplorer.bin" "%~dp0\DISS_A\assets\payloads"
+    )
+if exist "%~dp0\Lockpick_RCM.bin" (
+    move "%~dp0\Lockpick_RCM.bin" "%~dp0\DISS_A\assets\payloads"
+    )
+if exist "%~dp0\CommonProblemResolver.bin" (
+    move "%~dp0\CommonProblemResolver.bin" "%~dp0\DISS_A\assets\payloads"
+    )
+if exist "%~dp0\Incognito_RCM.bin" (
+    move "%~dp0\Incognito_RCM.bin" "%~dp0\DISS_A\assets\payloads"
+    )
+	
+echo.
+echo            Downloading BINs and NROs are done!
+echo.
+TIMEOUT /T 3
+
 dir /b "%~dp0\DISS_A\*.zip" > DISS_Version.txt
 echo "ATMOS, BOOTLOADER, and CFW version recorded"
 echo.
@@ -410,8 +469,8 @@ echo ------------------------------------------------------------------------
 echo.
 TIMEOUT /T 3
 
-robocopy %sd%:\ %~dp0\DISS_B\ /E /COPYALL  /XD %sd%:\emuMMC %sd%:\backup %sd%:\games %sd%:\DISS %sd%:\DISS_A %sd%:\DISS_B %sd%:\Firmware /XF %sd%:\DISS_OLDSD.zip %sd%:\DISS_ABC.zip %sd%:\*.bat %sd%:\*.ps1
-powershell -command "Compress-Archive -Path %~dp0\DISS_B\* -Destination %~dp0\DISS_OLDSD.zip" -verbose -Force
+robocopy %sd%:\ %~dp0\DISS_B\ /E /COPYALL  /XD %sd%:\emuMMC %sd%:\backup %sd%:\games %sd%:\DISS %sd%:\DISS_A %sd%:\DISS_B %sd%:\Firmware /XF %sd%:\DISS_OLDSD.zip %sd%:\DISS_ABC.zip
+powershell -command "Compress-Archive -Path DISS_B\* -Destination DISS_OLDSD.zip" -verbose -Force
 echo.
 ECHO       Please Wait.
 TIMEOUT /T 3
@@ -572,7 +631,7 @@ if exist "%~dp0\DISS_A\trash" (RD /s /q "%~dp0\DISS_A\trash")
 if exist "%~dp0\DISS_A\temp0" (RD /s /q "%~dp0\DISS_A\temp1")
 if exist "%~dp0\DISS_A\temp1" (RD /s /q "%~dp0\DISS_A\temp1")
 
-powershell -command "Compress-Archive -Path %~dp0\DISS_A\* -Destinationpath %~dp0\DISS_ABC.zip" -verbose -force
+powershell -command "Compress-Archive -Path DISS_A\* -Destinationpath DISS_ABC.zip" -verbose -force
 
 if exist "%~dp0\DISS_ABC.zip" (
     md C:\dissbackup\
@@ -584,9 +643,6 @@ if exist "%~dp0\DISS_OLDSD.zip" (
 if exist "%sd%:\DISS_version.txt"
     copy "%sd%:\DISS_version.txt" "C:\dissbackup\DISS_version.txt"
     )
-echo.
-echo                     Please Wait
-
 if exist "%~dp0\DISS_B" (RD /s /q "%~dp0\DISS_B")
 if exist "%~dp0\DISS" (RD /s /q "%~dp0\DISS")
 
