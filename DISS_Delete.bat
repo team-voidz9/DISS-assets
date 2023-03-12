@@ -47,11 +47,6 @@ if exist "%~dp0\DISS_B" (RD /s /q "%~dp0\DISS_B")
 TIMEOUT /T 2
 DEL Clean_Clean.bat
 DEL DISS_downloader.bat
-DEL DISS_downloader.bat
-DEL Atmos.ps1
-DEL BINRO.ps1
-DEL DAss.ps1
-DEL Hekat.ps1
 RD /s /q DISS_A
 pause
 del %0
