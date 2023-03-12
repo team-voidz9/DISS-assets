@@ -411,8 +411,7 @@ echo.
 TIMEOUT /T 3
 
 robocopy %sd%:\ %~dp0\DISS_B\ /E /COPYALL  /XD %sd%:\emuMMC %sd%:\backup %sd%:\games %sd%:\DISS %sd%:\DISS_A %sd%:\DISS_B %sd%:\Firmware /XF %sd%:\DISS_OLDSD.zip %sd%:\DISS_ABC.zip %sd%:\*.bat %sd%:\*.ps1
-
-powershell -command "Compress-Archive -Path %~dp0/DISS_B/ -Destination %~dp0/DISS_OLDSD.zip" -verbose -Force
+powershell -command "Compress-Archive -Path %~dp0\DISS_B\* -Destination %~dp0\DISS_OLDSD.zip" -verbose -Force
 echo.
 ECHO       Please Wait.
 TIMEOUT /T 3
@@ -455,25 +454,23 @@ for /f "delims=::::3 tokens=*" %%A in ('findstr /b ::::3 "%~f0"') do @echo(%%A
 echo ------------------------------------------------------------------------
 echo.
 TIMEOUT /T 3
-xcopy "%~dp0\DISS_A\assets\boot_logo\*" "%~dp0\DISS_A\cfw\atmosphere\exefs_patches\boot_logo\" /E /y
-xcopy "%~dp0\DISS_A\cfw\*" "%~dp0\DISS\" /E /y
 
-xcopy "%~dp0\DISS_A\hekate\*" "%~dp0\DISS\" /E /y
-
-xcopy "%~dp0\DISS_A\assets\app\*" "%~dp0\DISS\switch\" /E /y
-xcopy "%~dp0\DISS_A\assets\folders\*" "%~dp0\DISS\" /E /y
-xcopy "%~dp0\DISS_A\assets\payloads\*" "%~dp0\DISS\bootloader\payloads\" /E /y
-xcopy "%~dp0\DISS_A\assets\images\*" "%~dp0\DISS\bootloader\res\" /E /y
-xcopy "%~dp0\DISS_A\assets\gear\*" "%~dp0\DISS\" /E /y
-xcopy "%~dp0\DISS_A\assets\inis\*" "%~dp0\DISS\bootloader\" /E /y
-xcopy "%~dp0\DISS_A\assets\boot_logo\*" "%~dp0\DISS_A\cfw\atmosphere\exefs_patches\boot_logo\" /E /y
-xcopy "%~dp0\DISS_A\temp1\*" "%~dp0\DISS\" /E /y
-xcopy "%~dp0\DISS_Downloader.bat" "%~dp0\DISS\DISS_Downloader.bat" /E /y
+robocopy %~dp0\DISS_A\assets\boot_logo\ %~dp0\DISS_A\cfw\atmosphere\exefs_patches\boot_logo\ /E /COPYALL
+robocopy %~dp0\DISS_A\cfw\ %~dp0\DISS\ /E /COPYALL
+robocopy %~dp0\DISS_A\hekate\ %~dp0\DISS\ /E /COPYALL
+robocopy %~dp0\DISS_A\assets\app\ %~dp0\DISS\switch\ /E /COPYALL
+robocopy %~dp0\DISS_A\assets\folders\ %~dp0\DISS\ /E /COPYALL
+robocopy %~dp0\DISS_A\assets\payloads\ %~dp0\DISS\bootloader\payloads\ /E /COPYALL
+robocopy %~dp0\DISS_A\assets\images\ %~dp0\DISS\bootloader\res\ /E /COPYALL
+robocopy %~dp0\DISS_A\assets\gears\ %~dp0\DISS\ /E /COPYALL
+robocopy %~dp0\DISS_A\assets\inis\ %~dp0\DISS\bootloader\ /E /COPYALL
+robocopy %~dp0\DISS_A\assets\boot_logo\ %~dp0\DISS_A\cfw\atmosphere\exefs_patches\boot_logo\ /E /COPYALL
+robocopy %~dp0\DISS_A\temp1 %~dp0\DISS\ /E /COPYALL
 
 echo.
 TIMEOUT /T 2
 echo.
-xcopy "%~dp0\DISS\*" "%sd%:\" /E
+robocopy %~dp0\DISS\ %sd%:\ /E /COPYALL
 
 echo.
 echo                     New file(s) Installed to SD
@@ -571,20 +568,21 @@ TIMEOUT /T 3
 if exist "%~dp0\DISS_A\assets" (RD /s /q "%~dp0\DISS_A\assets")
 if exist "%~dp0\DISS_A\hekate" (RD /s /q "%~dp0\DISS_A\hekate")
 if exist "%~dp0\DISS_A\cfw" (RD /s /q "%~dp0\DISS_A\cfw")
-if exist "%~dp0\DISS_A/trash" (RD /s /q "%~dp0\DISS_A/trash")
-if exist "%~dp0\DISS_A/temp0" (RD /s /q "%~dp0\DISS_A/temp1")
-if exist "%~dp0\DISS_A/temp1" (RD /s /q "%~dp0\DISS_A/temp1")
+if exist "%~dp0\DISS_A\trash" (RD /s /q "%~dp0\DISS_A\trash")
+if exist "%~dp0\DISS_A\temp0" (RD /s /q "%~dp0\DISS_A\temp1")
+if exist "%~dp0\DISS_A\temp1" (RD /s /q "%~dp0\DISS_A\temp1")
 
-powershell -command "Compress-Archive -Path %~dp0/DISS_A -Destination %~dp0/DISS_ABC.zip" -verbose -Force
+powershell -command "Compress-Archive -Path %~dp0\DISS_A\* -Destinationpath %~dp0\DISS_ABC.zip" -verbose -force
+
 if exist "%~dp0\DISS_ABC.zip" (
     md C:\dissbackup\
-    copy "%~dp0\DISS_ABC.zip" "C:\dissbackup\"
+    copy "%~dp0\DISS_ABC.zip" "C:\dissbackup\DISS_ABC.zip"
     )
 if exist "%~dp0\DISS_OLDSD.zip" (
-    copy "%~dp0\DISS_OLDSD.zip" "C:\dissbackup\"
+    copy "%~dp0\DISS_OLDSD.zip" "C:\dissbackup\DISS_OLDSD.zip"
     )
 if exist "%sd%:\DISS_version.txt"
-    copy "%sd%:\DISS_version.txt" "C:\dissbackup\"
+    copy "%sd%:\DISS_version.txt" "C:\dissbackup\DISS_version.txt"
     )
 echo.
 echo                     Please Wait
