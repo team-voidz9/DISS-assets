@@ -607,49 +607,6 @@ echo.
 echo                     SD Folder(s) attribute Fixed
 echo.
 TIMEOUT /T 2
-
-cls
-echo ------------------------------------------------------------------------
-echo            STEP 4
-::::::5          ______  __
-::::::5         /      \/  |
-::::::5        /$$$$$$  $$ | ______   ______  _______
-::::::5        $$ |  $$/$$ |/      \ /      \/       \
-::::::5        $$ |     $$ /$$$$$$  |$$$$$$  $$$$$$$  |
-::::::5        $$ |   __$$ $$    $$ |/    $$ $$ |  $$ |
-::::::5        $$ \__/  $$ $$$$$$$$//$$$$$$$ $$ |  $$ |
-::::::5        $$    $$/$$ $$       $$    $$ $$ |  $$ |
-::::::5         $$$$$$/ $$/ $$$$$$$/ $$$$$$$/$$/   $$/
-for /f "delims=::::::5  tokens=*" %%A in ('findstr /b ::::::5  "%~f0"') do @echo(%%A
-echo ------------------------------------------------------------------------
-echo.
-TIMEOUT /T 3
-if exist "%~dp0\DISS_A\assets" (RD /s /q "%~dp0\DISS_A\assets")
-if exist "%~dp0\DISS_A\hekate" (RD /s /q "%~dp0\DISS_A\hekate")
-if exist "%~dp0\DISS_A\cfw" (RD /s /q "%~dp0\DISS_A\cfw")
-if exist "%~dp0\DISS_A\trash" (RD /s /q "%~dp0\DISS_A\trash")
-if exist "%~dp0\DISS_A\temp0" (RD /s /q "%~dp0\DISS_A\temp1")
-if exist "%~dp0\DISS_A\temp1" (RD /s /q "%~dp0\DISS_A\temp1")
-
-powershell -command "Compress-Archive -Path DISS_A\* -Destinationpath DISS_ABC.zip" -verbose -force
-
-if exist "%~dp0\DISS_ABC.zip" (
-    md C:\dissbackup\
-    copy "%~dp0\DISS_ABC.zip" "C:\dissbackup\DISS_ABC.zip"
-    )
-if exist "%~dp0\DISS_OLDSD.zip" (
-    copy "%~dp0\DISS_OLDSD.zip" "C:\dissbackup\DISS_OLDSD.zip"
-    )
-if exist "%sd%:\DISS_version.txt"
-    copy "%sd%:\DISS_version.txt" "C:\dissbackup\DISS_version.txt"
-    )
-if exist "%~dp0\DISS_B" (RD /s /q "%~dp0\DISS_B")
-if exist "%~dp0\DISS" (RD /s /q "%~dp0\DISS")
-
-echo.
-echo       Trash Deleted. Needed Item Backed Up. SD Cleaned
-echo.
-TIMEOUT /T 3
 goto ENDgood
 
 :WRONGSD
@@ -710,16 +667,16 @@ call %~dp0\DISS_delete.bat
 COLOR 0f
 cls
 echo.
-ECHO ----------------------------------------------------------
-ECHO ======                 DISS Downloader               =====
-ECHO ======           Assets / Bootloader / CFW           =====
-ECHO ----------------------------------------------------------
-ECHO.
+ECHO ===========================================================
+::1x                ___  _  ___  ___ 
+::1x               | . \| |/ __>/ __>   DISS DOWNLOADER
+::1x               | | || |\__ \\__ \           V.0.2.0
+::1x               |___/|_|<___/<___/        team-voidz
+for /f "delims=::1x tokens=*" %%A in ('findstr /b ::1x "%~f0"') do @echo(%%A
+echo.
+ECHO ==
 echo.
 echo               DISS installed into your SD card.
-echo                  Put it back in your Switch
-echo		              ENJOY !
-echo.
 echo.
 ECHO.
 ECHO ==========================================================
@@ -737,11 +694,13 @@ for %%A in ("N" "n" "2" "т" "Т") do if "%st%"==%%A (GOTO delete3)
 COLOR 0f
 cls
 echo.
-ECHO ----------------------------------------------------------
-ECHO ======                 DISS Downloader               =====
-ECHO ======           Assets / Bootloader / CFW           =====
-ECHO ----------------------------------------------------------
-ECHO.
+ECHO ===========================================================
+::1y                ___  _  ___  ___ 
+::1y               | . \| |/ __>/ __>   DISS DOWNLOADER
+::1y               | | || |\__ \\__ \           V.0.2.0
+::1y               |___/|_|<___/<___/        team-voidz
+for /f "delims=::1y tokens=*" %%A in ('findstr /b ::1y "%~f0"') do @echo(%%A
+echo.
 echo.
 echo            DISS is not installed into your SD card.
 echo                     Please Try Again !
