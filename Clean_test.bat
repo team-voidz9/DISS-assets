@@ -177,9 +177,7 @@ for %%A in ("7" "&" "7" "7") do if "%st%"==%%A (GOTO exit)
 for %%A in ("" "" "" "") do if "%st%"==%%A (GOTO exit)
 
 :downloadALL
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\atmos.ps1'"
 
 if exist "%~dp0\atmosphere-*.zip" (
     move "%~dp0\atmosphere-*.zip" "%~dp0\DISS_A\"
@@ -200,48 +198,31 @@ echo            Downloading CFW and Sigpatches is done!
 echo.
 TIMEOUT /T 3
 
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/CTCaer/hekate/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\Hekat.ps1'"
 
 if exist "%~dp0\hekate_*.zip" (
     move "%~dp0\hekate_*.zip" "%~dp0\DISS_A\"
     )
-if exist "%~dp0\joiner_scripts_*.zip" (
-    move "%~dp0\joiner_scripts_*.zip" "%~dp0\DISS_A\trash\"
-    )
-if exist "%~dp0\nyx_usb_*.reg" (
-    move "%~dp0\nyx_usb_*.reg" "%~dp0\DISS_A\trash\"
-    )
-
 echo.
 echo            Downloading Bootloader is done!
 echo.
 TIMEOUT /T 3
 
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/team-voidz/DISS-assets/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\DAss.ps1'"
 )
 if exist "%~dp0\assets_*.zip" (
     move "%~dp0\assets_*.zip" "%~dp0\DISS_A\"
     )
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\BINRO.ps1'"
 
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/tomvita/Breeze-Beta/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 
 powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
 
-if exist "%~dp0\version.txt" (
-    move "%~dp0\version.txt" "%~dp0\DISS_A\trash\"
-    )
+
 if exist "%~dp0\breeze.zip" (
     move "%~dp0\breeze.zip" "%~dp0\DISS_A\trash\"
     )
 
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/WerWolv/EdiZon/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\Edizon.nro" (
     md "%~dp0\DISS_A\temp1\switch\EdiZon\"
     move "%~dp0\Edizon.nro" "%~dp0\DISS_A\temp1\switch\EdiZon\"
@@ -250,87 +231,40 @@ if exist "%~dp0\ovlEdizon.ovl" (
     md "%~dp0\DISS_A\temp1\switch\.overlays\"
     move "%~dp0\ovlEdizon.ovl" "%~dp0\DISS_A\temp1\switch\EdiZon\"
     )
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/DarkMatterCore/nxdumptool/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\nxdumptool.nro" (
     md "%~dp0\DISS_A\temp1\switch\nxdumptool\"
     move "%~dp0\nxdumptool.nro" "%~dp0\DISS_A\temp1\switch\nxdumptool\"
     )
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/rashevskyv/dbi/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\dbi.nro" (
     move "%~dp0\dbi.nro" "%~dp0\DISS_A\temp1\switch\"
     )
 if exist "%~dp0\dbi.config" (
     move "%~dp0\dbi.config" "%~dp0\DISS_A\temp1\switch\"
     )
-if exist "%~dp0\dbibackend.exe" (
-    move "%~dp0\dbibackend.exe" "%~dp0\DISS_A\trash\"
-    )
-if exist "%~dp0\DBI_ru.nro" (
-    move "%~dp0\DBI_ru.nro" "%~dp0\DISS_A\trash\"
-    )
-if exist "%~dp0\dbibackend.tar.xz" (
-    move "%~dp0\dbibackend.tar.xz" "%~dp0\DISS_A\trash\"
-    )
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/J-D-K/JKSV/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\jksv.nro" (
     move "%~dp0\jksv.nro" "%~dp0\DISS_A\temp1\switch\"
     )
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/meganukebmp/Switch_90DNS_tester/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\Switch_90DNS_tester.nro" (
     move "%~dp0\Switch_90DNS_tester.nro" "%~dp0\DISS_A\temp1\switch\"
     )
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/rdmrocha/linkalho/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 powershell -command "Expand-Archive %~dp0/linkalho-*.zip %~dp0/DISS_A/temp1/switch" -verbose -force
 if exist "%~dp0\linkalho-*.zip" (
     move "%~dp0\linkalho-*.zip" "%~dp0\DISS_A\trash\"
     )
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/ITotalJustice/Gamecard-Installer-NX/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 powershell -command "Expand-Archive %~dp0/gamecard_installer.zip %~dp0/DISS_A/temp1" -verbose -force
 if exist "%~dp0\gamecard_installer.zip " (
     move "%~dp0\gamecard_installer.zip " "%~dp0\DISS_A\trash\"
     )
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/dezem/TegraExplorer/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\TegraExplorer.bin" (
     md "%~dp0\DISS_A\assets\payloads\"
     move "%~dp0\TegraExplorer.bin" "%~dp0\DISS_A\assets\payloads"
     )
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/shchmue/Lockpick_RCM/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\Lockpick_RCM.bin" (
     move "%~dp0\Lockpick_RCM.bin" "%~dp0\DISS_A\assets\payloads"
     )
-	
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/Team-Neptune/CommonProblemResolver/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\CommonProblemResolver.bin" (
     move "%~dp0\CommonProblemResolver.bin" "%~dp0\DISS_A\assets\payloads"
     )
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/jimzrt/Incognito_RCM/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\Incognito_RCM.bin" (
     move "%~dp0\Incognito_RCM.bin" "%~dp0\DISS_A\assets\payloads"
     )
@@ -342,9 +276,7 @@ TIMEOUT /T 3
 goto download0
 
 :download1
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\atmos.ps1'"
 
 if exist "%~dp0\atmosphere-*.zip" (
     move "%~dp0\atmosphere-*.zip" "%~dp0\DISS_A\"
@@ -367,20 +299,11 @@ TIMEOUT /T 3
 goto download0
 
 :download2
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/CTCaer/hekate/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\Hekat.ps1'"
 
 if exist "%~dp0\hekate_*.zip" (
     move "%~dp0\hekate_*.zip" "%~dp0\DISS_A\"
     )
-if exist "%~dp0\joiner_scripts_*.zip" (
-    move "%~dp0\joiner_scripts_*.zip" "%~dp0\DISS_A\trash\"
-    )
-if exist "%~dp0\nyx_usb_*.reg" (
-    move "%~dp0\nyx_usb_*.reg" "%~dp0\DISS_A\trash\"
-    )
-
 echo.
 echo            Downloading Bootloader is done!
 echo.
@@ -388,29 +311,21 @@ TIMEOUT /T 3
 goto download0
 
 :download3
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/team-voidz/DISS-assets/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\DAss.ps1'"
 )
 if exist "%~dp0\assets_*.zip" (
     move "%~dp0\assets_*.zip" "%~dp0\DISS_A\"
     )
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\BINRO.ps1'"
 
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/tomvita/Breeze-Beta/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 
 powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
 
-if exist "%~dp0\version.txt" (
-    move "%~dp0\version.txt" "%~dp0\DISS_A\trash\"
-    )
+
 if exist "%~dp0\breeze.zip" (
     move "%~dp0\breeze.zip" "%~dp0\DISS_A\trash\"
     )
 
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/WerWolv/EdiZon/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\Edizon.nro" (
     md "%~dp0\DISS_A\temp1\switch\EdiZon\"
     move "%~dp0\Edizon.nro" "%~dp0\DISS_A\temp1\switch\EdiZon\"
@@ -419,87 +334,40 @@ if exist "%~dp0\ovlEdizon.ovl" (
     md "%~dp0\DISS_A\temp1\switch\.overlays\"
     move "%~dp0\ovlEdizon.ovl" "%~dp0\DISS_A\temp1\switch\EdiZon\"
     )
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/DarkMatterCore/nxdumptool/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\nxdumptool.nro" (
     md "%~dp0\DISS_A\temp1\switch\nxdumptool\"
     move "%~dp0\nxdumptool.nro" "%~dp0\DISS_A\temp1\switch\nxdumptool\"
     )
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/rashevskyv/dbi/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\dbi.nro" (
     move "%~dp0\dbi.nro" "%~dp0\DISS_A\temp1\switch\"
     )
 if exist "%~dp0\dbi.config" (
     move "%~dp0\dbi.config" "%~dp0\DISS_A\temp1\switch\"
     )
-if exist "%~dp0\dbibackend.exe" (
-    move "%~dp0\dbibackend.exe" "%~dp0\DISS_A\trash\"
-    )
-if exist "%~dp0\DBI_ru.nro" (
-    move "%~dp0\DBI_ru.nro" "%~dp0\DISS_A\trash\"
-    )
-if exist "%~dp0\dbibackend.tar.xz" (
-    move "%~dp0\dbibackend.tar.xz" "%~dp0\DISS_A\trash\"
-    )
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/J-D-K/JKSV/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\jksv.nro" (
     move "%~dp0\jksv.nro" "%~dp0\DISS_A\temp1\switch\"
     )
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/meganukebmp/Switch_90DNS_tester/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\Switch_90DNS_tester.nro" (
     move "%~dp0\Switch_90DNS_tester.nro" "%~dp0\DISS_A\temp1\switch\"
     )
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/rdmrocha/linkalho/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 powershell -command "Expand-Archive %~dp0/linkalho-*.zip %~dp0/DISS_A/temp1/switch" -verbose -force
 if exist "%~dp0\linkalho-*.zip" (
     move "%~dp0\linkalho-*.zip" "%~dp0\DISS_A\trash\"
     )
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/ITotalJustice/Gamecard-Installer-NX/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 powershell -command "Expand-Archive %~dp0/gamecard_installer.zip %~dp0/DISS_A/temp1" -verbose -force
 if exist "%~dp0\gamecard_installer.zip " (
     move "%~dp0\gamecard_installer.zip " "%~dp0\DISS_A\trash\"
     )
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/dezem/TegraExplorer/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\TegraExplorer.bin" (
     md "%~dp0\DISS_A\assets\payloads\"
     move "%~dp0\TegraExplorer.bin" "%~dp0\DISS_A\assets\payloads"
     )
-
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/shchmue/Lockpick_RCM/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\Lockpick_RCM.bin" (
     move "%~dp0\Lockpick_RCM.bin" "%~dp0\DISS_A\assets\payloads"
     )
-	
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/Team-Neptune/CommonProblemResolver/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\CommonProblemResolver.bin" (
     move "%~dp0\CommonProblemResolver.bin" "%~dp0\DISS_A\assets\payloads"
     )
-for /f "tokens=1,* delims=:" %%A in ('curl -ks https://api.github.com/repos/jimzrt/Incognito_RCM/releases/latest ^| find "browser_download_url"') do (
-    curl -kOL %%B
-)
 if exist "%~dp0\Incognito_RCM.bin" (
     move "%~dp0\Incognito_RCM.bin" "%~dp0\DISS_A\assets\payloads"
     )
