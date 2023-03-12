@@ -116,12 +116,11 @@ IF EXIST "%~dp0\DISS_A\assets_*.zip" IF EXIST "%~dp0\DISS_A\hekate_ctcaer*.zip" 
 echo      Assets, Bootloader and CFW checked and ready
 powershell write-host -back Red         Enter 4 to extract
 ) ELSE (
-echo.
+echo
 )
 echo.
 IF EXIST "%~dp0\DISS_A\assets\payloads\Lockpick_RCM.bin"(
 echo      [EXTRA] Payloads and Homebrews Ready! [50MB done!] 
-powershell write-host -back Red         Nice
 ) ELSE (
 echo      [EXTRA] Download Latest Payloads and Homebrews 
 powershell write-host -back Red         Enter 6 to Download
