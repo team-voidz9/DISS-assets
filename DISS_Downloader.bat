@@ -24,8 +24,8 @@ echo.
 echo      =============Free Space and an internet connection needed=============
 echo.
 TIMEOUT /T 3
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/Clean_test.bat" --output %~dp0\Clean_Clean.bat
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS_Delete.bat" --output %~dp0\DISS_Delete.bat
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/Clean_test.bat" --output %~dp0/Clean_Clean.bat
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS_Delete.bat" --output %~dp0/DISS_Delete.bat
 TIMEOUT /T 3
 
 call %~dp0\Clean_Clean.bat

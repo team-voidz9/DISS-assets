@@ -486,7 +486,7 @@ robocopy %~dp0\DISS_A\temp1 %~dp0\DISS\ /E /COPYALL
 echo.
 TIMEOUT /T 2
 echo.
-robocopy %~dp0\DISS\ %sd%:\ /E /MIR /COPYALL
+robocopy %~dp0\DISS\ %sd%:\ /E /COPYALL
 
 echo.
 echo                     DONE
