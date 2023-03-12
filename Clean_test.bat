@@ -105,7 +105,7 @@ echo.
 set filepath3="%~dp0\DISS_A\assets_*.zip"
 for /F "delims=" %%i in (%filepath3%) do set basename3="%%~ni"
 IF EXIST "%~dp0\DISS_A\assets_*.zip" (
-echo      DISS Assets File READY! [80MB done!]
+echo      DISS Assets File READY! [25MB done!]
 echo       %basename3%
 ) ELSE (
 echo      [NO] Assets Files detected
@@ -118,10 +118,17 @@ powershell write-host -back Red         Enter 4 to extract
 ) ELSE (
 echo                   ...
 )
+echo.
+IF EXIST "%~dp0\DISS_A\temp1\switch\nxdumptool\nxdumptool.nro" IF EXIST "%~dp0\DISS_A\assets\payloads\Lockpick_RCM.bin"(
+echo      [EXTRA] Payloads and Homebrews Ready! [50MB done!] 
+powershell write-host -back Red         Nice
+) ELSE (
+echo      [EXTRA] Download Latest Payloads and Homebrews 
+powershell write-host -back Red         Enter 6 to Download
+)
 ECHO.
 ECHO =Please Download all the required files before extracting=
 ECHO ==========================================================
-ECHO                                        6.  Delete OLD .zip
 ECHO                                        7.  exit
 echo                                        0.  Download ALL
 ECHO.
@@ -134,7 +141,7 @@ for %%A in ("N" "n" "2" "т" "Т") do if "%st%"==%%A (GOTO download2)
 for %%A in ("3" "#" "3" "3" "3") do if "%st%"==%%A (GOTO download3)
 for %%A in ("$" "4" "4" "4" "4") do if "%st%"==%%A (GOTO unpack  )
 for %%A in ("5" "5" "5" "5" "5") do if "%st%"==%%A (GOTO startpoint)
-for %%A in ("6" "^" "6" "6" "6") do if "%st%"==%%A (GOTO delete1)
+for %%A in ("6" "^" "6" "6" "6") do if "%st%"==%%A (GOTO downloadextra)
 for %%A in ("7" "&" "7" "7") do if "%st%"==%%A (GOTO exit)
 for %%A in ("" "" "" "") do if "%st%"==%%A (GOTO exit)
 
@@ -213,62 +220,7 @@ PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\DAss.ps1'"
 if exist "%~dp0\assets_*.zip" (
     move "%~dp0\assets_*.zip" "%~dp0\DISS_A\"
     )
-PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\BINRO.ps1'"
 
-
-powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
-
-
-if exist "%~dp0\breeze.zip" (
-    move "%~dp0\breeze.zip" "%~dp0\DISS_A\trash\"
-    )
-
-if exist "%~dp0\Edizon.nro" (
-    md "%~dp0\DISS_A\temp1\switch\EdiZon\"
-    move "%~dp0\Edizon.nro" "%~dp0\DISS_A\temp1\switch\EdiZon\"
-    )
-if exist "%~dp0\ovlEdizon.ovl" (
-    md "%~dp0\DISS_A\temp1\switch\.overlays\"
-    move "%~dp0\ovlEdizon.ovl" "%~dp0\DISS_A\temp1\switch\EdiZon\"
-    )
-if exist "%~dp0\nxdumptool.nro" (
-    md "%~dp0\DISS_A\temp1\switch\nxdumptool\"
-    move "%~dp0\nxdumptool.nro" "%~dp0\DISS_A\temp1\switch\nxdumptool\"
-    )
-if exist "%~dp0\dbi.nro" (
-    move "%~dp0\dbi.nro" "%~dp0\DISS_A\temp1\switch\"
-    )
-if exist "%~dp0\dbi.config" (
-    move "%~dp0\dbi.config" "%~dp0\DISS_A\temp1\switch\"
-    )
-if exist "%~dp0\jksv.nro" (
-    move "%~dp0\jksv.nro" "%~dp0\DISS_A\temp1\switch\"
-    )
-if exist "%~dp0\Switch_90DNS_tester.nro" (
-    move "%~dp0\Switch_90DNS_tester.nro" "%~dp0\DISS_A\temp1\switch\"
-    )
-powershell -command "Expand-Archive %~dp0/linkalho-*.zip %~dp0/DISS_A/temp1/switch" -verbose -force
-if exist "%~dp0\linkalho-*.zip" (
-    move "%~dp0\linkalho-*.zip" "%~dp0\DISS_A\trash\"
-    )
-powershell -command "Expand-Archive %~dp0/gamecard_installer.zip %~dp0/DISS_A/temp1" -verbose -force
-if exist "%~dp0\gamecard_installer.zip " (
-    move "%~dp0\gamecard_installer.zip " "%~dp0\DISS_A\trash\"
-    )
-if exist "%~dp0\TegraExplorer.bin" (
-    md "%~dp0\DISS_A\assets\payloads\"
-    move "%~dp0\TegraExplorer.bin" "%~dp0\DISS_A\assets\payloads"
-    )
-if exist "%~dp0\Lockpick_RCM.bin" (
-    move "%~dp0\Lockpick_RCM.bin" "%~dp0\DISS_A\assets\payloads"
-    )
-if exist "%~dp0\CommonProblemResolver.bin" (
-    move "%~dp0\CommonProblemResolver.bin" "%~dp0\DISS_A\assets\payloads"
-    )
-if exist "%~dp0\Incognito_RCM.bin" (
-    move "%~dp0\Incognito_RCM.bin" "%~dp0\DISS_A\assets\payloads"
-    )
-	
 echo.
 echo            Downloading Assets is done!
 echo.
@@ -316,9 +268,14 @@ PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\DAss.ps1'"
 if exist "%~dp0\assets_*.zip" (
     move "%~dp0\assets_*.zip" "%~dp0\DISS_A\"
     )
+echo.
+echo            Downloading Assets is done
+echo.
+TIMEOUT /T 3
+goto download0
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\BINRO.ps1'"
 
-
+:downloadextra
 powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
 
 
@@ -332,7 +289,7 @@ if exist "%~dp0\Edizon.nro" (
     )
 if exist "%~dp0\ovlEdizon.ovl" (
     md "%~dp0\DISS_A\temp1\switch\.overlays\"
-    move "%~dp0\ovlEdizon.ovl" "%~dp0\DISS_A\temp1\switch\EdiZon\"
+    move "%~dp0\ovlEdizon.ovl" "%~dp0\DISS_A\temp1\switch\EdiZon\.overlays\"
     )
 if exist "%~dp0\nxdumptool.nro" (
     md "%~dp0\DISS_A\temp1\switch\nxdumptool\"
@@ -373,7 +330,7 @@ if exist "%~dp0\Incognito_RCM.bin" (
     )
 	
 echo.
-echo            Downloading Assets is done!
+echo            Downloading BINs and NROs are done!
 echo.
 TIMEOUT /T 3
 goto download0
