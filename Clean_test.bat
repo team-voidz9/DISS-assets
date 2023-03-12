@@ -112,7 +112,7 @@ echo      [NO] Assets Files detected
 powershell write-host -back Red Enter 3 to download
 )
 echo.
-IF EXIST "%~dp0\DISS_A\assets_*.zip" IF EXIST "%~dp0\DISS_A\hekate_ctcaer*.zip" IF EXIST "%~dp0\DISS_A\atmosphere-*.zip" (
+IF EXIST "%~dp0\DISS_A\assets_*.zip" IF EXIST "%~dp0\DISS_A\hekate_ctcaer*.zip"(
 echo      Assets, Bootloader and CFW checked and ready
 powershell write-host -back Red         Enter 4 to extract
 ) ELSE (
