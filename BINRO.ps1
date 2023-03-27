@@ -25,7 +25,7 @@ $filenamePattern10 = "CommonProblemResolver.bin"
 $repo11 = "shchmue/Lockpick_RCM"
 $filenamePattern11 = "Lockpick_rcm.bin"
 $repo12 = "jimzrt/Incognito_RCM"
-$filenamePattern12 = "Incognito_*.bin"
+$filenamePattern12 = "Incognito_RCM.bin"
 
 $innerDirectory = $true
 $preRelease = $true
