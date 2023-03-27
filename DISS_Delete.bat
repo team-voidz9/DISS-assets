@@ -1,23 +1,26 @@
 @echo off
-:deleteDelete
-COLOR 0f
+:downloadfront
+COLOR 02
 cls
-:::1      
-:::1             _             _         _           _        
-:::1            /\ \          /\ \      / /\        / /\      
-:::1           /  \ \____     \ \ \    / /  \      / /  \     
-:::1          / /\ \_____\    /\ \_\  / / /\ \__  / / /\ \__  
-:::1         / / /\/___  /   / /\/_/ / / /\ \___\/ / /\ \___\ 
-:::1        / / /   / / /   / / /    \ \ \ \/___/\ \ \ \/___/ 
-:::1       / / /   / / /   / / /      \ \ \       \ \ \       
-:::1      / / /   / / /   / / /   _    \ \ \  _    \ \ \      
-:::1      \ \ \__/ / /___/ / /__ /_/\__/ / / /_/\__/ / /      
-:::1       \ \___\/ //\__\/_/___\\ \/___/ /  \ \/___/ /       
-:::1        \/_____/ \/_________/ \_____\/    \_____\/        
-:::1                                                          
+:::1      DDDDDDDDDDDDD      IIIIIIIIII   SSSSSSSSSSSSSSS    SSSSSSSSSSSSSSS
+:::1      D::::::::::::DDD   I::::::::I SS:::::::::::::::S SS:::::::::::::::S
+:::1      D:::::::::::::::DD I::::::::IS:::::SSSSSS::::::SS:::::SSSSSS::::::S
+:::1      DDD:::::DDDDD:::::DII::::::IIS:::::S     SSSSSSSS:::::S     SSSSSSS
+:::1         D:::::D    D:::::D I::::I  S:::::S            S:::::S
+:::1         D:::::D     D:::::DI::::I  S:::::S            S:::::S
+:::1         D:::::D     D:::::DI::::I   S::::SSSS          S::::SSSS
+:::1         D:::::D     D:::::DI::::I    SS::::::SSSSS      SS::::::SSSSS
+:::1         D:::::D     D:::::DI::::I      SSS::::::::SS      SSS::::::::SS
+:::1         D:::::D     D:::::DI::::I         SSSSSS::::S        SSSSSS::::S
+:::1         D:::::D     D:::::DI::::I              S:::::S            S:::::S
+:::1         D:::::D    D:::::D I::::I              S:::::S            S:::::S
+:::1      DDD:::::DDDDD:::::DII::::::IISSSSSSS     S:::::SSSSSSSS     S:::::S
+:::1      D:::::::::::::::DD I::::::::IS::::::SSSSSS:::::SS::::::SSSSSS:::::S
+:::1      D::::::::::::DDD   I::::::::IS:::::::::::::::SS S:::::::::::::::SS
+:::1       DDDDDDDDDDDDD      IIIIIIIIII SSSSSSSSSSSSSSS    SSSSSSSSSSSSSSS
 for /f "delims=:::1 tokens=*" %%A in ('findstr /b :::1 "%~f0"') do @echo(%%A
 echo.
-echo	                                 DONE! and DONE!
+echo	                  CLEAN, DELETE AND BACKUP
 echo.
 if exist "%~dp0\DISS_A\temp0\DISS_Version.diss" (
     rename %~dp0\DISS_A\temp0\DISS_Version.diss DISS_Version.txt
@@ -53,7 +56,7 @@ if exist "%~dp0\DISS_A\temp0\DISS_Version.txt" (
     copy "%~dp0\DISS_A\temp0\DISS_Version.txt" "C:\dissbackup\DISS_Version.txt"
     )	
 if exist "%~dp0\DISS_B" (RD /s /q "%~dp0\DISS_B")
-TIMEOUT /T 2
+TIMEOUT /T 1
 DEL Clean_Clean.bat
 DEL DISS_downloader.bat
 RD /s /q DISS_A

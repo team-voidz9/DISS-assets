@@ -6,44 +6,80 @@ COLOR 0F
 set sd=%1
 if not defined %sd% (GOTO pickSD)
 
-:initialcheck
-if exist DISS_OLDSD.zip (DEL /Q /F DISS_OLDSD.zip)
-if exist DISS_ABC.zip (DEL /Q /F DISS_ABC.zip)
-if exist DISS_A\temp0 (DEL /Q /F DISS_A\temp0)
-md %~dp0\DISS_A
-md %~dp0\DISS_A\temp0
-md %~dp0\DISS_A\trash
-md %~dp0\DISS_B
-md %~dp0\DISS
-
 :main
-COLOR 02
+ECHO off
+COLOR 0f
 cls
-:::1      DDDDDDDDDDDDD      IIIIIIIIII   SSSSSSSSSSSSSSS    SSSSSSSSSSSSSSS
-:::1      D::::::::::::DDD   I::::::::I SS:::::::::::::::S SS:::::::::::::::S
-:::1      D:::::::::::::::DD I::::::::IS:::::SSSSSS::::::SS:::::SSSSSS::::::S
-:::1      DDD:::::DDDDD:::::DII::::::IIS:::::S     SSSSSSSS:::::S     SSSSSSS
-:::1         D:::::D    D:::::D I::::I  S:::::S            S:::::S
-:::1         D:::::D     D:::::DI::::I  S:::::S            S:::::S
-:::1         D:::::D     D:::::DI::::I   S::::SSSS          S::::SSSS
-:::1         D:::::D     D:::::DI::::I    SS::::::SSSSS      SS::::::SSSSS
-:::1         D:::::D     D:::::DI::::I      SSS::::::::SS      SSS::::::::SS
-:::1         D:::::D     D:::::DI::::I         SSSSSS::::S        SSSSSS::::S
-:::1         D:::::D     D:::::DI::::I              S:::::S            S:::::S
-:::1         D:::::D    D:::::D I::::I              S:::::S            S:::::S
-:::1      DDD:::::DDDDD:::::DII::::::IISSSSSSS     S:::::SSSSSSSS     S:::::S
-:::1      D:::::::::::::::DD I::::::::IS::::::SSSSSS:::::SS::::::SSSSSS:::::S
-:::1      D::::::::::::DDD   I::::::::IS:::::::::::::::SS S:::::::::::::::SS
-:::1       DDDDDDDDDDDDD      IIIIIIIIII SSSSSSSSSSSSSSS    SSSSSSSSSSSSSSS
-for /f "delims=:::1 tokens=*" %%A in ('findstr /b :::1 "%~f0"') do @echo(%%A
+echo.
+ECHO ===========================================================
+::1X                ___  _  ___  ___ 
+::1X               | . \| |/ __>/ __>   DISS DOWNLOADER
+::1X               | | || |\__ \\__ \           V.0.2.0
+::1X               |___/|_|<___/<___/        team-voidz
+for /f "delims=::1X tokens=*" %%A in ('findstr /b ::1X "%~f0"') do @echo(%%A
+echo.
+ECHO ===========================================================
+set SF=DISS_A
+set SFA=DISS_A\temp0
+set SFB=DISS_A\trash
+if not "%~1"=="" set SF=%~1
 
-echo      ====================== DISS Downloader V0.2.0 ========================
-echo                          (cfw / bootloader / assets)
-echo      1. This script will download needed files (cfw, bootloader and assets)
-echo      2. Clean and backup the files/folders in your SD and Install a new one
-echo.
-echo      =============Free Space and an internet connection needed=============
-echo.
+if exist "%SF%" (
+    ECHO OLD DISS_A folder found. Deleting Content now! 
+    RD /S /Q "%SF%"
+	MKDIR "%SF%"
+	MKDIR "%SFA%"
+	MKDIR "%SFB%"
+) else (
+    ECHO DISS_A folder not found. Creating . . .
+    MKDIR "%SF%"
+	MKDIR "%SFA%"
+	MKDIR "%SFB%"
+)
+set SF2=DISS_B
+if not "%~1"=="" set SF=%~1
+
+if exist "%SF2%" (
+    ECHO OLD DISS_B folder found. Deleting Content now! 
+    RD /S /Q "%SF2%"
+	MKDIR "%SF2%"
+) else (
+    ECHO DISS_B folder not found. Creating . . .
+    MKDIR "%SF2%"
+)
+set SF3=DISS
+if not "%~1"=="" set SF=%~1
+
+if exist "%SF3%" (
+    ECHO OLD DISS folder found. Deleting Content now! 
+    RD /S /Q "%SF3%"
+	MKDIR "%SF3%"
+) else (
+    ECHO DISS folder not found. Creating . . .
+    MKDIR "%SF3%"
+)
+set zip1=DISS_ABC.zip
+if not "%~1"=="" set SF=%~1
+
+if exist "%zip1%" (
+    ECHO OLD DISS_ABC.zip found. Deleting now! 
+    DEL /Q /F "%zip1%"
+) else (
+    ECHO OLD DISS_ABC.zip NOT found.
+)
+set zip2=DISS_OLDSD.zip
+if not "%~1"=="" set SF=%~1
+
+if exist "%zip2%" (
+    ECHO OLD DISS_OLDSD.zip found. Deleting now! 
+    DEL /Q /F "%zip2%"
+) else (
+    ECHO OLD DISS_OLDSD.zip NOT found.
+)
+ECHO.
+ECHO INITIAL FOLDERS CHECK COMPLETED
+ECHO.
+
 echo.
 echo Press Y to start. Press N to exit
 set st=
@@ -53,7 +89,18 @@ for %%A in ("Y" "y" "1" "н" "Н") do if "%st%"==%%A (GOTO pickSD)
 for %%A in ("N" "n" "2" "т" "Т") do if "%st%"==%%A (GOTO exit)
 
 :pickSD
+ECHO off
+COLOR 0f
 cls
+echo.
+ECHO ===========================================================
+::1Y                ___  _  ___  ___ 
+::1Y               | . \| |/ __>/ __>   DISS DOWNLOADER
+::1Y               | | || |\__ \\__ \           V.0.2.0
+::1Y               |___/|_|<___/<___/        team-voidz
+for /f "delims=::1Y tokens=*" %%A in ('findstr /b ::1Y "%~f0"') do @echo(%%A
+echo.
+ECHO ===========================================================
 echo.
 echo Please Choose correct SD card drive letter
 
@@ -68,6 +115,39 @@ if not exist "%sd%:\" (
 ) else (
 	if not exist "%sd%:\*" (goto WRONGSD)
 )
+
+:DISScheck
+ECHO off
+COLOR 0f
+cls
+echo.
+ECHO ===========================================================
+::1z                ___  _  ___  ___ 
+::1z               | . \| |/ __>/ __>   DISS DOWNLOADER
+::1z               | | || |\__ \\__ \           V.0.2.0
+::1z               |___/|_|<___/<___/        team-voidz
+for /f "delims=::1z tokens=*" %%A in ('findstr /b ::1z "%~f0"') do @echo(%%A
+echo.
+ECHO ===========================================================
+echo.
+
+
+IF EXIST "%sd%\DISS_Version.txt " (
+echo      You have DISS Installed !
+powershell write-host -back Red These File have been installed into your SD CARD.
+powershell Get-Content %sd%\DISS_Version.txt 
+powershell write-host -back Red .................................................
+) ELSE (
+echo      [NO] Previous DISS Installed !
+)
+echo.
+echo Press Y to start installing DISS. 
+echo Press N to exit
+set st=
+set /p st=": "
+
+for %%A in ("Y" "y" "1" "н" "Н") do if "%st%"==%%A (GOTO download0)
+for %%A in ("N" "n" "2" "т" "Т") do if "%st%"==%%A (GOTO exit)
 
 :download0
 COLOR 0f
@@ -165,23 +245,19 @@ ECHO.
 
 set st=
 set /p st="Enter Your number of choice: "
-for %%A in ("0" "o" "O" "0" "0") do if "%st%"==%%A (GOTO downloadALL)
-for %%A in ("Y" "y" "1" "н" "Н") do if "%st%"==%%A (GOTO download1)
-for %%A in ("N" "n" "2" "т" "Т") do if "%st%"==%%A (GOTO download2)
-for %%A in ("3" "#" "3" "3" "3") do if "%st%"==%%A (GOTO download3)
-for %%A in ("$" "4" "4" "4" "4") do if "%st%"==%%A (GOTO unpack)
 for %%A in ("5" "5" "5" "5" "5") do if "%st%"==%%A (GOTO startpoint)
 for %%A in ("6" "^" "6" "6" "6") do if "%st%"==%%A (GOTO delete1)
 for %%A in ("7" "&" "7" "7") do if "%st%"==%%A (GOTO exit)
 for %%A in ("" "" "" "") do if "%st%"==%%A (GOTO exit)
 
 :downloadALL
+
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/Atmos.ps1" --output %~dp0\Atmos.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\atmos.ps1'"
 
 if exist "%~dp0\atmosphere-*.zip" (
     move "%~dp0\atmosphere-*.zip" "%~dp0\DISS_A\"
     )
-
 if exist "%~dp0\fusee.bin" (
     rename %~dp0\fusee.bin fusee.bin.diss2
     move "%~dp0\fusee.bin.diss2" "%~dp0\DISS_A\temp0\fusee.bin.diss2"
@@ -192,20 +268,29 @@ curl "https://sigmapatches.coomer.party/sigpatches.zip" --output sigpatches.zip
 if exist "%~dp0\sigpatches.zip" (
     move "%~dp0\sigpatches.zip" "%~dp0\DISS_A\sigpatches.zip"
     )
+if exist "%~dp0\atmos.ps1" (
+    rename %~dp0\atmos.ps1 atmos.diss.done
+    move "%~dp0\atmos.diss.done" "%~dp0\DISS_A\trash\atmos.diss.done"
+    )	
 echo.
 echo            Downloading CFW and Sigpatches is done!
 echo.
-TIMEOUT /T 3
+TIMEOUT /T 2
 
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/Hekat.ps1" --output %~dp0\Hekat.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\Hekat.ps1'"
 
 if exist "%~dp0\hekate_*.zip" (
     move "%~dp0\hekate_*.zip" "%~dp0\DISS_A\"
     )
+if exist "%~dp0\Hekat.ps1" (
+    rename %~dp0\Hekat.ps1 Hekat.diss.done
+    move "%~dp0\Hekat.diss.done" "%~dp0\DISS_A\trash\Hekat.diss.done"
+    )
 echo.
 echo            Downloading Bootloader is done!
 echo.
-TIMEOUT /T 3
+TIMEOUT /T 2
 
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\DAss.ps1'"
 )
@@ -217,7 +302,7 @@ echo.
 echo            Downloading Assets is done!
 echo.
 TIMEOUT /T 3
-goto download0
+goto downloadextra
 
 :download1
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/Atmos.ps1" --output %~dp0\Atmos.ps1
@@ -345,6 +430,7 @@ goto download0
 
 :unpack
 dir /b "%~dp0\DISS_A\*.zip" > DISS_Version.txt
+echo.
 echo "ATMOS, BOOTLOADER, and CFW version recorded"
 echo.
 TIMEOUT /T 3
@@ -514,6 +600,7 @@ if not exist "%sd%:\boot.ini" (copy "%~dp0\DISS_A\temp0\boot.ini.diss" "%sd%:\bo
 if not exist "%sd%:\boot.ini" (copy "%~dp0\DISS_A\temp0\boot.ini.diss" "%sd%:\boot.ini")
 if not exist "%sd%:\exosphere.ini" (copy "%~dp0\DISS_A\temp0\exosphere.ini.diss" "%sd%:\exosphere.ini")
 if not exist "%sd%:\payload.bin" (copy "%~dp0\DISS_A\temp0\payload.bin.diss" "%sd%:\payload.bin")
+if not exist "%sd%:\hekate.bin" (copy "%~dp0\DISS_A\temp0\payload.bin.diss" "%sd%:\Hekate.bin")
 if not exist "%sd%:\fusee.bin" (copy "%~dp0\DISS_A\temp0\fusee.bin.diss" "%sd%:\fusee.bin")
 if not exist "%sd%:\hbmenu.nro" (copy "%~dp0\DISS_A\temp0\hbmenu.nro.diss" "%sd%:\hbmenu.nro")
 if not exist "%sd%:\DISS_Version.txt" (copy "%~dp0\DISS_A\temp0\DISS_Version.diss" "%sd%:\DISS_Version.txt")
@@ -612,12 +699,15 @@ echo	 zip files and temp folders DELETED!
 echo.
 echo Press any button for exit
 pause>nul 2>&1
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS_Delete.bat" --output %~dp0/DISS_Delete.bat
 call %~dp0\DISS_delete.bat
 
 :delete3
 cls
 if exist "%~dp0\DISS" (RD /s /q "%~dp0\DISS")
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS_Delete.bat" --output %~dp0/DISS_Delete.bat
 call %~dp0\DISS_delete.bat
+
 
 :ENDgood
 COLOR 0f
@@ -633,6 +723,7 @@ echo.
 ECHO ==
 echo.
 echo               DISS installed into your SD card.
+
 echo.
 ECHO.
 ECHO ==========================================================
@@ -660,7 +751,7 @@ echo.
 echo.
 echo            DISS is not installed into your SD card.
 echo                     Please Try Again !
-echo		   Read and follow the instructions
+echo		        Read and follow the instructions
 echo.
 echo.
 ECHO.
