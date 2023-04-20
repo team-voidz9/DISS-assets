@@ -40,6 +40,15 @@ if exist "%SF2%" (
     ECHO DISS_B folder not found. Creating . . .
     MKDIR "%SF2%"
 )
+set SFC=old.DISS
+if not "%~1"=="" set SF=%~1
+
+if exist "%SFC%" (
+    ECHO Old.DISS folder found. Deleting Content now! 
+    RD /S /Q "%SFC%"
+) else (
+    ECHO old.DISS folder not found.
+)
 set SF3=DISS
 if not "%~1"=="" set SF=%~1
 
@@ -50,15 +59,6 @@ if exist "%SF3%" (
 ) else (
     ECHO DISS folder not found. Creating . . .
     MKDIR "%SF3%"
-)
-set SFC=old.DISS
-if not "%~1"=="" set SF=%~1
-
-if exist "%SFC%" (
-    ECHO Old.DISS folder found. Deleting Content now! 
-    RD /S /Q "%SFC%"
-) else (
-    ECHO old.DISS folder not found.
 )
 set zip1=DISS_Hats_*.zip
 set CDISS =c:\dissbackup
@@ -159,7 +159,6 @@ powershell Get-Content %~dp0\DISS\DISS_Version.txt
 echo.
 echo Place the Content of "DISS" folder into you SD card ROOT
 echo.
-powershell -command "Compress-Archive -Path DISS\* -DestinationPath ('DISS_Hats_' + (get-date -Format yyyyMMdd) + '.zip')"
 pause
 RD /s /q DISS_A
 RD /s /q DISS_B
@@ -299,6 +298,14 @@ dir /b "%~dp0\DISS_A\*.zip" > DISS_Version.txt
 echo.
 echo "ATMOS, BOOTLOADER, and CFW version recorded"
 echo.
+dir /b "%~dp0\DISS_A\assets\payloads" > DISS_NRO.txt
+echo.
+echo "NROS recorded"
+echo.
+dir /b "%~dp0\DISS_A\temp1\switch" > DISS_BIN.txt
+echo.
+echo "BINs recorded"
+echo.
 TIMEOUT /T 3
 if exist "%~dp0\DISS" (RD /s /q "%~dp0\DISS")
 
@@ -428,5 +435,8 @@ if exist "%~dp0\DISS\*.*" (attrib -A -r %~dp0\DISS\*.*)
 echo.
 echo                     DONE
 echo.
+if not exist "%~dp0\DISS\DISS_NRO.txt" (move "%~dp0\DISS_NRO.txt" "%~dp0\DISS\DISS_NRO.txt")
+if not exist "%~dp0\DISS\DISS_BIN.txt" (move "%~dp0\DISS_BIN.txt" "%~dp0\DISS\DISS_BIN.txt")
 TIMEOUT /T 3
+powershell -command "Compress-Archive -Path DISS\* -DestinationPath ('DISS_Hats_' + (get-date -Format yyyyMMdd) + '.zip')"
 goto FRONTLOAD3
