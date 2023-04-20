@@ -163,7 +163,7 @@ powershell -command "Compress-Archive -Path DISS\* -DestinationPath ('DISS_Hats_
 pause
 RD /s /q DISS_A
 RD /s /q DISS_B
-exit
+del %0
 
 :download1
 cls
