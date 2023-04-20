@@ -45,25 +45,128 @@ if not "%~1"=="" set SF=%~1
 
 if exist "%SF3%" (
     ECHO OLD DISS folder found. Deleting Content now! 
-    RD /S /Q "%SF3%"
+    ren "%SF3%" "old.DISS"
 	MKDIR "%SF3%"
 ) else (
     ECHO DISS folder not found. Creating . . .
     MKDIR "%SF3%"
 )
-set zip1=DISS_*.zip
+set SFC=old.DISS
+if not "%~1"=="" set SF=%~1
+
+if exist "%SFC%" (
+    ECHO Old.DISS folder found. Deleting Content now! 
+    RD /S /Q "%SFC%"
+) else (
+    ECHO old.DISS folder not found.
+)
+set zip1=DISS_Hats_*.zip
+set CDISS =c:\dissbackup
 if not "%~1"=="" set SF=%~1
 
 if exist "%zip1%" (
-    ECHO OLD DISS_ABC.zip found. Deleting now! 
-    DEL /Q /F "%zip1%"
+    ECHO OLD DISS_ABC.zip found. Backup-ing it now!
+	MKDIR "c:\dissbackup"
+    move "%zip1%" "c:\dissbackup"
 ) else (
     ECHO OLD DISS_.zip NOT found.
 )
+
 ECHO.
 ECHO INITIAL FOLDERS CHECK COMPLETED
 ECHO.
+TIMEOUT /T 3
+
+:FRONTLOAD2
+ECHO off
+COLOR 0f
+cls
+echo.
+ECHO ===========================================================
+::1Y                ___  _  ___  ___ 
+::1Y               | . \| |/ __>/ __>   DISS LITE COMPILER
+::1Y               | | || |\__ \\__ \              V.0.3.1
+::1Y               |___/|_|<___/<___/           team-voidz
+for /f "delims=::1Y tokens=*" %%A in ('findstr /b ::1Y "%~f0"') do @echo(%%A
+echo.
+ECHO ===========================================================
+set filepath1="%~dp0\DISS_A\atmosphere-*.zip"
+for /F "delims=" %%i in (%filepath1%) do set basename1="%%~ni"
+IF EXIST "%~dp0\DISS_A\atmosphere-*.zip" (
+echo      CFW and SIGPATCHES READY! [4MB done!]
+powershell write-host -back Green      %basename1%
+) ELSE (
+echo      [NO] CFW and SIGPATCHES files detected
+powershell write-host -back Red Enter 1 to download
+)
+echo.
+set filepath2="%~dp0\DISS_A\hekate_ctcaer*.zip"
+for /F "delims=" %%i in (%filepath2%) do set basename2="%%~ni"
+IF EXIST "%~dp0\DISS_A\hekate_ctcaer*" (
+echo      Bootloader File READY! [1MB done!]
+powershell write-host -back Green      %basename2%
+) ELSE (
+echo      [NO] Bootloader Files detected
+powershell write-host -back Red Enter 2 to download
+)
+echo.
+set filepath3="%~dp0\DISS_A\assets_*.zip"
+for /F "delims=" %%i in (%filepath3%) do set basename3="%%~ni"
+IF EXIST "%~dp0\DISS_A\assets_*.zip" (
+echo      DISS Assets File READY! [100MB done!]
+powershell write-host -back Green       %basename3%
+) ELSE (
+echo      [NO] Assets Files detected
+powershell write-host -back Red Enter 3 to download
+)
+echo.
+IF EXIST "%~dp0\DISS_A\assets_*.zip" IF EXIST "%~dp0\DISS_A\hekate_ctcaer*.zip" IF EXIST "%~dp0\DISS_A\atmosphere-*.zip" (
+echo      Assets, Bootloader and CFW checked and ready
+powershell write-host -back Red         Enter 4 to compile
+) ELSE (
+echo      ....................................................
+)
+
+ECHO.
+
+set st=
+set /p st="Enter Your number of choice: "
+for %%A in ("Y" "y" "1" "н" "Н") do if "%st%"==%%A (GOTO download1)
+for %%A in ("N" "n" "2" "т" "Т") do if "%st%"==%%A (GOTO download2)
+for %%A in ("3" "#" "3" "3" "3") do if "%st%"==%%A (GOTO download3)
+for %%A in ("$" "4" "4" "4" "4") do if "%st%"==%%A (GOTO unpack  )
+for %%A in ("5" "5" "5" "5" "5") do if "%st%"==%%A (GOTO exit)
+for %%A in ("6" "^" "6" "6" "6") do if "%st%"==%%A (GOTO exit)
+for %%A in ("7" "&" "7" "7") do if "%st%"==%%A (GOTO exit)
+for %%A in ("" "" "" "") do if "%st%"==%%A (GOTO exit)
+
+:FRONTLOAD3
+ECHO off
+COLOR 0f
+cls
+echo.
+ECHO ===========================================================
+::1q                ___  _  ___  ___ 
+::1q               | . \| |/ __>/ __>   DISS LITE COMPILER
+::1q               | | || |\__ \\__ \              V.0.3.1
+::1q               |___/|_|<___/<___/           team-voidz
+for /f "delims=::1q tokens=*" %%A in ('findstr /b ::1q "%~f0"') do @echo(%%A
+echo.
+ECHO ===========================================================
+
+powershell write-host -back Red These File have been downloaded and prepared.
+powershell Get-Content %~dp0\DISS\DISS_Version.txt 
+echo.
+echo Place the Content of "DISS" folder into you SD card ROOT
+echo.
+powershell -command "Compress-Archive -Path DISS\* -DestinationPath ('DISS_Hats_' + (get-date -Format yyyyMMdd) + '.zip')"
+pause
+RD /s /q DISS_A
+RD /s /q DISS_B
+exit
+
 :download1
+cls
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/Atmos.ps1" --output %~dp0\Atmos.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\atmos.ps1'"
 
@@ -88,9 +191,10 @@ echo.
 echo            Downloading CFW and Sigpatches is done!
 echo.
 TIMEOUT /T 3
-goto download2
+goto FRONTLOAD2
 
 :download2
+cls
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/Hekat.ps1" --output %~dp0\Hekat.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\Hekat.ps1'"
 
@@ -105,9 +209,10 @@ echo.
 echo            Downloading Bootloader is done!
 echo.
 TIMEOUT /T 3
-goto download3
+goto FRONTLOAD2
 
 :download3
+cls
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DAss.ps1" --output %~dp0\DAss.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\DAss.ps1'"
 )
@@ -125,6 +230,7 @@ TIMEOUT /T 3
 goto downloadextra
 
 :downloadextra
+cls
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/BINRO.ps1" --output %~dp0\BINRO.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\BINRO.ps1'"
 powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
@@ -185,9 +291,10 @@ echo.
 echo            Downloading BINs and NROs are done!
 echo.
 TIMEOUT /T 3
-goto unpack
+goto FRONTLOAD2
 
 :unpack
+cls
 dir /b "%~dp0\DISS_A\*.zip" > DISS_Version.txt
 echo.
 echo "ATMOS, BOOTLOADER, and CFW version recorded"
@@ -250,6 +357,7 @@ ECHO  Extracting Assets, Bootloader, CFW is done!
 echo.
 TIMEOUT /T 3
 goto copy
+
 :copy
 robocopy %~dp0\DISS_A\assets\boot_logo\ %~dp0\DISS_A\cfw\atmosphere\exefs_patches\boot_logo\ /E /COPYALL
 robocopy %~dp0\DISS_A\cfw\ %~dp0\DISS\ /E /COPYALL
@@ -320,6 +428,5 @@ if exist "%~dp0\DISS\*.*" (attrib -A -r %~dp0\DISS\*.*)
 echo.
 echo                     DONE
 echo.
-
-powershell -command "Compress-Archive -Path DISS\* -Destination DISS_.zip"  -verbose -Force
-pause
+TIMEOUT /T 3
+goto FRONTLOAD3
