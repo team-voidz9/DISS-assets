@@ -307,14 +307,7 @@ dir /b "%~dp0\DISS_A\*.zip" > DISS_Version.txt
 echo.
 echo "ATMOS, BOOTLOADER, and CFW version recorded"
 echo.
-dir /b "%~dp0\DISS_A\assets\payloads" > DISS_NRO.txt
-echo.
-echo "NROS recorded"
-echo.
-dir /b "%~dp0\DISS_A\temp1\switch" > DISS_BIN.txt
-echo.
-echo "BINs recorded"
-echo.
+
 TIMEOUT /T 3
 if exist "%~dp0\DISS" (RD /s /q "%~dp0\DISS")
 
@@ -444,7 +437,14 @@ if exist "%~dp0\DISS\*.*" (attrib -A -r %~dp0\DISS\*.*)
 echo.
 echo                     DONE
 echo.
+dir /b "%~dp0\DISS\bootloader\payloads" > DISS_NRO.txt
+echo "NROS recorded"
+dir /b "%~dp0\DISS\switch" > DISS_BIN.txt
+echo "BINs recorded"
+echo.
+md "%~dp0\DISS\DISS_Compiler\X\"
 if not exist "%~dp0\DISS\DISS_NRO.txt" (move "%~dp0\DISS_NRO.txt" "%~dp0\DISS\DISS_NRO.txt")
+if not exist "%~dp0\DISS\DISS_Version.txt" (move "%~dp0\DISS_Version.txt" "%~dp0\DISS\DISS_Version.txt")
 if not exist "%~dp0\DISS\DISS_BIN.txt" (move "%~dp0\DISS_BIN.txt" "%~dp0\DISS\DISS_BIN.txt")
 if exist "%~dp0\DISS\DISS_BIN.txt" (
     move "%~dp0\DISS\DISS_BIN.txt" "%~dp0\DISS\DISS_Compiler\X\"
@@ -456,15 +456,18 @@ if exist "%~dp0\DISS\DISS_Version.txt" (
     move "%~dp0\DISS\DISS_Version.txt" "%~dp0\DISS\DISS_Compiler\X\"
     )
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/spacers.zip" --output %~dp0\DISS\spacers.zip	
-powershell -command "Expand-Archive -LiteralPath %~dp0/DISS/spacers.zip -Destination %~dp0/DISS/DISS_Compiler/X/" -verbose -force
-if exist "%~dp0\DISS\spacer.zip" (
-    move "%~dp0\DISS\spacer.zip" "%~dp0\DISS\DISS_Compiler\X\"
-    )
-if exist "%~dp0\DISS\DISS_Compiler\X\spacers\DISS_A1.txt" (
-    move "%~dp0\DISS\DISS_Compiler\X\spacers\*.txt" "%~dp0\DISS\DISS_Compiler\X\"
+powershell -command "Expand-Archive -LiteralPath %~dp0/DISS/spacers.zip -Destination %~dp0/DISS/DISS_Compiler/X1/" -verbose -force
+if exist "%~dp0\DISS\DISS_Compiler\X1\DISS_*.txt" (
+    move "%~dp0\DISS\DISS_Compiler\X1\*.txt" "%~dp0\DISS\DISS_Compiler\X\"
     )
 copy "%~dp0\DISS\DISS_Compiler\X\*.txt" "%~dp0\DISS\DISS_Compiler\Installed.txt"
+echo "CFW, Homebrews, Payloads Recorded"
+if exist  "%~dp0\DISS\spacers.zip" (
+    move  "%~dp0\DISS\spacers.zip" "%~dp0\DISS\DISS_Compiler\X\spacers.zip"
+    )
 RD /s /q "%~dp0\DISS\DISS_Compiler\X\"
+RD /s /q "%~dp0\DISS\DISS_Compiler\X1\"
+
 TIMEOUT /T 3
 powershell -command "Compress-Archive -Path DISS\* -DestinationPath ('DISS_Hats_' + (get-date -Format yyyyMMdd) + '.zip')"
 goto FRONTLOAD3
