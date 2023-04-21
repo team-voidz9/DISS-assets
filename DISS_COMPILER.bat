@@ -12,6 +12,15 @@ ECHO ===========================================================
 for /f "delims=::1X tokens=*" %%A in ('findstr /b ::1X "%~f0"') do @echo(%%A
 echo.
 ECHO ===========================================================
+set old=old.DISS
+if exist "%old%" (
+    ECHO OLD.DISS folder found. Zipping and Backup-ing content now
+	MKDIR "c:\dissbackup\old"
+powershell -command "Compress-Archive -Path old.DISS\* -DestinationPath ('oldDISS_' + (get-date -Format yyyyMMdd) + '.zip')"
+	move "oldDISS_*.zip" "c:\dissbackup\old\"
+) else (
+    ECHO NO OLD.DISS zip
+)
 set SF=DISS_A
 set SFA=DISS_A\temp0
 set SFB=DISS_A\trash
