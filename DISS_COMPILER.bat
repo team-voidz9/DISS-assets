@@ -164,9 +164,7 @@ echo.
 ECHO ===========================================================
 
 powershell write-host -back Red These File have been downloaded and prepared.
-powershell Get-Content %~dp0\DISS\DISS_Version.txt 
-powershell Get-Content %~dp0\DISS\DISS_NRO.txt
-powershell Get-Content %~dp0\DISS\DISS_BIN.txt
+powershell Get-Content %~dp0\DISS\DISS_Compiler/Installed.txt
 echo.
 echo Place the Content of "DISS" folder into you SD card ROOT
 echo.
@@ -448,6 +446,25 @@ echo                     DONE
 echo.
 if not exist "%~dp0\DISS\DISS_NRO.txt" (move "%~dp0\DISS_NRO.txt" "%~dp0\DISS\DISS_NRO.txt")
 if not exist "%~dp0\DISS\DISS_BIN.txt" (move "%~dp0\DISS_BIN.txt" "%~dp0\DISS\DISS_BIN.txt")
+if exist "%~dp0\DISS\DISS_BIN.txt" (
+    move "%~dp0\DISS\DISS_BIN.txt" "%~dp0\DISS\DISS_Compiler\X\"
+    )
+if exist "%~dp0\DISS\DISS_NRO.txt" (
+    move "%~dp0\DISS\DISS_NRO.txt" "%~dp0\DISS\DISS_Compiler\X\"
+    )
+if exist "%~dp0\DISS\DISS_Version.txt" (
+    move "%~dp0\DISS\DISS_Version.txt" "%~dp0\DISS\DISS_Compiler\X\"
+    )
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/spacers.zip" --output %~dp0\DISS\spacers.zip	
+powershell -command "Expand-Archive -LiteralPath %~dp0/DISS/spacers.zip -Destination %~dp0/DISS/DISS_Compiler/X/" -verbose -force
+if exist "%~dp0\DISS\spacer.zip" (
+    move "%~dp0\DISS\spacer.zip" "%~dp0\DISS\DISS_Compiler\X\"
+    )
+if exist "%~dp0\DISS\DISS_Compiler\X\spacers\DISS_A1.txt" (
+    move "%~dp0\DISS\DISS_Compiler\X\spacers\*.txt" "%~dp0\DISS\DISS_Compiler\X\"
+    )
+copy "%~dp0\DISS\DISS_Compiler\X\*.txt" "%~dp0\DISS\DISS_Compiler\Installed.txt"
+RD /s /q "%~dp0\DISS\DISS_Compiler\X\"
 TIMEOUT /T 3
 powershell -command "Compress-Archive -Path DISS\* -DestinationPath ('DISS_Hats_' + (get-date -Format yyyyMMdd) + '.zip')"
 goto FRONTLOAD3
