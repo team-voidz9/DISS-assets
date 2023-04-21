@@ -461,7 +461,6 @@ if exist "%~dp0\DISS\DISS_Compiler\X1\DISS_*.txt" (
     move "%~dp0\DISS\DISS_Compiler\X1\*.txt" "%~dp0\DISS\DISS_Compiler\X\"
     )
 copy "%~dp0\DISS\DISS_Compiler\X\*.txt" "%~dp0\DISS\DISS_Compiler\Installed.txt"
-echo "CFW, Homebrews, Payloads Recorded"
 if exist  "%~dp0\DISS\spacers.zip" (
     move  "%~dp0\DISS\spacers.zip" "%~dp0\DISS\DISS_Compiler\X\spacers.zip"
     )
