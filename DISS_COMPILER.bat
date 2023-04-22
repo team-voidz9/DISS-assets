@@ -12,6 +12,17 @@ ECHO ===========================================================
 for /f "delims=::1X tokens=*" %%A in ('findstr /b ::1X "%~f0"') do @echo(%%A
 echo.
 ECHO ===========================================================
+set SF3=DISS
+if not "%~1"=="" set SF=%~1
+
+if exist "%SF3%" (
+    ECHO Previous DISS folder found.
+    ren "%SF3%" "old.DISS"
+	MKDIR "%SF3%"
+) else (
+    ECHO DISS folder not found. Creating . . .
+    MKDIR "%SF3%"
+)
 set old=old.DISS
 if exist "%old%" (
     ECHO OLD.DISS folder found. Zipping and Backup-ing content now
@@ -57,28 +68,6 @@ if exist "%SFC%" (
     RD /S /Q "%SFC%"
 ) else (
     ECHO old.DISS folder not found.
-)
-set SF3=DISS
-if not "%~1"=="" set SF=%~1
-
-if exist "%SF3%" (
-    ECHO OLD DISS folder found. Deleting Content now! 
-    ren "%SF3%" "old.DISS"
-	MKDIR "%SF3%"
-) else (
-    ECHO DISS folder not found. Creating . . .
-    MKDIR "%SF3%"
-)
-set zip1=DISS_Hats_*.zip
-set CDISS =c:\dissbackup
-if not "%~1"=="" set SF=%~1
-
-if exist "%zip1%" (
-    ECHO OLD DISS_ABC.zip found. Backup-ing it now!
-	MKDIR "c:\dissbackup"
-    move "%zip1%" "c:\dissbackup"
-) else (
-    ECHO OLD DISS_.zip NOT found.
 )
 
 ECHO.
