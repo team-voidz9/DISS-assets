@@ -430,11 +430,14 @@ dir /b "%~dp0\DISS\bootloader\payloads" > DISS_NRO.txt
 echo "NROS recorded"
 dir /b "%~dp0\DISS\switch" > DISS_BIN.txt
 echo "BINs recorded"
+dir /b "%~dp0\DISS\Installer" > DISS_y2.txt
+echo "NROS recorded"
 echo.
 md "%~dp0\DISS\DISS_Compiler\X\"
 if not exist "%~dp0\DISS\DISS_NRO.txt" (move "%~dp0\DISS_NRO.txt" "%~dp0\DISS\DISS_NRO.txt")
 if not exist "%~dp0\DISS\DISS_Version.txt" (move "%~dp0\DISS_Version.txt" "%~dp0\DISS\DISS_Version.txt")
 if not exist "%~dp0\DISS\DISS_BIN.txt" (move "%~dp0\DISS_BIN.txt" "%~dp0\DISS\DISS_BIN.txt")
+if not exist "%~dp0\DISS\DISS_y2.txt" (move "%~dp0\DISS_y2.txt" "%~dp0\DISS\DISS_y2.txt")
 if exist "%~dp0\DISS\DISS_BIN.txt" (
     move "%~dp0\DISS\DISS_BIN.txt" "%~dp0\DISS\DISS_Compiler\X\"
     )
@@ -443,6 +446,9 @@ if exist "%~dp0\DISS\DISS_NRO.txt" (
     )
 if exist "%~dp0\DISS\DISS_Version.txt" (
     move "%~dp0\DISS\DISS_Version.txt" "%~dp0\DISS\DISS_Compiler\X\"
+    )
+if exist "%~dp0\DISS\DISS_y2.txt" (
+    move "%~dp0\DISS\DISS_y2.txt" "%~dp0\DISS\DISS_Compiler\X\"
     )
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/spacers.zip" --output %~dp0\DISS\spacers.zip	
 powershell -command "Expand-Archive -LiteralPath %~dp0/DISS/spacers.zip -Destination %~dp0/DISS/DISS_Compiler/X1/" -verbose -force
