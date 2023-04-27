@@ -462,6 +462,10 @@ if exist  "%~dp0\DISS\spacers.zip" (
 RD /s /q "%~dp0\DISS\DISS_Compiler\X\"
 RD /s /q "%~dp0\DISS\DISS_Compiler\X1\"
 
+tree /f "%~dp0\DISS"> AllFiles_Folders.txt
+if exist  "%~dp0\AllFiles_Folders.txt" (
+    move  "%~dp0\AllFiles_Folders.txt" "%~dp0\DISS\DISS_Compiler\AllFiles_Folders.txt"
+    )
 TIMEOUT /T 3
 powershell -command "Compress-Archive -Path DISS\* -DestinationPath ('DISS_Hats_' + (get-date -Format yyyyMMdd) + '.zip')"
 goto FRONTLOAD3
