@@ -23,7 +23,7 @@ $filenamePattern9 = "TegraExplorer.bin"
 $repo10 = "Team-Neptune/CommonProblemResolver"
 $filenamePattern10 = "CommonProblemResolver.bin"
 $repo11 = "shchmue/Lockpick_RCM"
-$filenamePattern11 = "Lockpick_rcm.bin"
+$filenamePattern11 = "Lockpick_RCM.bin"
 $repo12 = "jimzrt/Incognito_RCM"
 $filenamePattern12 = "Incognito_RCM.bin"
 
