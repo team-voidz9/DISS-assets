@@ -22,8 +22,8 @@ $repo9 = "dezem/TegraExplorer"
 $filenamePattern9 = "TegraExplorer.bin"
 $repo10 = "Team-Neptune/CommonProblemResolver"
 $filenamePattern10 = "CommonProblemResolver.bin"
-$repo11 = "shchmue/Lockpick_RCM"
-$filenamePattern11 = "Lockpick_RCM.bin"
+$repo11a = "shchmue/Lockpick_RCM"
+$filenamePattern11a = "Lockpick_RCM.bin"
 $repo12 = "jimzrt/Incognito_RCM"
 $filenamePattern12 = "Incognito_RCM.bin"
 
@@ -196,15 +196,15 @@ Invoke-WebRequest -Uri $downloadUri10 -Out $filenameUrlDecoded10
 
 
 if ($preRelease) {
-    $releasesUri11 = "https://api.github.com/repos/$repo11/releases"
-    $downloadUri11 = ((Invoke-RestMethod -Method GET -Uri $releasesUri11)[0].assets | Where-Object name -like $filenamePattern11 ).browser_download_url
+    $releasesUri11 = "https://api.github.com/repos/$repo11a/releases"
+    $downloadUri11 = ((Invoke-RestMethod -Method GET -Uri $releasesUri11)[0].assets | Where-Object name -like $filenamePattern11a ).browser_download_url
 }
 else {
-    $releasesUri11 = "https://api.github.com/repos/$repo11/releases/latest"
+    $releasesUri11 = "https://api.github.com/repos/$repo11a/releases/latest"
     $downloadUri11 = ((Invoke-RestMethod -Method GET -Uri $releasesUri11).assets | Where-Object name -like $filenamePattern11 ).browser_download_url
 }
 $downloadUriBuilder11 = [System.UriBuilder] $downloadUri11
-$filename10 = Split-Path -Path ($downloadUriBuilder11.Path) -Leaf       
+$filename11 = Split-Path -Path ($downloadUriBuilder11.Path) -Leaf       
 $filenameUrlDecoded11 = [System.Web.HttpUtility]::UrlDecode($filename11)
 Invoke-WebRequest -Uri $downloadUri11 -Out $filenameUrlDecoded11
 
