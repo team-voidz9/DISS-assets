@@ -431,7 +431,7 @@ echo "NROS recorded"
 dir /b "%~dp0\DISS\switch" > DISS_BIN.txt
 echo "BINs recorded"
 dir /b "%~dp0\DISS\Installer" > DISS_y2.txt
-echo "NROS recorded"
+echo "NSPs recorded"
 echo.
 md "%~dp0\DISS\DISS_Compiler\X\"
 if not exist "%~dp0\DISS\DISS_NRO.txt" (move "%~dp0\DISS_NRO.txt" "%~dp0\DISS\DISS_NRO.txt")
