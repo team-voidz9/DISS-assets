@@ -15,8 +15,6 @@ $repo6 = "J-D-K/JKSV"
 $filenamePattern6 = "jksv.nro"
 $repo7 = "rdmrocha/linkalho"
 $filenamePattern7 = "linkalho-*.zip"
-$repo8 = "ITotalJustice/Gamecard-Installer-NX"
-$filenamePattern8 = "gamecard_installer.zip"
 #BIN
 $repo9 = "dezem/TegraExplorer"
 $filenamePattern9 = "TegraExplorer.bin"
@@ -154,20 +152,6 @@ Invoke-WebRequest -Uri $downloadUri7 -Out $filenameUrlDecoded7
 
 
 if ($preRelease) {
-    $releasesUri8 = "https://api.github.com/repos/$repo8/releases"
-    $downloadUri8 = ((Invoke-RestMethod -Method GET -Uri $releasesUri8)[0].assets | Where-Object name -like $filenamePattern8 ).browser_download_url
-}
-else {
-    $releasesUri8 = "https://api.github.com/repos/$repo8/releases/latest"
-    $downloadUri8 = ((Invoke-RestMethod -Method GET -Uri $releasesUri8).assets | Where-Object name -like $filenamePattern8 ).browser_download_url
-}
-$downloadUriBuilder8 = [System.UriBuilder] $downloadUri8
-$filename8 = Split-Path -Path ($downloadUriBuilder8.Path) -Leaf       
-$filenameUrlDecoded8 = [System.Web.HttpUtility]::UrlDecode($filename8)
-Invoke-WebRequest -Uri $downloadUri8 -Out $filenameUrlDecoded8
-
-
-if ($preRelease) {
     $releasesUri9 = "https://api.github.com/repos/$repo9/releases"
     $downloadUri9 = ((Invoke-RestMethod -Method GET -Uri $releasesUri9)[0].assets | Where-Object name -like $filenamePattern9 ).browser_download_url
 }
@@ -222,4 +206,5 @@ $filename12 = Split-Path -Path ($downloadUriBuilder12.Path) -Leaf
 $filenameUrlDecoded12 = [System.Web.HttpUtility]::UrlDecode($filename12)
 Invoke-WebRequest -Uri $downloadUri12 -Out $filenameUrlDecoded12
 
-write-host -back Red "All Latest BINs & NROs Downloaded"
+write-host -back Red "All Latest BINs Downloaded"
+write-host -back Red "All Latest NROs Downloaded"
