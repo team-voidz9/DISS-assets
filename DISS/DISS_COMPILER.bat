@@ -12,6 +12,26 @@ ECHO ===========================================================
 for /f "delims=::1X tokens=*" %%A in ('findstr /b ::1X "%~f0"') do @echo(%%A
 echo.
 ECHO ===========================================================
+set SF3=DISS
+if not "%~1"=="" set SF=%~1
+
+if exist "%SF3%" (
+    ECHO Previous DISS folder found.
+    ren "%SF3%" "old.DISS"
+	MKDIR "%SF3%"
+) else (
+    ECHO DISS folder not found. Creating . . .
+    MKDIR "%SF3%"
+)
+set old=old.DISS
+if exist "%old%" (
+    ECHO OLD.DISS folder found. Zipping and Backup-ing content now
+	MKDIR "c:\dissbackup\old"
+powershell -command "Compress-Archive -Path old.DISS\* -DestinationPath ('oldDISS_' + (get-date -Format yyyyMMdd) + '.zip')"
+	move "oldDISS_*.zip" "c:\dissbackup\old\"
+) else (
+    ECHO NO OLD.DISS zip
+)
 set SF=DISS_A
 set SFA=DISS_A\temp0
 set SFB=DISS_A\trash
@@ -48,28 +68,6 @@ if exist "%SFC%" (
     RD /S /Q "%SFC%"
 ) else (
     ECHO old.DISS folder not found.
-)
-set SF3=DISS
-if not "%~1"=="" set SF=%~1
-
-if exist "%SF3%" (
-    ECHO OLD DISS folder found. Deleting Content now! 
-    ren "%SF3%" "old.DISS"
-	MKDIR "%SF3%"
-) else (
-    ECHO DISS folder not found. Creating . . .
-    MKDIR "%SF3%"
-)
-set zip1=DISS_Hats_*.zip
-set CDISS =c:\dissbackup
-if not "%~1"=="" set SF=%~1
-
-if exist "%zip1%" (
-    ECHO OLD DISS_ABC.zip found. Backup-ing it now!
-	MKDIR "c:\dissbackup"
-    move "%zip1%" "c:\dissbackup"
-) else (
-    ECHO OLD DISS_.zip NOT found.
 )
 
 ECHO.
@@ -155,11 +153,10 @@ echo.
 ECHO ===========================================================
 
 powershell write-host -back Red These File have been downloaded and prepared.
-powershell Get-Content %~dp0\DISS\DISS_Version.txt 
+powershell Get-Content %~dp0\DISS\DISS_Compiler/Installed.txt
 echo.
 echo Place the Content of "DISS" folder into you SD card ROOT
 echo.
-powershell -command "Compress-Archive -Path DISS\* -DestinationPath ('DISS_Hats_' + (get-date -Format yyyyMMdd) + '.zip')"
 pause
 RD /s /q DISS_A
 RD /s /q DISS_B
@@ -299,6 +296,7 @@ dir /b "%~dp0\DISS_A\*.zip" > DISS_Version.txt
 echo.
 echo "ATMOS, BOOTLOADER, and CFW version recorded"
 echo.
+
 TIMEOUT /T 3
 if exist "%~dp0\DISS" (RD /s /q "%~dp0\DISS")
 
@@ -428,5 +426,46 @@ if exist "%~dp0\DISS\*.*" (attrib -A -r %~dp0\DISS\*.*)
 echo.
 echo                     DONE
 echo.
+dir /b "%~dp0\DISS\bootloader\payloads" > DISS_NRO.txt
+echo "NROS recorded"
+dir /b "%~dp0\DISS\switch" > DISS_BIN.txt
+echo "BINs recorded"
+dir /b "%~dp0\DISS\Installer" > DISS_y2.txt
+echo "NSPs recorded"
+echo.
+md "%~dp0\DISS\DISS_Compiler\X\"
+if not exist "%~dp0\DISS\DISS_NRO.txt" (move "%~dp0\DISS_NRO.txt" "%~dp0\DISS\DISS_NRO.txt")
+if not exist "%~dp0\DISS\DISS_Version.txt" (move "%~dp0\DISS_Version.txt" "%~dp0\DISS\DISS_Version.txt")
+if not exist "%~dp0\DISS\DISS_BIN.txt" (move "%~dp0\DISS_BIN.txt" "%~dp0\DISS\DISS_BIN.txt")
+if not exist "%~dp0\DISS\DISS_y2.txt" (move "%~dp0\DISS_y2.txt" "%~dp0\DISS\DISS_y2.txt")
+if exist "%~dp0\DISS\DISS_BIN.txt" (
+    move "%~dp0\DISS\DISS_BIN.txt" "%~dp0\DISS\DISS_Compiler\X\"
+    )
+if exist "%~dp0\DISS\DISS_NRO.txt" (
+    move "%~dp0\DISS\DISS_NRO.txt" "%~dp0\DISS\DISS_Compiler\X\"
+    )
+if exist "%~dp0\DISS\DISS_Version.txt" (
+    move "%~dp0\DISS\DISS_Version.txt" "%~dp0\DISS\DISS_Compiler\X\"
+    )
+if exist "%~dp0\DISS\DISS_y2.txt" (
+    move "%~dp0\DISS\DISS_y2.txt" "%~dp0\DISS\DISS_Compiler\X\"
+    )
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/spacers.zip" --output %~dp0\DISS\spacers.zip	
+powershell -command "Expand-Archive -LiteralPath %~dp0/DISS/spacers.zip -Destination %~dp0/DISS/DISS_Compiler/X1/" -verbose -force
+if exist "%~dp0\DISS\DISS_Compiler\X1\DISS_*.txt" (
+    move "%~dp0\DISS\DISS_Compiler\X1\*.txt" "%~dp0\DISS\DISS_Compiler\X\"
+    )
+copy "%~dp0\DISS\DISS_Compiler\X\*.txt" "%~dp0\DISS\DISS_Compiler\Installed.txt"
+if exist  "%~dp0\DISS\spacers.zip" (
+    move  "%~dp0\DISS\spacers.zip" "%~dp0\DISS\DISS_Compiler\X\spacers.zip"
+    )
+RD /s /q "%~dp0\DISS\DISS_Compiler\X\"
+RD /s /q "%~dp0\DISS\DISS_Compiler\X1\"
+
+tree /f "%~dp0\DISS"> AllFiles_Folders.txt
+if exist  "%~dp0\AllFiles_Folders.txt" (
+    move  "%~dp0\AllFiles_Folders.txt" "%~dp0\DISS\DISS_Compiler\AllFiles_Folders.txt"
+    )
 TIMEOUT /T 3
+powershell -command "Compress-Archive -Path DISS\* -DestinationPath ('DISS_Hats_' + (get-date -Format yyyyMMdd) + '.zip')"
 goto FRONTLOAD3

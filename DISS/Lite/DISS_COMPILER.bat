@@ -153,7 +153,7 @@ echo.
 ECHO ===========================================================
 
 powershell write-host -back Red These File have been downloaded and prepared.
-powershell Get-Content %~dp0\DISS\DISS_Compiler/Installed.txt
+powershell Get-Content %~dp0\DISS\DISS_Compiler\Installed.txt
 echo.
 echo Place the Content of "DISS" folder into you SD card ROOT
 echo.
