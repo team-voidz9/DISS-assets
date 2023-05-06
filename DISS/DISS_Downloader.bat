@@ -29,7 +29,7 @@ echo.
 echo      =============Free Space and an internet connection needed=============
 echo.
 pause
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/Clean_test.bat" --output %~dp0/Clean_Clean.bat
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Clean_test.bat" --output %~dp0/Clean_Clean.bat
 TIMEOUT /T 2
 
 call %~dp0\Clean_Clean.bat

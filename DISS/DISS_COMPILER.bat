@@ -164,7 +164,7 @@ del %0
 
 :download1
 cls
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/Atmos.ps1" --output %~dp0\Atmos.ps1
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Atmos.ps1" --output %~dp0\Atmos.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\atmos.ps1'"
 
 if exist "%~dp0\atmosphere-*.zip" (
@@ -192,7 +192,7 @@ goto FRONTLOAD2
 
 :download2
 cls
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/Hekat.ps1" --output %~dp0\Hekat.ps1
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Hekat.ps1" --output %~dp0\Hekat.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\Hekat.ps1'"
 
 if exist "%~dp0\hekate_*.zip" (
@@ -210,7 +210,7 @@ goto FRONTLOAD2
 
 :download3
 cls
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DAss.ps1" --output %~dp0\DAss.ps1
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/DAss.ps1" --output %~dp0\DAss.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\DAss.ps1'"
 )
 if exist "%~dp0\assets_*.zip" (
@@ -228,7 +228,7 @@ goto downloadextra
 
 :downloadextra
 cls
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/BINRO.ps1" --output %~dp0\BINRO.ps1
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/BINRO.ps1" --output %~dp0\BINRO.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\BINRO.ps1'"
 powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
 if exist "%~dp0\breeze.zip" (
@@ -450,7 +450,7 @@ if exist "%~dp0\DISS\DISS_Version.txt" (
 if exist "%~dp0\DISS\DISS_y2.txt" (
     move "%~dp0\DISS\DISS_y2.txt" "%~dp0\DISS\DISS_Compiler\X\"
     )
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/spacers.zip" --output %~dp0\DISS\spacers.zip	
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/spacers.zip" --output %~dp0\DISS\spacers.zip	
 powershell -command "Expand-Archive -LiteralPath %~dp0/DISS/spacers.zip -Destination %~dp0/DISS/DISS_Compiler/X1/" -verbose -force
 if exist "%~dp0\DISS\DISS_Compiler\X1\DISS_*.txt" (
     move "%~dp0\DISS\DISS_Compiler\X1\*.txt" "%~dp0\DISS\DISS_Compiler\X\"
