@@ -1,6 +1,6 @@
 Write-Host "Payloads and Homebrews Downloader Rev.4" -ForegroundColor green -BackgroundColor black
 Write-Host "TEAM-VOIDZ"
-Write-Host "Latest : Lockpick to Picklock"
+Write-Host "Latest : LockPick Removed"
 
 #NROs
 $repo1 = "tomvita/Breeze-Beta"
