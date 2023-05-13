@@ -263,16 +263,12 @@ powershell -command "Expand-Archive %~dp0/linkalho-*.zip %~dp0/DISS_A/temp1/swit
 if exist "%~dp0\linkalho-*.zip" (
     move "%~dp0\linkalho-*.zip" "%~dp0\DISS_A\trash\"
     )
-powershell -command "Expand-Archive %~dp0/gamecard_installer.zip %~dp0/DISS_A/temp1" -verbose -force
-if exist "%~dp0\gamecard_installer.zip " (
-    move "%~dp0\gamecard_installer.zip " "%~dp0\DISS_A\trash\"
-    )
 if exist "%~dp0\TegraExplorer.bin" (
     md "%~dp0\DISS_A\assets\payloads\"
     move "%~dp0\TegraExplorer.bin" "%~dp0\DISS_A\assets\payloads"
     )
-if exist "%~dp0\Lockpick_RCM.bin" (
-    move "%~dp0\Lockpick_RCM.bin" "%~dp0\DISS_A\assets\payloads"
+if exist "%~dp0\Picklock_RCM.bin" (
+    move "%~dp0\Picklock_RCM.bin" "%~dp0\DISS_A\assets\payloads"
     )
 if exist "%~dp0\CommonProblemResolver.bin" (
     move "%~dp0\CommonProblemResolver.bin" "%~dp0\DISS_A\assets\payloads"

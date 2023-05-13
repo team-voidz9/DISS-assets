@@ -1,4 +1,4 @@
-Write-Host "Payloads and Homebrews Downloader Rev.1" -ForegroundColor green -BackgroundColor black
+Write-Host "Payloads and Homebrews Downloader Rev.3" -ForegroundColor green -BackgroundColor black
 Write-Host "TEAM-VOIDZ"
 Write-Host "Latest : Lockpick to Picklock"
 
@@ -20,7 +20,7 @@ $filenamePattern6 = "jksv.nro"
 $repo7 = "rdmrocha/linkalho"
 $filenamePattern7 = "linkalho-*.zip"
 #BIN
-$repo8 = "Slluxx/Picklock_RCM/"
+$repo8 = "Slluxx/Picklock_RCM"
 $filenamePattern8 = "Picklock_RCM.bin"
 $repo9 = "dezem/TegraExplorer"
 $filenamePattern9 = "TegraExplorer.bin"
