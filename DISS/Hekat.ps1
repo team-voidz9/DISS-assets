@@ -1,3 +1,8 @@
+Write-Host "Bootloader Downloader Rev.1" -ForegroundColor green -BackgroundColor black
+Write-Host "TEAM-VOIDZ"
+Write-Host "Latest : -"
+
+
 $repo = "CTCaer/hekate"
 $filenamePattern = "hekate_*.zip"
 $innerDirectory = $true

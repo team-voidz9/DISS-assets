@@ -1,3 +1,7 @@
+Write-Host "Atmosphere Downloader Rev.1" -ForegroundColor green -BackgroundColor black
+Write-Host "TEAM-VOIDZ"
+Write-Host "Latest : -"
+
 $repo = "Atmosphere-NX/Atmosphere"
 $filenamePattern = "*+hbmenu-*.zip"
 $filenamePattern2 = "fusee.bin"

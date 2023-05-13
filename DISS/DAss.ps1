@@ -1,3 +1,7 @@
+Write-Host "Asset Downloader Rev.1" -ForegroundColor green -BackgroundColor black
+Write-Host "TEAM-VOIDZ"
+Write-Host "Latest : -"
+
 $repo = "team-voidz/DISS-assets"
 $filenamePattern = "assets_*.zip"
 $innerDirectory = $true
