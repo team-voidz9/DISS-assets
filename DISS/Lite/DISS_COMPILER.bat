@@ -281,7 +281,7 @@ if exist "%~dp0\BINRO.ps1" (
     move "%~dp0\BINRO.diss.done" "%~dp0\DISS_A\trash\BINRO.diss.done"
     )	
 echo.
-echo            Downloading BINs and NROs are done!
+echo            Downloading BINs and NROs are done! ....
 echo.
 TIMEOUT /T 3
 goto FRONTLOAD2
