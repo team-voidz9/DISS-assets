@@ -1,4 +1,4 @@
-Write-Host "Payloads and Homebrews Downloader Rev.3" -ForegroundColor green -BackgroundColor black
+Write-Host "Payloads and Homebrews Downloader Rev.4" -ForegroundColor green -BackgroundColor black
 Write-Host "TEAM-VOIDZ"
 Write-Host "Latest : Lockpick to Picklock"
 
@@ -26,8 +26,6 @@ $repo9 = "dezem/TegraExplorer"
 $filenamePattern9 = "TegraExplorer.bin"
 $repo10 = "Team-Neptune/CommonProblemResolver"
 $filenamePattern10 = "CommonProblemResolver.bin"
-$repo11a = "shchmue/Lockpick_RCM"
-$filenamePattern11a = "Lockpick_RCM.bin"
 $repo12 = "jimzrt/Incognito_RCM"
 $filenamePattern12 = "Incognito_RCM.bin"
 
@@ -197,20 +195,6 @@ $downloadUriBuilder10 = [System.UriBuilder] $downloadUri10
 $filename10 = Split-Path -Path ($downloadUriBuilder10.Path) -Leaf       
 $filenameUrlDecoded10 = [System.Web.HttpUtility]::UrlDecode($filename10)
 Invoke-WebRequest -Uri $downloadUri10 -Out $filenameUrlDecoded10
-
-
-if ($preRelease) {
-    $releasesUri11 = "https://api.github.com/repos/$repo11a/releases"
-    $downloadUri11 = ((Invoke-RestMethod -Method GET -Uri $releasesUri11)[0].assets | Where-Object name -like $filenamePattern11a ).browser_download_url
-}
-else {
-    $releasesUri11 = "https://api.github.com/repos/$repo11a/releases/latest"
-    $downloadUri11 = ((Invoke-RestMethod -Method GET -Uri $releasesUri11).assets | Where-Object name -like $filenamePattern11 ).browser_download_url
-}
-$downloadUriBuilder11 = [System.UriBuilder] $downloadUri11
-$filename11 = Split-Path -Path ($downloadUriBuilder11.Path) -Leaf       
-$filenameUrlDecoded11 = [System.Web.HttpUtility]::UrlDecode($filename11)
-Invoke-WebRequest -Uri $downloadUri11 -Out $filenameUrlDecoded11
 
 
 if ($preRelease) {
