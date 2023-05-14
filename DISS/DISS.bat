@@ -19,7 +19,7 @@ cls
 :::1       DDDDDDDDDDDDD      IIIIIIIIII SSSSSSSSSSSSSSS    SSSSSSSSSSSSSSS
 for /f "delims=:::1 tokens=*" %%A in ('findstr /b :::1 "%~f0"') do @echo(%%A
 
-echo      ====================== DISS Compiler V0.3.1 ========================
+echo      ====================== DISS Compiler V0.3.2 ========================
 echo                          (cfw / bootloader / assets)
 echo      1. This script will download needed files (cfw, bootloader and assets)
 echo      2. Download and compile everything for you 

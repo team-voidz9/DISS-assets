@@ -7,7 +7,7 @@ echo.
 ECHO ===========================================================
 ::1X                ___  _  ___  ___ 
 ::1X               | . \| |/ __>/ __>   DISS LITE COMPILER
-::1X               | | || |\__ \\__ \              V.0.3.2
+::1X               | | || |\__ \\__ \              V.0.3.1
 ::1X               |___/|_|<___/<___/           team-voidz
 for /f "delims=::1X tokens=*" %%A in ('findstr /b ::1X "%~f0"') do @echo(%%A
 echo.
@@ -83,7 +83,7 @@ echo.
 ECHO ===========================================================
 ::1Y                ___  _  ___  ___ 
 ::1Y               | . \| |/ __>/ __>   DISS LITE COMPILER
-::1Y               | | || |\__ \\__ \              V.0.3.2
+::1Y               | | || |\__ \\__ \              V.0.3.1
 ::1Y               |___/|_|<___/<___/           team-voidz
 for /f "delims=::1Y tokens=*" %%A in ('findstr /b ::1Y "%~f0"') do @echo(%%A
 echo.
@@ -146,14 +146,14 @@ echo.
 ECHO ===========================================================
 ::1q                ___  _  ___  ___ 
 ::1q               | . \| |/ __>/ __>   DISS LITE COMPILER
-::1q               | | || |\__ \\__ \              V.0.3.2
+::1q               | | || |\__ \\__ \              V.0.3.1
 ::1q               |___/|_|<___/<___/           team-voidz
 for /f "delims=::1q tokens=*" %%A in ('findstr /b ::1q "%~f0"') do @echo(%%A
 echo.
 ECHO ===========================================================
 
 powershell write-host -back Red These File have been downloaded and prepared.
-powershell Get-Content %~dp0\DISS\DISS_Compiler\Installed.txt
+powershell Get-Content %~dp0\DISS\DISS_Compiler/Installed.txt
 echo.
 echo Place the Content of "DISS" folder into you SD card ROOT
 echo.
@@ -234,7 +234,10 @@ powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %
 if exist "%~dp0\breeze.zip" (
     move "%~dp0\breeze.zip" "%~dp0\DISS_A\trash\"
     )
-
+powershell -command "Expand-Archive -LiteralPath %~dp0/ldn_mitm_*.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
+if exist "%~dp0\ldn_mitm_*.zip " (
+    move "%~dp0\ldn_mitm_*.zip " "%~dp0\DISS_A\trash\"
+    )
 if exist "%~dp0\Edizon.nro" (
     md "%~dp0\DISS_A\temp1\switch\EdiZon\"
     move "%~dp0\Edizon.nro" "%~dp0\DISS_A\temp1\switch\EdiZon\"
@@ -267,8 +270,8 @@ if exist "%~dp0\TegraExplorer.bin" (
     md "%~dp0\DISS_A\assets\payloads\"
     move "%~dp0\TegraExplorer.bin" "%~dp0\DISS_A\assets\payloads"
     )
-if exist "%~dp0\Picklock_RCM.bin" (
-    move "%~dp0\Picklock_RCM.bin" "%~dp0\DISS_A\assets\payloads"
+if exist "%~dp0\Lockpick_RCM.bin" (
+    move "%~dp0\Lockpick_RCM.bin" "%~dp0\DISS_A\assets\payloads"
     )
 if exist "%~dp0\CommonProblemResolver.bin" (
     move "%~dp0\CommonProblemResolver.bin" "%~dp0\DISS_A\assets\payloads"
@@ -281,7 +284,7 @@ if exist "%~dp0\BINRO.ps1" (
     move "%~dp0\BINRO.diss.done" "%~dp0\DISS_A\trash\BINRO.diss.done"
     )	
 echo.
-echo            Downloading BINs and NROs are done! ....
+echo            Downloading BINs and NROs are done!
 echo.
 TIMEOUT /T 3
 goto FRONTLOAD2
@@ -364,6 +367,7 @@ robocopy %~dp0\DISS_A\assets\gears\ %~dp0\DISS\ /E /COPYALL
 robocopy %~dp0\DISS_A\assets\inis\ %~dp0\DISS\bootloader\ /E /COPYALL
 robocopy %~dp0\DISS_A\assets\boot_logo\ %~dp0\DISS_A\cfw\atmosphere\exefs_patches\boot_logo\ /E /COPYALL
 robocopy %~dp0\DISS_A\temp1 %~dp0\DISS\ /E /COPYALL
+
 goto attribute
 :attribute
 if not exist "%%~dp0\DISS\boot.dat" (copy "%~dp0\DISS_A\temp0\boot.dat.diss" "%~dp0\DISS\boot.dat")
