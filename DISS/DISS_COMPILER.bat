@@ -234,7 +234,10 @@ powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %
 if exist "%~dp0\breeze.zip" (
     move "%~dp0\breeze.zip" "%~dp0\DISS_A\trash\"
     )
-
+powershell -command "Expand-Archive -LiteralPath %~dp0/ldn_mitm_*.zip -Destination %~dp0/DISS_A/temp2/" -verbose -force
+if exist "%~dp0\ldn_mitm_*.zip " (
+    move "%~dp0\ldn_mitm_*.zip " "%~dp0\DISS_A\trash\"
+    )
 if exist "%~dp0\Edizon.nro" (
     md "%~dp0\DISS_A\temp1\switch\EdiZon\"
     move "%~dp0\Edizon.nro" "%~dp0\DISS_A\temp1\switch\EdiZon\"
@@ -368,6 +371,8 @@ robocopy %~dp0\DISS_A\assets\gears\ %~dp0\DISS\ /E /COPYALL
 robocopy %~dp0\DISS_A\assets\inis\ %~dp0\DISS\bootloader\ /E /COPYALL
 robocopy %~dp0\DISS_A\assets\boot_logo\ %~dp0\DISS_A\cfw\atmosphere\exefs_patches\boot_logo\ /E /COPYALL
 robocopy %~dp0\DISS_A\temp1 %~dp0\DISS\ /E /COPYALL
+robocopy %~dp0\DISS_A\temp2 %~dp0\DISS\ /E /COPYALL
+
 goto attribute
 :attribute
 if not exist "%%~dp0\DISS\boot.dat" (copy "%~dp0\DISS_A\temp0\boot.dat.diss" "%~dp0\DISS\boot.dat")
