@@ -234,9 +234,12 @@ powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %
 if exist "%~dp0\breeze.zip" (
     move "%~dp0\breeze.zip" "%~dp0\DISS_A\trash\"
     )
-powershell -command "Expand-Archive -LiteralPath %~dp0/ldn_mitm_*.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
-if exist "%~dp0\ldn_mitm_*.zip " (
-    move "%~dp0\ldn_mitm_*.zip " "%~dp0\DISS_A\trash\"
+if exist "%~dp0\ldn_mitm_*.zip" (
+    rename %~dp0\ldn_mitm_*.zip ldn.zip
+    )
+powershell -command "Expand-Archive -LiteralPath %~dp0/ldn.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
+if exist "%~dp0\ldn.zip " (
+    move "%~dp0\ldn.zip " "%~dp0\DISS_A\trash\"
     )
 if exist "%~dp0\Edizon.nro" (
     md "%~dp0\DISS_A\temp1\switch\EdiZon\"
@@ -270,8 +273,8 @@ if exist "%~dp0\TegraExplorer.bin" (
     md "%~dp0\DISS_A\assets\payloads\"
     move "%~dp0\TegraExplorer.bin" "%~dp0\DISS_A\assets\payloads"
     )
-if exist "%~dp0\Lockpick_RCM.bin" (
-    move "%~dp0\Lockpick_RCM.bin" "%~dp0\DISS_A\assets\payloads"
+if exist "%~dp0\Picklock_RCM.bin" (
+    move "%~dp0\Picklock_RCM.bin" "%~dp0\DISS_A\assets\payloads"
     )
 if exist "%~dp0\CommonProblemResolver.bin" (
     move "%~dp0\CommonProblemResolver.bin" "%~dp0\DISS_A\assets\payloads"
