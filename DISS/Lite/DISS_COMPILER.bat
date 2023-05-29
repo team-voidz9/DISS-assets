@@ -269,6 +269,10 @@ powershell -command "Expand-Archive %~dp0/linkalho-*.zip %~dp0/DISS_A/temp1/swit
 if exist "%~dp0\linkalho-*.zip" (
     move "%~dp0\linkalho-*.zip" "%~dp0\DISS_A\trash\"
     )
+powershell -command "Expand-Archive %~dp0/NX-Activity-Log.zip %~dp0/DISS_A/temp1/switch" -verbose -force
+if exist "%~dp0\NX-Activity-Log.zip" (
+    move "%~dp0\NX-Activity-Log.zip" "%~dp0\DISS_A\trash\"
+    )
 if exist "%~dp0\TegraExplorer.bin" (
     md "%~dp0\DISS_A\assets\payloads\"
     move "%~dp0\TegraExplorer.bin" "%~dp0\DISS_A\assets\payloads"

@@ -1,6 +1,6 @@
 Write-Host "Payloads and Homebrews Downloader Rev.5" -ForegroundColor green -BackgroundColor black
 Write-Host "TEAM-VOIDZ"
-Write-Host "Latest : added LDN_MITM"
+Write-Host "Latest : added zdm NX-Activity Log"
 
 #NROs
 $repo1 = "tomvita/Breeze-Beta"
@@ -21,6 +21,8 @@ $repo7 = "rdmrocha/linkalho"
 $filenamePattern7 = "linkalho-*.zip"
 $repo11 = "spacemeowx2/ldn_mitm"
 $filenamePattern11 = "ldn_mitm_*.zip"
+$repo13 = "zdm65477730/NX-Activity-Log"
+$filenamePattern13 = "NX-Activity-Log.zip"
 #BIN
 $repo8 = "Slluxx/Picklock_RCM"
 $filenamePattern8 = "Picklock_RCM.bin"
@@ -224,6 +226,19 @@ $downloadUriBuilder11 = [System.UriBuilder] $downloadUri11
 $filename11 = Split-Path -Path ($downloadUriBuilder11.Path) -Leaf       
 $filenameUrlDecoded11 = [System.Web.HttpUtility]::UrlDecode($filename11)
 Invoke-WebRequest -Uri $downloadUri11 -Out $filenameUrlDecoded11
+
+if ($preRelease) {
+    $releasesUri13 = "https://api.github.com/repos/$repo13/releases"
+    $downloadUri13 = ((Invoke-RestMethod -Method GET -Uri $releasesUri13)[0].assets | Where-Object name -like $filenamePattern13 ).browser_download_url
+}
+else {
+    $releasesUri13 = "https://api.github.com/repos/$repo13/releases/latest"
+    $downloadUri13 = ((Invoke-RestMethod -Method GET -Uri $releasesUri13).assets | Where-Object name -like $filenamePattern13 ).browser_download_url
+}
+$downloadUriBuilder13 = [System.UriBuilder] $downloadUri13
+$filename13 = Split-Path -Path ($downloadUriBuilder13.Path) -Leaf       
+$filenameUrlDecoded13 = [System.Web.HttpUtility]::UrlDecode($filename13)
+Invoke-WebRequest -Uri $downloadUri13 -Out $filenameUrlDecoded13
 
 write-host -back Red "All Latest BINs Downloaded"
 write-host -back Red "All Latest NROs Downloaded"
