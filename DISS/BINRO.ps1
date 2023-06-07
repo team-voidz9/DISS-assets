@@ -1,6 +1,6 @@
 Write-Host "Payloads and Homebrews Downloader Rev.5" -ForegroundColor green -BackgroundColor black
 Write-Host "TEAM-VOIDZ"
-Write-Host "Latest : added zdm NX-Activity Log"
+Write-Host "Latest : added zdm NX-Activity Log, remove CPR, remove lockpick"
 
 #NROs
 $repo1 = "tomvita/Breeze-Beta"
@@ -24,12 +24,10 @@ $filenamePattern11 = "ldn_mitm_*.zip"
 $repo13 = "zdm65477730/NX-Activity-Log"
 $filenamePattern13 = "NX-Activity-Log.zip"
 #BIN
-$repo8 = "Slluxx/Picklock_RCM"
-$filenamePattern8 = "Picklock_RCM.bin"
+
 $repo9 = "dezem/TegraExplorer"
 $filenamePattern9 = "TegraExplorer.bin"
-$repo10 = "Team-Neptune/CommonProblemResolver"
-$filenamePattern10 = "CommonProblemResolver.bin"
+
 $repo12 = "jimzrt/Incognito_RCM"
 $filenamePattern12 = "Incognito_RCM.bin"
 
@@ -160,20 +158,6 @@ Invoke-WebRequest -Uri $downloadUri7 -Out $filenameUrlDecoded7
 
 
 if ($preRelease) {
-    $releasesUri8 = "https://api.github.com/repos/$repo8/releases"
-    $downloadUri8 = ((Invoke-RestMethod -Method GET -Uri $releasesUri8)[0].assets | Where-Object name -like $filenamePattern8 ).browser_download_url
-}
-else {
-    $releasesUri8 = "https://api.github.com/repos/$repo8/releases/latest"
-    $downloadUri8 = ((Invoke-RestMethod -Method GET -Uri $releasesUri8).assets | Where-Object name -like $filenamePattern8 ).browser_download_url
-}
-$downloadUriBuilder8 = [System.UriBuilder] $downloadUri8
-$filename8 = Split-Path -Path ($downloadUriBuilder8.Path) -Leaf       
-$filenameUrlDecoded8 = [System.Web.HttpUtility]::UrlDecode($filename8)
-Invoke-WebRequest -Uri $downloadUri8 -Out $filenameUrlDecoded8
-
-
-if ($preRelease) {
     $releasesUri9 = "https://api.github.com/repos/$repo9/releases"
     $downloadUri9 = ((Invoke-RestMethod -Method GET -Uri $releasesUri9)[0].assets | Where-Object name -like $filenamePattern9 ).browser_download_url
 }
@@ -185,20 +169,6 @@ $downloadUriBuilder9 = [System.UriBuilder] $downloadUri9
 $filename9 = Split-Path -Path ($downloadUriBuilder9.Path) -Leaf       
 $filenameUrlDecoded9 = [System.Web.HttpUtility]::UrlDecode($filename9)
 Invoke-WebRequest -Uri $downloadUri9 -Out $filenameUrlDecoded9
-
-
-if ($preRelease) {
-    $releasesUri10 = "https://api.github.com/repos/$repo10/releases"
-    $downloadUri10 = ((Invoke-RestMethod -Method GET -Uri $releasesUri10)[0].assets | Where-Object name -like $filenamePattern10 ).browser_download_url
-}
-else {
-    $releasesUri10 = "https://api.github.com/repos/$repo10/releases/latest"
-    $downloadUri10 = ((Invoke-RestMethod -Method GET -Uri $releasesUri10).assets | Where-Object name -like $filenamePattern10 ).browser_download_url
-}
-$downloadUriBuilder10 = [System.UriBuilder] $downloadUri10
-$filename10 = Split-Path -Path ($downloadUriBuilder10.Path) -Leaf       
-$filenameUrlDecoded10 = [System.Web.HttpUtility]::UrlDecode($filename10)
-Invoke-WebRequest -Uri $downloadUri10 -Out $filenameUrlDecoded10
 
 
 if ($preRelease) {
