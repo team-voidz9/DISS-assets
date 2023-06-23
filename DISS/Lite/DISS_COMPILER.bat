@@ -257,6 +257,9 @@ if exist "%~dp0\jksv.nro" (
 if exist "%~dp0\Switch_90DNS_tester.nro" (
     move "%~dp0\Switch_90DNS_tester.nro" "%~dp0\DISS_A\temp1\switch\"
     )
+if exist "%~dp0\appstore.nro" (
+    move "%~dp0\appstore.nro" "%~dp0\DISS_A\temp1\switch\"
+    )
 powershell -command "Expand-Archive %~dp0/linkalho-*.zip %~dp0/DISS_A/temp1/switch" -verbose -force
 if exist "%~dp0\linkalho-*.zip" (
     move "%~dp0\linkalho-*.zip" "%~dp0\DISS_A\trash\"
