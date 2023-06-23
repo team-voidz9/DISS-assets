@@ -254,9 +254,6 @@ if exist "%~dp0\dbi.config" (
 if exist "%~dp0\jksv.nro" (
     move "%~dp0\jksv.nro" "%~dp0\DISS_A\temp1\switch\"
     )
-if exist "%~dp0\Switch_90DNS_tester.nro" (
-    move "%~dp0\Switch_90DNS_tester.nro" "%~dp0\DISS_A\temp1\switch\"
-    )
 if exist "%~dp0\appstore.nro" (
     move "%~dp0\appstore.nro" "%~dp0\DISS_A\temp1\switch\"
     )
@@ -275,12 +272,6 @@ if exist "%~dp0\sys-patch.zip" (
 if exist "%~dp0\TegraExplorer.bin" (
     md "%~dp0\DISS_A\assets\payloads\"
     move "%~dp0\TegraExplorer.bin" "%~dp0\DISS_A\assets\payloads"
-    )
-if exist "%~dp0\Picklock_RCM.bin" (
-    move "%~dp0\Picklock_RCM.bin" "%~dp0\DISS_A\assets\payloads"
-    )
-if exist "%~dp0\CommonProblemResolver.bin" (
-    move "%~dp0\CommonProblemResolver.bin" "%~dp0\DISS_A\assets\payloads"
     )
 if exist "%~dp0\Incognito_RCM.bin" (
     move "%~dp0\Incognito_RCM.bin" "%~dp0\DISS_A\assets\payloads"
