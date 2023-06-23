@@ -241,17 +241,9 @@ powershell -command "Expand-Archive -LiteralPath %~dp0/ldn.zip -Destination %~dp
 if exist "%~dp0\ldn.zip " (
     move "%~dp0\ldn.zip " "%~dp0\DISS_A\trash\"
     )
-if exist "%~dp0\Edizon.nro" (
-    md "%~dp0\DISS_A\temp1\switch\EdiZon\"
-    move "%~dp0\Edizon.nro" "%~dp0\DISS_A\temp1\switch\EdiZon\"
-    )
-if exist "%~dp0\ovlEdizon.ovl" (
-    md "%~dp0\DISS_A\temp1\switch\.overlays\"
-    move "%~dp0\ovlEdizon.ovl" "%~dp0\DISS_A\temp1\switch\.overlays\"
-    )
-if exist "%~dp0\nxdumptool.nro" (
-    md "%~dp0\DISS_A\temp1\switch\nxdumptool\"
-    move "%~dp0\nxdumptool.nro" "%~dp0\DISS_A\temp1\switch\nxdumptool\"
+powershell -command "Expand-Archive %~dp0/EdiZon.zip %~dp0/DISS_A/temp1" -verbose -force
+if exist "%~dp0\EdiZon.zip" (
+    move "%~dp0\EdiZon.zip" "%~dp0\DISS_A\trash\"
     )
 if exist "%~dp0\dbi.nro" (
     move "%~dp0\dbi.nro" "%~dp0\DISS_A\temp1\switch\"
@@ -289,6 +281,12 @@ if exist "%~dp0\CommonProblemResolver.bin" (
     )
 if exist "%~dp0\Incognito_RCM.bin" (
     move "%~dp0\Incognito_RCM.bin" "%~dp0\DISS_A\assets\payloads"
+    )
+if exist "%~dp0\titles.zip" (
+    move "%~dp0\titles.zip" "%~dp0\DISS_A\temp1\switch\breeze\cheats"
+    )
+if exist "%~dp0\DISS_A\temp1\switch\breeze\cheats\titles.zip" (
+    copy "%~dp0\DISS_A\temp1\switch\breeze\cheats\titles.zip" "%~dp0\DISS_A\temp1\switch\EdiZon\cheats"
     )
 if exist "%~dp0\BINRO.ps1" (
     rename %~dp0\BINRO.ps1 BINRO.diss.done
