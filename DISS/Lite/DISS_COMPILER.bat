@@ -283,10 +283,10 @@ if exist "%~dp0\Incognito_RCM.bin" (
     move "%~dp0\Incognito_RCM.bin" "%~dp0\DISS_A\assets\payloads"
     )
 if exist "%~dp0\titles.zip" (
-    move "%~dp0\titles.zip" "%~dp0\DISS_A\temp1\switch\breeze\cheats"
+    move "%~dp0\titles.zip" "%~dp0\DISS_A\temp1\switch\breeze\cheats\"
     )
 if exist "%~dp0\DISS_A\temp1\switch\breeze\cheats\titles.zip" (
-    copy "%~dp0\DISS_A\temp1\switch\breeze\cheats\titles.zip" "%~dp0\DISS_A\temp1\switch\EdiZon\cheats"
+    copy "%~dp0\DISS_A\temp1\switch\breeze\cheats\titles.zip" "%~dp0\DISS_A\temp1\switch\EdiZon\cheats\"
     )
 if exist "%~dp0\BINRO.ps1" (
     rename %~dp0\BINRO.ps1 BINRO.diss.done

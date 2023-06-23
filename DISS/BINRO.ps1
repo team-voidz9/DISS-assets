@@ -62,7 +62,7 @@ else {
 $downloadUriBuilder2 = [System.UriBuilder] $downloadUri2
 $filename2 = Split-Path -Path ($downloadUriBuilder2.Path) -Leaf       
 $filenameUrlDecoded2 = [System.Web.HttpUtility]::UrlDecode($filename2)
-Invoke-WebRequest -Uri $downloadUri2 -Out $filenameUrlDecoded22
+Invoke-WebRequest -Uri $downloadUri2 -Out $filenameUrlDecoded2
 
 Write-Host "3. Breeze/Edizon Cheats" -ForegroundColor green -BackgroundColor black
 if ($preRelease) {
@@ -119,7 +119,7 @@ $filename5 = Split-Path -Path ($downloadUriBuilder5.Path) -Leaf
 $filenameUrlDecoded5 = [System.Web.HttpUtility]::UrlDecode($filename5)
 Invoke-WebRequest -Uri $downloadUri5 -Out $filenameUrlDecoded5
 
-Write-Host "6. JKSV" -ForegroundColor green -BackgroundColor black
+Write-Host "6. APPSTORE" -ForegroundColor green -BackgroundColor black
 if ($preRelease) {
     $releasesUri6 = "https://api.github.com/repos/$repo6/releases"
     $downloadUri6 = ((Invoke-RestMethod -Method GET -Uri $releasesUri6)[0].assets | Where-Object name -like $filenamePattern6 ).browser_download_url
