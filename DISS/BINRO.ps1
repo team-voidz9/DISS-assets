@@ -206,11 +206,11 @@ Invoke-WebRequest -Uri $downloadUri11 -Out $filenameUrlDecoded11
 
 Write-Host "12. Incognito RCM" -ForegroundColor green -BackgroundColor black
 if ($preRelease) {
-    $releasesUri12 = "https://api.github.com/repos/$repo12 releases"
+    $releasesUri12 = "https://api.github.com/repos/$repo12/releases"
     $downloadUri12  = ((Invoke-RestMethod -Method GET -Uri $releasesUri12)[0].assets | Where-Object name -like $filenamePattern12).browser_download_url
 }
 else {
-    $releasesUri12 = "https://api.github.com/repos/$repo12 /releases/latest"
+    $releasesUri12 = "https://api.github.com/repos/$repo12/releases/latest"
     $downloadUri12 = ((Invoke-RestMethod -Method GET -Uri $releasesUri12).assets | Where-Object name -like $filenamePattern12).browser_download_url
 }
 $downloadUriBuilder12 = [System.UriBuilder] $downloadUri12
