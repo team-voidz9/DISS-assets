@@ -1,7 +1,6 @@
 Write-Host "Payloads Downloader Rev.2" -ForegroundColor green -BackgroundColor black
 Write-Host "TEAM-VOIDZ"
-Write-Host "Latest : remove CPR, remove lockpick,remove nx-dumptool"
-Write-Host "Latest : added zdm NX-Activity Log, added sys-patch, added cheats"
+Write-Host "Added : TegraExplorer, Incognito"
 
 #BIN
 $repo1 = "dezem/TegraExplorer"
