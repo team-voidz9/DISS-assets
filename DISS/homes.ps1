@@ -28,12 +28,6 @@ $filenamePattern10 = "NX-Activity-Log.zip"
 $repo13 = "XorTroll/Goldleaf"
 $filenamePattern13 = "Goldleaf.nro"
 
-#BIN
-$repo11 = "dezem/TegraExplorer"
-$filenamePattern11 = "TegraExplorer.bin"
-$repo12 = "jimzrt/Incognito_RCM"
-$filenamePattern12 = "Incognito_RCM.bin"
-
 $innerDirectory = $true
 $preRelease = $true
 

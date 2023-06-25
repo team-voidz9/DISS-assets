@@ -277,6 +277,9 @@ if exist "%~dp0\DISS_A\temp1\switch\breeze\cheats\titles.zip" (
     md "%~dp0\DISS_A\temp1\switch\EdiZon\cheats\"
 	copy "%~dp0\DISS_A\temp1\switch\breeze\cheats\titles.zip" "%~dp0\DISS_A\temp1\switch\EdiZon\cheats\"
     )
+if exist "%~dp0\Goldleaf.nro" (
+    move "%~dp0\Goldleaf.nro" "%~dp0\DISS_A\temp1\switch\"
+    )
 if exist "%~dp0\homes.ps1" (
     rename %~dp0\homes.ps1 homes.diss.done
     move "%~dp0\homes.diss.done" "%~dp0\DISS_A\trash\homes.diss.done"
