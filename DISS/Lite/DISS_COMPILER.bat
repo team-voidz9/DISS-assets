@@ -228,8 +228,8 @@ goto downloadextra
 
 :downloadextra
 cls
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/BINRO.ps1" --output %~dp0\BINRO.ps1
-PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\BINRO.ps1'"
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/homes.ps1" --output %~dp0\homes.ps1
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\homes.ps1'"
 powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
 if exist "%~dp0\breeze.zip" (
     move "%~dp0\breeze.zip" "%~dp0\DISS_A\trash\"
@@ -269,13 +269,6 @@ powershell -command "Expand-Archive %~dp0/sys-patch.zip %~dp0/DISS_A/temp1" -ver
 if exist "%~dp0\sys-patch.zip" (
     move "%~dp0\sys-patch.zip" "%~dp0\DISS_A\trash\"
     )
-if exist "%~dp0\TegraExplorer.bin" (
-    md "%~dp0\DISS_A\assets\payloads\"
-    move "%~dp0\TegraExplorer.bin" "%~dp0\DISS_A\assets\payloads"
-    )
-if exist "%~dp0\Incognito_RCM.bin" (
-    move "%~dp0\Incognito_RCM.bin" "%~dp0\DISS_A\assets\payloads"
-    )
 if exist "%~dp0\titles.zip" (
 	md "%~dp0\DISS_A\temp1\switch\breeze\cheats\"
     move "%~dp0\titles.zip" "%~dp0\DISS_A\temp1\switch\breeze\cheats\"
@@ -284,12 +277,25 @@ if exist "%~dp0\DISS_A\temp1\switch\breeze\cheats\titles.zip" (
     md "%~dp0\DISS_A\temp1\switch\EdiZon\cheats\"
 	copy "%~dp0\DISS_A\temp1\switch\breeze\cheats\titles.zip" "%~dp0\DISS_A\temp1\switch\EdiZon\cheats\"
     )
-if exist "%~dp0\BINRO.ps1" (
-    rename %~dp0\BINRO.ps1 BINRO.diss.done
-    move "%~dp0\BINRO.diss.done" "%~dp0\DISS_A\trash\BINRO.diss.done"
-    )	
+if exist "%~dp0\homes.ps1" (
+    rename %~dp0\homes.ps1 homes.diss.done
+    move "%~dp0\homes.diss.done" "%~dp0\DISS_A\trash\homes.diss.done"
+    )		
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/pays.ps1" --output %~dp0\pays.ps1
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\pays.ps1'"	
+if exist "%~dp0\TegraExplorer.bin" (
+    md "%~dp0\DISS_A\assets\payloads\"
+    move "%~dp0\TegraExplorer.bin" "%~dp0\DISS_A\assets\payloads"
+    )
+if exist "%~dp0\Incognito_RCM.bin" (
+    move "%~dp0\Incognito_RCM.bin" "%~dp0\DISS_A\assets\payloads"
+    )
+if exist "%~dp0\pays.ps1" (
+    rename %~dp0\pays.ps1 pays.diss.done
+    move "%~dp0\pays.diss.done" "%~dp0\DISS_A\trash\pays.diss.done"
+    )
 echo.
-echo            Downloading BINs and NROs are done!
+echo            Downloading Payloads and Homebrews are done!
 echo.
 TIMEOUT /T 3
 goto FRONTLOAD2
