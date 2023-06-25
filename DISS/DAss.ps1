@@ -3,7 +3,7 @@ Write-Host "TEAM-VOIDZ"
 Write-Host "Latest : -"
 
 $repo1 = "team-voidz/DISS-assets"
-$filenamePattern1 = "assets_v*.zip"
+$filenamePattern1 = "assets_*.zip"
 $innerDirectory = $true
 $preRelease = $true
 
