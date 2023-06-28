@@ -197,5 +197,5 @@ else {
 $downloadUriBuilder11 = [System.UriBuilder] $downloadUri11
 $filename11 = Split-Path -Path ($downloadUriBuilder11.Path) -Leaf       
 $filenameUrlDecoded11 = [System.Web.HttpUtility]::UrlDecode($filename11)
-Invoke-WebRequest -Uri $downloadUri11 -Out $filenameUrlDecoded10
+Invoke-WebRequest -Uri $downloadUri11 -Out $filenameUrlDecoded11
 
