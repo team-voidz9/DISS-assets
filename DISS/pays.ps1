@@ -3,7 +3,7 @@ Write-Host "TEAM-VOIDZ"
 Write-Host "Added : TegraExplorer, Incognito"
 
 #BIN
-$repo1 = "dezem/TegraExplorer"
+$repo1 = "suchmememanyskill/TegraExplorer"
 $filenamePattern1 = "TegraExplorer.bin"
 $repo2 = "jimzrt/Incognito_RCM"
 $filenamePattern2 = "Incognito_RCM.bin"
