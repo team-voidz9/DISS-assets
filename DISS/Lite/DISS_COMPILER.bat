@@ -228,9 +228,7 @@ goto downloadextra
 
 :downloadextra
 cls
-md "%~dp0\hosts\"
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/hosts/emummc.txt" --output %~dp0\hosts\emummc.txt
-
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/hosts/emummc.txt" --output %~dp0\emummc.txt
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/homes.ps1" --output %~dp0\homes.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\homes.ps1'"
 powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
@@ -360,8 +358,10 @@ if exist "%~dp0\DISS_A\cfw\fusee.bin" (
 if exist "%~dp0\DISS_A\cfw\hbmenu.nro" (
     copy "%~dp0\DISS_A\cfw\hbmenu.nro" "%~dp0\DISS_A\temp0\hbmenu.nro.diss"
     )
-if exist "%~dp0\hosts\emummc.txt" (
-    move "%~dp0\hosts\emummc.txt" "%~dp0\DISS_A\cfw\atmosphere\hosts\emummc.txt"
+if exist "%~dp0\emummc.txt" (
+    copy "%~dp0\emummc.txt" "%~dp0\DISS_A\cfw\atmosphere\hosts\emummc.txt"
+	rename %~dp0\emummc.txt emummc.diss.done
+    move "%~dp0\emummc.diss.done" "%~dp0\DISS_A\trash\emummc.diss.done"
     )
 powershell -command "Expand-Archive %~dp0/DISS_A/sigpatches.zip %~dp0/DISS_A/cfw" -verbose -Force
 
