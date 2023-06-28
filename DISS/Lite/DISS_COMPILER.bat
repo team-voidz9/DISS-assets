@@ -229,6 +229,10 @@ goto downloadextra
 :downloadextra
 cls
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/hosts/emummc.txt" --output %~dp0\emummc.txt
+if exist "%~dp0\emummc.txt" (
+    rename %~dp0\emummc.txt emummc.txt.diss
+    move "%~dp0\emummc.txt.diss" "%~dp0\DISS_A\temp0\emummc.txt.diss"
+    )
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/homes.ps1" --output %~dp0\homes.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\homes.ps1'"
 powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
@@ -358,11 +362,6 @@ if exist "%~dp0\DISS_A\cfw\fusee.bin" (
 if exist "%~dp0\DISS_A\cfw\hbmenu.nro" (
     copy "%~dp0\DISS_A\cfw\hbmenu.nro" "%~dp0\DISS_A\temp0\hbmenu.nro.diss"
     )
-if exist "%~dp0\emummc.txt" (
-    copy "%~dp0\emummc.txt" "%~dp0\DISS_A\temp1\atmosphere\hosts\emummc.txt"
-	rename %~dp0\emummc.txt emummc.diss.done
-    move "%~dp0\emummc.diss.done" "%~dp0\DISS_A\trash\emummc.diss.done"
-    )
 powershell -command "Expand-Archive %~dp0/DISS_A/sigpatches.zip %~dp0/DISS_A/cfw" -verbose -Force
 
 if exist "%~dp0\DISS_Version.txt" (
@@ -400,6 +399,10 @@ if not exist "%~dp0\DISS\hekate.bin" (copy "%~dp0\DISS_A\temp0\payload.bin.diss"
 if not exist "%~dp0\DISS\fusee.bin" (copy "%~dp0\DISS_A\temp0\fusee.bin.diss" "%~dp0\DISS\fusee.bin")
 if not exist "%~dp0\DISS\hbmenu.nro" (copy "%~dp0\DISS_A\temp0\hbmenu.nro.diss" "%~dp0\DISS\hbmenu.nro")
 if not exist "%~dp0\DISS\DISS_Version.txt" (copy "%~dp0\DISS_A\temp0\DISS_Version.diss" "%~dp0\DISS\DISS_Version.txt")
+if not exist "%~dp0\DISS\atmosphere\hosts\emummc.txt" (
+md %~dp0\DISS\atmosphere\hosts
+copy "%~dp0\DISS_A\temp0\emummc.txt.diss" "%~dp0\DISS\atmosphere\hosts\emummc.txt"
+)
 
 if exist "%~dp0\DISS\atmosphere" (
 	attrib -A -r /S /D %~dp0\DISS\atmosphere\*
