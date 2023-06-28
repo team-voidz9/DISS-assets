@@ -359,7 +359,7 @@ if exist "%~dp0\DISS_A\cfw\hbmenu.nro" (
     copy "%~dp0\DISS_A\cfw\hbmenu.nro" "%~dp0\DISS_A\temp0\hbmenu.nro.diss"
     )
 if exist "%~dp0\emummc.txt" (
-    copy "%~dp0\emummc.txt" "%~dp0\DISS_A\cfw\atmosphere\hosts\emummc.txt"
+    copy "%~dp0\emummc.txt" "%~dp0\DISS_A\temp1\atmosphere\hosts\emummc.txt"
 	rename %~dp0\emummc.txt emummc.diss.done
     move "%~dp0\emummc.diss.done" "%~dp0\DISS_A\trash\emummc.diss.done"
     )
