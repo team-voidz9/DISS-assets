@@ -157,7 +157,7 @@ powershell Get-Content %~dp0\DISS\DISS_Compiler/Installed.txt
 echo.
 echo Place the Content of "DISS" folder into you SD card ROOT
 echo.
-pause
+TIMEOUT /T 10
 RD /s /q DISS_A
 RD /s /q DISS_B
 del %0
