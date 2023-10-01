@@ -1,7 +1,7 @@
-Write-Host "Payloads and Homebrews Downloader Rev.7" -ForegroundColor green -BackgroundColor black
+Write-Host "Payloads and Homebrews Downloader Rev.8a" -ForegroundColor green -BackgroundColor black
 Write-Host "TEAM-VOIDZ"
-Write-Host "Latest : remove CPR, remove lockpick,remove nx-dumptool"
-Write-Host "Latest : added zdm NX-Activity Log, added sys-patch, added cheats"
+Write-Host "Latest : remove ldn_MITM"
+Write-Host "Latest : added aio_updater"
 
 #NROs
 $repo1 = "tomvita/Breeze-Beta"
@@ -21,8 +21,8 @@ $repo7 = "rdmrocha/linkalho"
 $filenamePattern7 = "linkalho-*.zip"
 $repo8 = "ITotalJustice/sys-patch"
 $filenamePattern8 = "sys-patch.zip"
-$repo9 = "spacemeowx2/ldn_mitm"
-$filenamePattern9 = "ldn_mitm_*.zip"
+$repo9 = "HamletDuFromage/aio-switch-updater"
+$filenamePattern9 = "aio-switch-updater.zip"
 $repo10 = "zdm65477730/NX-Activity-Log"
 $filenamePattern10 = "NX-Activity-Log.zip"
 
@@ -161,7 +161,7 @@ $filename8 = Split-Path -Path ($downloadUriBuilder8.Path) -Leaf
 $filenameUrlDecoded8 = [System.Web.HttpUtility]::UrlDecode($filename8)
 Invoke-WebRequest -Uri $downloadUri8 -Out $filenameUrlDecoded8
 
-Write-Host "9. LDN-MITM" -ForegroundColor green -BackgroundColor black
+Write-Host "9. AIO-Updater" -ForegroundColor green -BackgroundColor black
 if ($preRelease) {
     $releasesUri9 = "https://api.github.com/repos/$repo9/releases"
     $downloadUri9 = ((Invoke-RestMethod -Method GET -Uri $releasesUri9)[0].assets | Where-Object name -like $filenamePattern9 ).browser_download_url

@@ -239,8 +239,8 @@ powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %
 if exist "%~dp0\breeze.zip" (
     move "%~dp0\breeze.zip" "%~dp0\DISS_A\trash\"
     )
-if exist "%~dp0\ldn_mitm_*.zip" (
-    rename %~dp0\ldn_mitm_*.zip ldn.zip
+if exist "%~dp0\aio-switch-updater.zip" (
+    rename %~dp0\aio-switch-updater.zip ldn.zip
     )
 powershell -command "Expand-Archive -LiteralPath %~dp0/ldn.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
 if exist "%~dp0\ldn.zip " (
