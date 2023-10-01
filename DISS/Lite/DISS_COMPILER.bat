@@ -164,7 +164,7 @@ del %0
 
 :download1
 cls
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Atmos.ps1" --output %~dp0\Atmos.ps1
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Atmosphere.ps1" --output %~dp0\Atmos.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\atmos.ps1'"
 
 if exist "%~dp0\atmosphere-*.zip" (
@@ -186,13 +186,14 @@ if exist "%~dp0\atmos.ps1" (
     )	
 echo.
 echo            Downloading CFW and Sigpatches is done!
+echo            team-voidz / v o i d z 9
 echo.
 TIMEOUT /T 3
 goto FRONTLOAD2
 
 :download2
 cls
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Hekat.ps1" --output %~dp0\Hekat.ps1
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Hekate.ps1" --output %~dp0\Hekat.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\Hekat.ps1'"
 
 if exist "%~dp0\hekate_*.zip" (
@@ -204,13 +205,14 @@ if exist "%~dp0\Hekat.ps1" (
     )
 echo.
 echo            Downloading Bootloader is done!
+echo            team-voidz / v o i d z 9
 echo.
 TIMEOUT /T 3
 goto FRONTLOAD2
 
 :download3
 cls
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/DAss.ps1" --output %~dp0\DAss.ps1
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/DISS_assets" --output %~dp0\DAss.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\DAss.ps1'"
 )
 if exist "%~dp0\assets_*.zip" (
@@ -222,6 +224,7 @@ if exist "%~dp0\DAss.ps1" (
     )
 echo.
 echo            Downloading Assets is done
+echo            team-voidz / v o i d z 9
 echo.
 TIMEOUT /T 3
 goto downloadextra
@@ -233,7 +236,7 @@ if exist "%~dp0\emummc.txt" (
     rename %~dp0\emummc.txt emummc.txt.diss
     move "%~dp0\emummc.txt.diss" "%~dp0\DISS_A\temp0\emummc.txt.diss"
     )
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/homes.ps1" --output %~dp0\homes.ps1
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Homebrews.ps1 --output %~dp0\homes.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\homes.ps1'"
 powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
 if exist "%~dp0\breeze.zip" (
@@ -289,7 +292,7 @@ if exist "%~dp0\homes.ps1" (
     rename %~dp0\homes.ps1 homes.diss.done
     move "%~dp0\homes.diss.done" "%~dp0\DISS_A\trash\homes.diss.done"
     )		
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/pays.ps1" --output %~dp0\pays.ps1
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Payloads" --output %~dp0\pays.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\pays.ps1'"	
 if exist "%~dp0\TegraExplorer.bin" (
     md "%~dp0\DISS_A\assets\payloads\"
@@ -304,6 +307,7 @@ if exist "%~dp0\pays.ps1" (
     )
 echo.
 echo            Downloading Payloads and Homebrews are done!
+echo            team-voidz / v o i d z 9
 echo.
 TIMEOUT /T 3
 goto FRONTLOAD2
