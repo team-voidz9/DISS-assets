@@ -189,35 +189,5 @@ $filename10 = Split-Path -Path ($downloadUriBuilder10.Path) -Leaf
 $filenameUrlDecoded10 = [System.Web.HttpUtility]::UrlDecode($filename10)
 Invoke-WebRequest -Uri $downloadUri10 -Out $filenameUrlDecoded10
 
-write-host -back Red "Downloading Payloads"
-Write-Host "11. Tegra Explorer BIN" -ForegroundColor green -BackgroundColor black
-if ($preRelease) {
-    $releasesUri11 = "https://api.github.com/repos/$repo11/releases"
-    $downloadUri11 = ((Invoke-RestMethod -Method GET -Uri $releasesUri11)[0].assets | Where-Object name -like $filenamePattern11 ).browser_download_url
-}
-else {
-    $releasesUri11 = "https://api.github.com/repos/$repo11/releases/latest"
-    $downloadUri11 = ((Invoke-RestMethod -Method GET -Uri $releasesUri11).assets | Where-Object name -like $filenamePattern11 ).browser_download_url
-}
-$downloadUriBuilder11 = [System.UriBuilder] $downloadUri11
-$filename11 = Split-Path -Path ($downloadUriBuilder11.Path) -Leaf       
-$filenameUrlDecoded11 = [System.Web.HttpUtility]::UrlDecode($filename11)
-Invoke-WebRequest -Uri $downloadUri11 -Out $filenameUrlDecoded11
 
-Write-Host "12. Incognito RCM" -ForegroundColor green -BackgroundColor black
-if ($preRelease) {
-    $releasesUri12 = "https://api.github.com/repos/$repo12/releases"
-    $downloadUri12  = ((Invoke-RestMethod -Method GET -Uri $releasesUri12)[0].assets | Where-Object name -like $filenamePattern12).browser_download_url
-}
-else {
-    $releasesUri12 = "https://api.github.com/repos/$repo12/releases/latest"
-    $downloadUri12 = ((Invoke-RestMethod -Method GET -Uri $releasesUri12).assets | Where-Object name -like $filenamePattern12).browser_download_url
-}
-$downloadUriBuilder12 = [System.UriBuilder] $downloadUri12
-$filename12 = Split-Path -Path ($downloadUriBuilder12.Path) -Leaf       
-$filenameUrlDecoded12 = [System.Web.HttpUtility]::UrlDecode($filename12)
-Invoke-WebRequest -Uri $downloadUri12 -Out $filenameUrlDecoded12
-
-
-write-host -back Red "All Latest Payloads Downloaded"
 write-host -back Red "All Latest Homebrews Downloaded"
