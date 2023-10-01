@@ -27,7 +27,7 @@ $repo10 = "zdm65477730/NX-Activity-Log"
 $filenamePattern10 = "NX-Activity-Log.zip"
 
 #BIN
-$repo11 = "dezem/TegraExplorer"
+$repo11 = "suchmememanyskill/TegraExplorer"
 $filenamePattern11 = "TegraExplorer.bin"
 $repo12 = "jimzrt/Incognito_RCM"
 $filenamePattern12 = "Incognito_RCM.bin"
