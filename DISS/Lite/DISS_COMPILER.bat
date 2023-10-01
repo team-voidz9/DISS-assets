@@ -374,6 +374,7 @@ if exist "%~dp0\DISS_Version.txt" (
     )
 echo.
 ECHO  Extracting Assets, Bootloader, CFW is done!
+echo            team-voidz / v o i d z 9
 echo.
 TIMEOUT /T 3
 goto copy
@@ -453,6 +454,7 @@ if exist "%~dp0\DISS\*.*" (attrib -A -r %~dp0\DISS\*.*)
 
 echo.
 echo                     DONE
+echo            team-voidz / v o i d z 9
 echo.
 dir /b "%~dp0\DISS\bootloader\payloads" > DISS_NRO.txt
 echo "NROS recorded"
