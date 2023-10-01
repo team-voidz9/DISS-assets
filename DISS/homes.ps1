@@ -1,14 +1,14 @@
-Write-Host "Homebrews Downloader Rev.8" -ForegroundColor green -BackgroundColor black
+Write-Host "Payloads and Homebrews Downloader Rev.8a" -ForegroundColor green -BackgroundColor black
 Write-Host "TEAM-VOIDZ"
-Write-Host "Removed : Payloads script"
-Write-Host "Added : zdm NX-Activity Log, sys-patch, cheats"
+Write-Host "Latest : remove ldn_MITM"
+Write-Host "Latest : added aio_updater"
 
 #NROs
 $repo1 = "tomvita/Breeze-Beta"
 $filenamePattern1 = "Breeze.zip"
 $repo2 = "tomvita/EdiZon-SE"
 $filenamePattern2 = "EdiZon.zip"
-$repo3 = "HamletDuFromage/switch-cheats-db"
+$repo3 = "tomvita/NXCheatCode"
 $filenamePattern3 = "titles.zip"
 $repo4 = "rashevskyv/dbi"
 $filenamePattern41 = "dbi.nro"
@@ -21,12 +21,16 @@ $repo7 = "rdmrocha/linkalho"
 $filenamePattern7 = "linkalho-*.zip"
 $repo8 = "ITotalJustice/sys-patch"
 $filenamePattern8 = "sys-patch.zip"
-$repo9 = "spacemeowx2/ldn_mitm"
-$filenamePattern9 = "ldn_mitm_*.zip"
+$repo9 = "HamletDuFromage/aio-switch-updater"
+$filenamePattern9 = "aio-switch-updater.zip"
 $repo10 = "zdm65477730/NX-Activity-Log"
 $filenamePattern10 = "NX-Activity-Log.zip"
-$repo11 = "XorTroll/Goldleaf"
-$filenamePattern11 = "Goldleaf.nro"
+
+#BIN
+$repo11 = "dezem/TegraExplorer"
+$filenamePattern11 = "TegraExplorer.bin"
+$repo12 = "jimzrt/Incognito_RCM"
+$filenamePattern12 = "Incognito_RCM.bin"
 
 $innerDirectory = $true
 $preRelease = $true
@@ -157,7 +161,7 @@ $filename8 = Split-Path -Path ($downloadUriBuilder8.Path) -Leaf
 $filenameUrlDecoded8 = [System.Web.HttpUtility]::UrlDecode($filename8)
 Invoke-WebRequest -Uri $downloadUri8 -Out $filenameUrlDecoded8
 
-Write-Host "9. LDN-MITM" -ForegroundColor green -BackgroundColor black
+Write-Host "9. AIO-Updater" -ForegroundColor green -BackgroundColor black
 if ($preRelease) {
     $releasesUri9 = "https://api.github.com/repos/$repo9/releases"
     $downloadUri9 = ((Invoke-RestMethod -Method GET -Uri $releasesUri9)[0].assets | Where-Object name -like $filenamePattern9 ).browser_download_url
@@ -185,17 +189,35 @@ $filename10 = Split-Path -Path ($downloadUriBuilder10.Path) -Leaf
 $filenameUrlDecoded10 = [System.Web.HttpUtility]::UrlDecode($filename10)
 Invoke-WebRequest -Uri $downloadUri10 -Out $filenameUrlDecoded10
 
-Write-Host "11. Goldleaf" -ForegroundColor green -BackgroundColor black
+write-host -back Red "Downloading Payloads"
+Write-Host "11. Tegra Explorer BIN" -ForegroundColor green -BackgroundColor black
 if ($preRelease) {
     $releasesUri11 = "https://api.github.com/repos/$repo11/releases"
-    $downloadUri11 = ((Invoke-RestMethod -Method GET -Uri $releasesUri11)[0].assets | Where-Object name -like $filenamePattern11).browser_download_url
+    $downloadUri11 = ((Invoke-RestMethod -Method GET -Uri $releasesUri11)[0].assets | Where-Object name -like $filenamePattern11 ).browser_download_url
 }
 else {
     $releasesUri11 = "https://api.github.com/repos/$repo11/releases/latest"
-    $downloadUri11 = ((Invoke-RestMethod -Method GET -Uri $releasesUri11).assets | Where-Object name -like $filenamePattern11).browser_download_url
+    $downloadUri11 = ((Invoke-RestMethod -Method GET -Uri $releasesUri11).assets | Where-Object name -like $filenamePattern11 ).browser_download_url
 }
 $downloadUriBuilder11 = [System.UriBuilder] $downloadUri11
 $filename11 = Split-Path -Path ($downloadUriBuilder11.Path) -Leaf       
 $filenameUrlDecoded11 = [System.Web.HttpUtility]::UrlDecode($filename11)
 Invoke-WebRequest -Uri $downloadUri11 -Out $filenameUrlDecoded11
 
+Write-Host "12. Incognito RCM" -ForegroundColor green -BackgroundColor black
+if ($preRelease) {
+    $releasesUri12 = "https://api.github.com/repos/$repo12/releases"
+    $downloadUri12  = ((Invoke-RestMethod -Method GET -Uri $releasesUri12)[0].assets | Where-Object name -like $filenamePattern12).browser_download_url
+}
+else {
+    $releasesUri12 = "https://api.github.com/repos/$repo12/releases/latest"
+    $downloadUri12 = ((Invoke-RestMethod -Method GET -Uri $releasesUri12).assets | Where-Object name -like $filenamePattern12).browser_download_url
+}
+$downloadUriBuilder12 = [System.UriBuilder] $downloadUri12
+$filename12 = Split-Path -Path ($downloadUriBuilder12.Path) -Leaf       
+$filenameUrlDecoded12 = [System.Web.HttpUtility]::UrlDecode($filename12)
+Invoke-WebRequest -Uri $downloadUri12 -Out $filenameUrlDecoded12
+
+
+write-host -back Red "All Latest Payloads Downloaded"
+write-host -back Red "All Latest Homebrews Downloaded"
