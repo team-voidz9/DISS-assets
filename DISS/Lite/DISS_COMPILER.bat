@@ -238,6 +238,7 @@ if exist "%~dp0\emummc.txt" (
     )
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Homebrews.ps1 --output %~dp0\homes.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\homes.ps1'"
+)
 powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
 if exist "%~dp0\breeze.zip" (
     move "%~dp0\breeze.zip" "%~dp0\DISS_A\trash\"
@@ -293,7 +294,8 @@ if exist "%~dp0\homes.ps1" (
     move "%~dp0\homes.diss.done" "%~dp0\DISS_A\trash\homes.diss.done"
     )		
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Payloads.ps1" --output %~dp0\pays.ps1
-PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\pays.ps1'"	
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\pays.ps1'"
+)
 if exist "%~dp0\TegraExplorer.bin" (
     md "%~dp0\DISS_A\assets\payloads\"
     move "%~dp0\TegraExplorer.bin" "%~dp0\DISS_A\assets\payloads"
