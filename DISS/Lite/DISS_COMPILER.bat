@@ -212,7 +212,7 @@ goto FRONTLOAD2
 
 :download3
 cls
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/DISS_assets" --output %~dp0\DAss.ps1
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/DISS_assets.ps1" --output %~dp0\DAss.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\DAss.ps1'"
 )
 if exist "%~dp0\assets_*.zip" (
@@ -292,7 +292,7 @@ if exist "%~dp0\homes.ps1" (
     rename %~dp0\homes.ps1 homes.diss.done
     move "%~dp0\homes.diss.done" "%~dp0\DISS_A\trash\homes.diss.done"
     )		
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Payloads" --output %~dp0\pays.ps1
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Payloads.ps1" --output %~dp0\pays.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\pays.ps1'"	
 if exist "%~dp0\TegraExplorer.bin" (
     md "%~dp0\DISS_A\assets\payloads\"
@@ -305,6 +305,7 @@ if exist "%~dp0\pays.ps1" (
     rename %~dp0\pays.ps1 pays.diss.done
     move "%~dp0\pays.diss.done" "%~dp0\DISS_A\trash\pays.diss.done"
     )
+
 echo.
 echo            Downloading Payloads and Homebrews are done!
 echo            team-voidz / v o i d z 9
@@ -456,6 +457,13 @@ echo.
 echo                     DONE
 echo            team-voidz / v o i d z 9
 echo.
+:downloadpico
+cls
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/picofly_2040/emummc.txt" --output %~dp0\emummc.txt
+if exist "%~dp0\emummc.txt" (
+    rename %~dp0\emummc.txt emummc.txt.diss
+    move "%~dp0\emummc.txt.diss" "%~dp0\DISS_A\temp0\emummc.txt.diss"
+    )
 dir /b "%~dp0\DISS\bootloader\payloads" > DISS_NRO.txt
 echo "NROS recorded"
 dir /b "%~dp0\DISS\switch" > DISS_BIN.txt
