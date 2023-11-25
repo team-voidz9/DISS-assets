@@ -236,7 +236,8 @@ if exist "%~dp0\emummc.txt" (
     rename %~dp0\emummc.txt emummc.txt.diss
     move "%~dp0\emummc.txt.diss" "%~dp0\DISS_A\temp0\emummc.txt.diss"
     )
-
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/BINRO.ps1" --output %~dp0\BINRO.ps1
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\BINRO.ps1'"
 powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
 if exist "%~dp0\breeze.zip" (
     move "%~dp0\breeze.zip" "%~dp0\DISS_A\trash\"
@@ -287,9 +288,9 @@ if exist "%~dp0\DISS_A\temp1\switch\breeze\cheats\titles.zip" (
 if exist "%~dp0\Goldleaf.nro" (
     move "%~dp0\Goldleaf.nro" "%~dp0\DISS_A\temp1\switch\"
     )
-if exist "%~dp0\myhome.ps1" (
-    rename %~dp0\myhome.ps1 myhome.diss.done
-    move "%~dp0\myhome.diss.done" "%~dp0\DISS_A\trash\myhome.diss.done"
+if exist "%~dp0\BINRO.ps1" (
+    rename %~dp0\BINRO.ps1 BINRO.diss.done
+    move "%~dp0\BINRO.diss.done" "%~dp0\DISS_A\trash\BINRO.diss.done"
     )		
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Payloads.ps1" --output %~dp0\pays.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\pays.ps1'"
