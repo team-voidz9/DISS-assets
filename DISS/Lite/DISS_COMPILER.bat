@@ -214,7 +214,7 @@ goto FRONTLOAD2
 cls
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/DISS_assets.ps1" --output %~dp0\DAss.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\DAss.ps1'"
-)
+
 if exist "%~dp0\assets_*.zip" (
     move "%~dp0\assets_*.zip" "%~dp0\DISS_A\"
     )
@@ -236,9 +236,9 @@ if exist "%~dp0\emummc.txt" (
     rename %~dp0\emummc.txt emummc.txt.diss
     move "%~dp0\emummc.txt.diss" "%~dp0\DISS_A\temp0\emummc.txt.diss"
     )
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Homebrews.ps1 --output %~dp0\homes.ps1
-PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\homes.ps1'"
-)
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/myhome.ps1 --output %~dp0\myhome.ps1
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\myhome.ps1'"
+
 powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
 if exist "%~dp0\breeze.zip" (
     move "%~dp0\breeze.zip" "%~dp0\DISS_A\trash\"
@@ -289,13 +289,13 @@ if exist "%~dp0\DISS_A\temp1\switch\breeze\cheats\titles.zip" (
 if exist "%~dp0\Goldleaf.nro" (
     move "%~dp0\Goldleaf.nro" "%~dp0\DISS_A\temp1\switch\"
     )
-if exist "%~dp0\homes.ps1" (
-    rename %~dp0\homes.ps1 homes.diss.done
-    move "%~dp0\homes.diss.done" "%~dp0\DISS_A\trash\homes.diss.done"
+if exist "%~dp0\myhome.ps1" (
+    rename %~dp0\myhome.ps1 myhome.diss.done
+    move "%~dp0\myhome.diss.done" "%~dp0\DISS_A\trash\myhome.diss.done"
     )		
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Payloads.ps1" --output %~dp0\pays.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\pays.ps1'"
-)
+
 if exist "%~dp0\TegraExplorer.bin" (
     md "%~dp0\DISS_A\assets\payloads\"
     move "%~dp0\TegraExplorer.bin" "%~dp0\DISS_A\assets\payloads"
