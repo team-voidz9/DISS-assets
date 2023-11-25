@@ -236,8 +236,6 @@ if exist "%~dp0\emummc.txt" (
     rename %~dp0\emummc.txt emummc.txt.diss
     move "%~dp0\emummc.txt.diss" "%~dp0\DISS_A\temp0\emummc.txt.diss"
     )
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/2/myhome.ps1 --output %~dp0\myhome.ps1
-PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\myhome.ps1'"
 
 powershell -command "Expand-Archive -LiteralPath %~dp0/breeze.zip -Destination %~dp0/DISS_A/temp1/" -verbose -force
 if exist "%~dp0\breeze.zip" (
