@@ -516,14 +516,16 @@ powershell -command "Compress-Archive -Path DISS\* -DestinationPath ('DISS_Hats_
 goto FRONTLOAD3
 
 :DOWNLOADTIN
+md "%~dp0\tinfoil"
+md "%~dp0\tinfoil\temp1"
+md "%~dp0\tinfoil\temp2"
+md "%~dp0\tinfoil\ready"
+
 curl "https://tinfoil.media/repo/tinfoil.latest.zip" --output %~dp0\tinfoil\tinfoil.zip
 powershell -command "Expand-Archive %~dp0\tinfoil\tinfoil.zip %~dp0/tinfoil/temp1" -verbose -force
 
-curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/tinfoil.zip" --output %~dp0\tinfoil\json.zip	
-powershell -command "Expand-Archive -LiteralPath %~dp0\tinfoil\json.zip -Destination %~dp0/tinfoil/temp2" -verbose -force
-
 robocopy %~dp0\tinfoil\temp1\switch\ %~dp0\tinfoil\ready\switch\ /E /COPYALL
-robocopy %~dp0\tinfoil\temp2\switch\ %~dp0\tinfoil\ready\switch\ /E /COPYALL
+curl "https://raw.githubusercontent.com/team-voidz/jsons/main/locations.conf" --output %~dp0\tinfoil\ready\switch\tinfoil\locations.conf
 robocopy %~dp0\tinfoil\ready\switch\ %~dp0\DISS\switch /E /COPYALL /E /COPYALL
 RD /s /q "%~dp0\tinfoil"
 
