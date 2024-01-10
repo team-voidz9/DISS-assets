@@ -7,7 +7,7 @@ echo.
 ECHO ===========================================================
 ::1X                ___  _  ___  ___ 
 ::1X               | . \| |/ __>/ __>   DISS LITE COMPILER
-::1X               | | || |\__ \\__ \              V.0.3.3
+::1X               | | || |\__ \\__ \     V.0.3.5 JAN 2024
 ::1X               |___/|_|<___/<___/           team-voidz
 for /f "delims=::1X tokens=*" %%A in ('findstr /b ::1X "%~f0"') do @echo(%%A
 echo.
@@ -83,7 +83,7 @@ echo.
 ECHO ===========================================================
 ::1Y                ___  _  ___  ___ 
 ::1Y               | . \| |/ __>/ __>   DISS LITE COMPILER
-::1Y               | | || |\__ \\__ \              V.0.3.2
+::1Y               | | || |\__ \\__ \     V.0.3.5 JAN 2024
 ::1Y               |___/|_|<___/<___/           team-voidz
 for /f "delims=::1Y tokens=*" %%A in ('findstr /b ::1Y "%~f0"') do @echo(%%A
 echo.
@@ -146,7 +146,7 @@ echo.
 ECHO ===========================================================
 ::1q                ___  _  ___  ___ 
 ::1q               | . \| |/ __>/ __>   DISS LITE COMPILER
-::1q               | | || |\__ \\__ \              V.0.3.2
+::1q               | | || |\__ \\__ \     V.0.3.5 JAN 2024
 ::1q               |___/|_|<___/<___/           team-voidz
 for /f "delims=::1q tokens=*" %%A in ('findstr /b ::1q "%~f0"') do @echo(%%A
 echo.
@@ -465,11 +465,15 @@ if exist "%~dp0\emummc.txt" (
     rename %~dp0\emummc.txt emummc.txt.diss
     move "%~dp0\emummc.txt.diss" "%~dp0\DISS_A\temp0\emummc.txt.diss"
     )
-
+cls
+echo.
+echo.
 set st=
-set /p st="Download and install tinfoil? Y/N: "
+set /p st="DOWNLOAD tinfoil? & Shop? Y/N: "
 for %%A in ("Y" "y" "1" "н" "Н") do if "%st%"==%%A (GOTO DOWNLOADTIN)
 for %%A in ("N" "n" "2" "т" "Т") do if "%st%"==%%A (GOTO ENDWOI)
+echo.
+echo.
 
 :ENDWOI 
 dir /b "%~dp0\DISS\bootloader\payloads" > DISS_NRO.txt
