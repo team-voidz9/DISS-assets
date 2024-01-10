@@ -529,7 +529,7 @@ RD /s /q "%~dp0\tinfoil"
 
 echo.
 echo            Downloading tinfoil is done!
-echo            team-voidz / v o i d z 9 x
+echo            team-voidz / v o i d z 9 
 echo.
 TIMEOUT /T 3
 goto ENDWOI
