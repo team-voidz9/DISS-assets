@@ -465,6 +465,13 @@ if exist "%~dp0\emummc.txt" (
     rename %~dp0\emummc.txt emummc.txt.diss
     move "%~dp0\emummc.txt.diss" "%~dp0\DISS_A\temp0\emummc.txt.diss"
     )
+
+set st=
+set /p st="Download and install tinfoil? Y/N: "
+for %%A in ("Y" "y" "1" "н" "Н") do if "%st%"==%%A (GOTO DOWNLOADTIN)
+for %%A in ("N" "n" "2" "т" "Т") do if "%st%"==%%A (GOTO ENDWOI)
+
+:ENDWOI 
 dir /b "%~dp0\DISS\bootloader\payloads" > DISS_NRO.txt
 echo "NROS recorded"
 dir /b "%~dp0\DISS\switch" > DISS_BIN.txt
@@ -505,6 +512,24 @@ tree /f "%~dp0\DISS"> AllFiles_Folders.txt
 if exist  "%~dp0\AllFiles_Folders.txt" (
     move  "%~dp0\AllFiles_Folders.txt" "%~dp0\DISS\DISS_Compiler\AllFiles_Folders.txt"
     )
-TIMEOUT /T 3
 powershell -command "Compress-Archive -Path DISS\* -DestinationPath ('DISS_Hats_' + (get-date -Format yyyyMMdd) + '.zip')"
 goto FRONTLOAD3
+
+:DOWNLOADTIN
+curl "https://tinfoil.media/repo/tinfoil.latest.zip" --output %~dp0\tinfoil\tinfoil.zip
+powershell -command "Expand-Archive %~dp0\tinfoil\tinfoil.zip %~dp0/tinfoil/temp1" -verbose -force
+
+curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/tinfoil.zip" --output %~dp0\tinfoil\json.zip	
+powershell -command "Expand-Archive -LiteralPath %~dp0\tinfoil\json.zip -Destination %~dp0/tinfoil/temp2" -verbose -force
+
+robocopy %~dp0\tinfoil\temp1\switch\ %~dp0\tinfoil\ready\switch\ /E /COPYALL
+robocopy %~dp0\tinfoil\temp2\switch\ %~dp0\tinfoil\ready\switch\ /E /COPYALL
+robocopy %~dp0\tinfoil\ready\switch\ %~dp0\DISS\switch /E /COPYALL /E /COPYALL
+RD /s /q "%~dp0\tinfoil"
+
+echo.
+echo            Downloading tinfoil is done!
+echo            team-voidz / v o i d z 9 x
+echo.
+TIMEOUT /T 3
+goto ENDWOI
