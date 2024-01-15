@@ -160,7 +160,7 @@ echo.
 TIMEOUT /T 10
 RD /s /q DISS_A
 RD /s /q DISS_B
-
+del %0
 
 :download1
 cls
