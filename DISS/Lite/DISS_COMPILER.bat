@@ -175,7 +175,7 @@ if exist "%~dp0\fusee.bin" (
     move "%~dp0\fusee.bin.diss2" "%~dp0\DISS_A\temp0\fusee.bin.diss2"
     )
 
-curl "https://sigmapatches.coomer.party/sigpatches.zip" --output sigpatches.zip
+curl "https://sigmapatches.su/sigpatches.zip" --output sigpatches.zip
 
 if exist "%~dp0\sigpatches.zip" (
     move "%~dp0\sigpatches.zip" "%~dp0\DISS_A\sigpatches.zip"
