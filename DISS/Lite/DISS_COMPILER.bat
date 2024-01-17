@@ -273,13 +273,13 @@ powershell -command "Expand-Archive %~dp0/NX-Activity-Log.zip %~dp0/DISS_A/temp1
 if exist "%~dp0\NX-Activity-Log.zip" (
     move "%~dp0\NX-Activity-Log.zip" "%~dp0\DISS_A\trash\"
     )
+powershell -command "Expand-Archive %~dp0/NXGallery_*.zip %~dp0/DISS_A/temp1" -verbose -force
+if exist "%~dp0\NXGallery_*.zip" (
+    move "%~dp0\NXGallery_*.zip" "%~dp0\DISS_A\trash\"
+    )
 powershell -command "Expand-Archive %~dp0/sys-patch.zip %~dp0/DISS_A/temp1" -verbose -force
 if exist "%~dp0\sys-patch.zip" (
     move "%~dp0\sys-patch.zip" "%~dp0\DISS_A\trash\"
-    )
-if exist "%~dp0\titles.zip" (
-	md "%~dp0\DISS_A\temp1\switch\breeze\cheats\"
-    move "%~dp0\titles.zip" "%~dp0\DISS_A\temp1\switch\breeze\cheats\"
     )
 if exist "%~dp0\DISS_A\temp1\switch\breeze\cheats\titles.zip" (
     md "%~dp0\DISS_A\temp1\switch\EdiZon\cheats\"
@@ -291,10 +291,15 @@ if exist "%~dp0\Goldleaf.nro" (
 if exist "%~dp0\BINRO.ps1" (
     rename %~dp0\BINRO.ps1 BINRO.diss.done
     move "%~dp0\BINRO.diss.done" "%~dp0\DISS_A\trash\BINRO.diss.done"
-    )		
+    )
+curl "https://github.com/team-voidz/DISS-assets/raw/main/picofly_2040/2.75/picofly_toolbox_0.2.bin" --output %~dp0\picofly_toolbox_0.2.bin
 curl "https://raw.githubusercontent.com/team-voidz/DISS-assets/main/DISS/Payloads.ps1" --output %~dp0\pays.ps1
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\pays.ps1'"
 
+if exist "%~dp0\picofly_toolbox_0.2.bin" (
+    md "%~dp0\DISS_A\assets\payloads\"
+    move "%~dp0\picofly_toolbox_0.2.bin" "%~dp0\DISS_A\assets\payloads"
+    )
 if exist "%~dp0\TegraExplorer.bin" (
     md "%~dp0\DISS_A\assets\payloads\"
     move "%~dp0\TegraExplorer.bin" "%~dp0\DISS_A\assets\payloads"
@@ -302,11 +307,13 @@ if exist "%~dp0\TegraExplorer.bin" (
 if exist "%~dp0\Incognito_RCM.bin" (
     move "%~dp0\Incognito_RCM.bin" "%~dp0\DISS_A\assets\payloads"
     )
+if exist "%~dp0\hwfly_toolbox.bin" (
+    move "%~dp0\hwfly_toolbox.bin" "%~dp0\DISS_A\assets\payloads"
+    )
 if exist "%~dp0\pays.ps1" (
     rename %~dp0\pays.ps1 pays.diss.done
     move "%~dp0\pays.diss.done" "%~dp0\DISS_A\trash\pays.diss.done"
     )
-
 echo.
 echo            Downloading Payloads and Homebrews are done!
 echo            team-voidz / v o i d z 9

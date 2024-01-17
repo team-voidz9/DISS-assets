@@ -1,15 +1,15 @@
-Write-Host "Payloads and Homebrews Downloader Rev.8a" -ForegroundColor green -BackgroundColor black
+Write-Host "Payloads and Homebrews Downloader Rev.8b" -ForegroundColor green -BackgroundColor black
 Write-Host "TEAM-VOIDZ"
-Write-Host "Latest : remove ldn_MITM"
-Write-Host "Latest : added aio_updater"
+Write-Host "Latest : remove ldn_MITM, cheats"
+Write-Host "Latest : added NXgallery"
 
 #NROs
 $repo1 = "tomvita/Breeze-Beta"
 $filenamePattern1 = "Breeze.zip"
 $repo2 = "tomvita/EdiZon-SE"
 $filenamePattern2 = "EdiZon.zip"
-$repo3 = "tomvita/NXCheatCode"
-$filenamePattern3 = "titles.zip"
+$repo3 = "XorTroll/Goldleaf"
+$filenamePattern3 = "Goldleaf.nro"
 $repo4 = "rashevskyv/dbi"
 $filenamePattern41 = "dbi.nro"
 $filenamePattern42 = "dbi.config"
@@ -25,12 +25,8 @@ $repo9 = "HamletDuFromage/aio-switch-updater"
 $filenamePattern9 = "aio-switch-updater.zip"
 $repo10 = "zdm65477730/NX-Activity-Log"
 $filenamePattern10 = "NX-Activity-Log.zip"
-
-#BIN
-$repo11 = "dezem/TegraExplorer"
-$filenamePattern11 = "TegraExplorer.bin"
-$repo12 = "jimzrt/Incognito_RCM"
-$filenamePattern12 = "Incognito_RCM.bin"
+$repo11 = "iUltimateLP/NXGallery"
+$filenamePattern11 = "NXGallery_*.zip"
 
 $innerDirectory = $true
 $preRelease = $true
@@ -64,7 +60,7 @@ $filename2 = Split-Path -Path ($downloadUriBuilder2.Path) -Leaf
 $filenameUrlDecoded2 = [System.Web.HttpUtility]::UrlDecode($filename2)
 Invoke-WebRequest -Uri $downloadUri2 -Out $filenameUrlDecoded2
 
-Write-Host "3. Breeze/Edizon Cheats" -ForegroundColor green -BackgroundColor black
+Write-Host "3. Goldleaf" -ForegroundColor green -BackgroundColor black
 if ($preRelease) {
     $releasesUri3 = "https://api.github.com/repos/$repo3/releases"
     $downloadUri3 = ((Invoke-RestMethod -Method GET -Uri $releasesUri3)[0].assets | Where-Object name -like $filenamePattern3 ).browser_download_url
@@ -188,5 +184,19 @@ $downloadUriBuilder10 = [System.UriBuilder] $downloadUri10
 $filename10 = Split-Path -Path ($downloadUriBuilder10.Path) -Leaf       
 $filenameUrlDecoded10 = [System.Web.HttpUtility]::UrlDecode($filename10)
 Invoke-WebRequest -Uri $downloadUri10 -Out $filenameUrlDecoded10
+
+Write-Host "10. NX Gallery" -ForegroundColor green -BackgroundColor black
+if ($preRelease) {
+    $releasesUri11 = "https://api.github.com/repos/$repo11/releases"
+    $downloadUri11 = ((Invoke-RestMethod -Method GET -Uri $releasesUri11)[0].assets | Where-Object name -like $filenamePattern11 ).browser_download_url
+}
+else {
+    $releasesUri11 = "https://api.github.com/repos/$repo11/releases/latest"
+    $downloadUri11 = ((Invoke-RestMethod -Method GET -Uri $releasesUri11).assets | Where-Object name -like $filenamePattern11 ).browser_download_url
+}
+$downloadUriBuilder11 = [System.UriBuilder] $downloadUri11
+$filename11 = Split-Path -Path ($downloadUriBuilder11.Path) -Leaf       
+$filenameUrlDecoded11 = [System.Web.HttpUtility]::UrlDecode($filename11)
+Invoke-WebRequest -Uri $downloadUri11 -Out $filenameUrlDecoded11
 
 write-host -back Red "All Latest Homebrews Downloaded"
