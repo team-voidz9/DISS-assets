@@ -532,7 +532,7 @@ md "%~dp0\tinfoil\temp1"
 md "%~dp0\tinfoil\temp2"
 md "%~dp0\tinfoil\ready"
 
-curl "https://tinfoil.media/repo/tinfoil.latest.zip" --output %~dp0\tinfoil\tinfoil.zip
+curl "https://github.com/kkkkyue/Tinfoil/releases/download/16.0.v2/Tinfoil.Self.Installer.050000BADDAD0000.16.0.v2.zip" --output %~dp0\tinfoil\tinfoil.zip
 powershell -command "Expand-Archive %~dp0\tinfoil\tinfoil.zip %~dp0/tinfoil/temp1" -verbose -force
 
 robocopy %~dp0\tinfoil\temp1\switch\ %~dp0\tinfoil\ready\switch\ /E /COPYALL
